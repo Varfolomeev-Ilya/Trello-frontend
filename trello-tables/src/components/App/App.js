@@ -1,18 +1,16 @@
 import './App';
 import React from 'react';
-import Header from './Header/Header'
-import SignUp from '../SignUp/SignUp'
-
+// import Signin from '../../pages/SignIn/SignIn';
+import Signup from '../../pages/Signup/Signup'
 class App extends React.Component {
-
   render() {
     return (
       <>
-      <Header/>
-      <SignUp/>
+      <Signup></Signup>
+     {/* <Signin></Signin> */}
       </>
-    );
-  };
+    )
+  }
 }
 
 export default App;
