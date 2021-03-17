@@ -6,7 +6,6 @@ import NotFound from '../pages/NotFound/NotFound';
 import HomePage from '../pages/Home/Home';
 import Account from '../pages/Account/Account';
 
-
 const routes = [
   // {
   //   path: '',

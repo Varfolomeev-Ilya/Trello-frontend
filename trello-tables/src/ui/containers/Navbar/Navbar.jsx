@@ -1,10 +1,13 @@
 import React from 'react';
-import { StyledDiv } from './NavbarStyled';
+import { StyledDiv,StyledInput } from './NavbarStyled';
 
 function Navbar () {
   return(
+    <>
     <StyledDiv>
+      <StyledInput>sdfsdf</StyledInput>
     </StyledDiv>
+    </>
   )
 }
 
