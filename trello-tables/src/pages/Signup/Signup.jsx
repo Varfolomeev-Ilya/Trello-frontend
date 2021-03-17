@@ -6,8 +6,8 @@ import { StyledBody,StyledSection,StyledForm,StyledInput,StyledDiv,StyledH2 } fr
 import { StyledHr } from '../../ui/components/HrStyled/HrStyled';
 import { StyledButton, StyledH3 } from '../../ui/components/Buttons/ButtonStyled';
 import { StyledLoginButton,StyledSpan } from '../../ui/components/Buttons/LoginBtnStyled';
-import { StyledA,StyledSpanLog } from '../../ui/components/StyledA'
-
+import { StyledSpanLog } from '../../ui/components/StyledA';
+import FollowLinkIn from './components/LinkIn';
 
 function Signup () {
   return(
@@ -32,7 +32,7 @@ function Signup () {
     <StyledSpan>Continue with Apple</StyledSpan>
     </StyledLoginButton>
     <StyledSpanLog>
-    <StyledA>Already have an account? Log In</StyledA>
+    <FollowLinkIn/>
     </StyledSpanLog>
     </StyledDiv>
     </StyledForm>

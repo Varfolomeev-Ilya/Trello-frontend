@@ -6,6 +6,7 @@ import { StyledBody,StyledSection,StyledForm,StyledInput,StyledDiv,StyledH2,Styl
 import { StyledHr } from '../../ui/components/HrStyled/HrStyled';
 import { StyledButton, StyledH3 } from '../../ui/components/Buttons/ButtonStyled';
 import { StyledLoginButton,StyledSpan  } from '../../ui/components/Buttons/LoginBtnStyled';
+import FollowLink from './components/LinkUp'
 
 function Signin () {
   return(
@@ -21,9 +22,7 @@ function Signin () {
       <StyledH3>Log in</StyledH3>
     </StyledButton>
     <StyledH2>or</StyledH2>
-    <StyledButton>
-      <StyledH3>Sign up</StyledH3>
-    </StyledButton>
+    <FollowLink/>
     <StyledLoginButton>
     <StyledSpan>Continue with Google</StyledSpan>
     </StyledLoginButton>
