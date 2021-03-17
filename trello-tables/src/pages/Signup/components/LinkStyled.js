@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import { Link } from "react-router-dom";
 
 const StyledLink = styled(Link)`
-  width: 100px;
-  height: 27px;
   opacity: 0.5;
   margin-top: 10px;
   box-shadow: rgb(0 0 0 / 100%) 0 0 20px; 

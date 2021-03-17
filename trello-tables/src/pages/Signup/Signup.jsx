@@ -12,35 +12,35 @@ import FollowLinkIn from './components/LinkIn';
 function Signup () {
   return(
     <StyledBody  style={{ backgroundImage: `url(${background})` }}>
-    <Header/>
-    <StyledSection>
-    <StyledForm>
-    <StyledDiv>
-    <StyledH2>Sign up for your account</StyledH2>
-    <StyledInput placeholder="Enter email"></StyledInput>
-    <StyledButton>
-      <StyledH3>Continue</StyledH3>
-    </StyledButton>
-    <StyledH2>or</StyledH2>
-    <StyledLoginButton>
-    <StyledSpan>Continue with Google</StyledSpan>
-    </StyledLoginButton>
-    <StyledLoginButton>
-    <StyledSpan>Continue with Microsoft</StyledSpan>
-    </StyledLoginButton>
-    <StyledLoginButton>
-    <StyledSpan>Continue with Apple</StyledSpan>
-    </StyledLoginButton>
-    <StyledSpanLog>
-    <FollowLinkIn/>
-    </StyledSpanLog>
-    </StyledDiv>
-    </StyledForm>
-    </StyledSection>
-    <StyledHr/>
-    <Footer/>
+      <Header/>
+      <StyledSection>
+        <StyledForm>
+          <StyledDiv>
+            <StyledH2>Sign up for your account</StyledH2>
+            <StyledInput placeholder="Enter email"></StyledInput>
+              <StyledButton>
+                <StyledH3>Continue</StyledH3>
+              </StyledButton>
+            <StyledH2>or</StyledH2>
+            <StyledLoginButton>
+              <StyledSpan>Continue with Google</StyledSpan>
+            </StyledLoginButton>
+            <StyledLoginButton>
+              <StyledSpan>Continue with Microsoft</StyledSpan>
+            </StyledLoginButton>
+            <StyledLoginButton>
+              <StyledSpan>Continue with Apple</StyledSpan>
+            </StyledLoginButton>
+            <StyledSpanLog>
+              <FollowLinkIn/>
+            </StyledSpanLog>
+          </StyledDiv>
+        </StyledForm>
+      </StyledSection>
+      <StyledHr/>
+      <Footer/>
     </StyledBody>
-  )
-}
+  );
+};
 
 export default Signup;

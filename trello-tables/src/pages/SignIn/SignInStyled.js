@@ -6,13 +6,16 @@ const StyledBody = styled.body`
   bottom: 0;
   left: 0;
   background-size: 100% 100%;
+  width: 100%;
+  height: auto;
+  background-color: black
 `;
 
 const StyledSection = styled.section`
-    width: 100%;
-    height: 600px;
-    padding: 0px;
-    overflow: visible;
+  width: 100%;
+  height: 600px;
+  padding: 0px;
+  overflow: visible;
 `;
 
 const StyledForm = styled.form`
