@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import AppBar from '@material-ui/core/AppBar';
+import { Link } from "react-router-dom";
 
 const StyledDiv = styled.div`
   width: 100%;
@@ -18,4 +20,17 @@ const StyledH1 = styled.h1`
   width: 100px;
 `;
 
-export { StyledDiv, StyledH1 } ;
+const StyledAppBar = styled(AppBar)`
+  background-color: #cc1919e3;
+  color: white;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+  font-weight: 200;
+  line-height: 1.5;
+  padding-top: 6px;
+`;
+
+export { StyledDiv, StyledH1,StyledAppBar,StyledLink }
