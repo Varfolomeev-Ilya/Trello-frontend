@@ -9,7 +9,8 @@ import { StyledLoginButton,StyledSpan } from '../../ui/components/Buttons/LoginB
 import { StyledSpanLog } from '../../ui/components/StyledA';
 import FollowLinkIn from './components/LinkIn';
 import { connect } from 'react-redux';
-import { changeIsAuthentification } from '../../store/checkAuth';
+import { changeIsAuthentification } from '../../store/store.js';
+import { Link } from  'react-router-dom'
 
 
 function Signup (props) {
@@ -25,7 +26,7 @@ function Signup (props) {
             <StyledH2>Sign up for your account</StyledH2>
             <StyledInput placeholder="Enter email"></StyledInput>
               <StyledButton type='button' onClick={onLogin}>
-                <StyledH3>Continue</StyledH3>
+                <Link to='/home'><StyledH3>Continue</StyledH3></Link>
               </StyledButton>
             <StyledH2>or</StyledH2>
             <StyledLoginButton>

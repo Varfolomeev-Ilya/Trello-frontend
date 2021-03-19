@@ -13,6 +13,9 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import { StyledAppBar, StyledLink } from './NavigationStyled';
 
 const useStyles = makeStyles((theme) => ({
+  mylink: {
+    сolor: 'black',
+  },
   grow: {
     flexGrow: 1,
   },
@@ -113,7 +116,7 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}><StyledLink to='/account'>My account</StyledLink></MenuItem>
+      <MenuItem onClick={handleMenuClose}><StyledLink className={classes.mylink} to='/account'>My account</StyledLink></MenuItem>
     </Menu>
 
   );

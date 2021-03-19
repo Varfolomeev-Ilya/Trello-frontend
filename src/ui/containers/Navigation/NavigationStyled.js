@@ -27,7 +27,7 @@ const StyledAppBar = styled(AppBar)`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: black;
+  color: white;
   font-weight: 200;
   line-height: 1.5;
   padding-top: 6px;
