@@ -8,12 +8,14 @@ import { StyledButton, StyledH3 } from '../../ui/components/Buttons/ButtonStyled
 import { StyledLoginButton,StyledSpan } from '../../ui/components/Buttons/LoginBtnStyled';
 import { StyledSpanLog } from '../../ui/components/StyledA';
 import FollowLinkIn from './components/LinkIn';
+import { connect } from 'react-redux';
+import { changeIsAuthentification } from '../../store/checkAuth';
 
-function Signup () {
+
+function Signup (props) {
   const onLogin = () => {
-    window.localStorage.setItem('isAuthentificated', true);
-  };
-  
+    props.onChangeIsAuthenticated(true)};
+    
   return(
     <StyledBody  style={{ backgroundImage: `url(${background})` }}>
       <Header/>
@@ -22,7 +24,7 @@ function Signup () {
           <StyledDiv>
             <StyledH2>Sign up for your account</StyledH2>
             <StyledInput placeholder="Enter email"></StyledInput>
-              <StyledButton onClick={onLogin}>
+              <StyledButton type='button' onClick={onLogin}>
                 <StyledH3>Continue</StyledH3>
               </StyledButton>
             <StyledH2>or</StyledH2>
@@ -47,4 +49,8 @@ function Signup () {
   );
 };
 
-export default Signup;
+const mapDispatchToProps = (dispatch) => ({
+  onChangeIsAuthenticated: (isAuthentificated) => dispatch(changeIsAuthentification(isAuthentificated)),
+});
+
+export default connect(null, mapDispatchToProps)(Signup);

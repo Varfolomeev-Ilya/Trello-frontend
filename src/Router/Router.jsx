@@ -1,11 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Router, Route,Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
 import Signup from '../pages/Signup/Signup';
 import Signin from '../pages/SignIn/SignIn';
 import NotFound from '../pages/NotFound/NotFound';
 import HomePage from '../pages/Home/Home';
 import Account from '../pages/Account/Account';
 import ProtectedRoute from './Protected';
+import { connect } from 'react-redux';
 
 const routes = [
   {
@@ -32,18 +33,21 @@ const routes = [
 function Routers() {
   return (
     <Router>
-        {routes.map(({ path, component, isAuthentificated = true, exact = true }, key  ) => (
-          isAuthentificated ? 
+        {routes.map(({ path, component, exact = true }, key  ) => (
           <Route
             exact={exact}
             path={path}
             component={component}
             key={key}
-          /> :
-          <ProtectedRoute/>
+          /> 
           ))}
+          <ProtectedRoute/>        
     </Router>
   );
 };
 
-export default Routers;
+const mapStateToProps = (state) => ({
+  isAuthentificated: state.checkAuth.isAuthentificated,
+});
+
+export default connect(mapStateToProps)(Routers);

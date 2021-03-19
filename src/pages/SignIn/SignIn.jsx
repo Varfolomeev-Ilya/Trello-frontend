@@ -16,8 +16,8 @@ function Signin () {
           <StyledForm>
             <StyledDiv>
               <StyledH2>Log in to Trello</StyledH2>
-              <StyledInput placeholder="Enter email"></StyledInput>
-              <StyledInput placeholder="Enter password"></StyledInput>
+              <StyledInput type='email' placeholder="Enter email"></StyledInput>
+              <StyledInput type='password' placeholder="Enter password"></StyledInput>
               <StyledButton>
                 <StyledH3>Log in</StyledH3>
               </StyledButton>
