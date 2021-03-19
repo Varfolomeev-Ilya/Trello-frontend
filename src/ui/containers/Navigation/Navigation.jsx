@@ -10,11 +10,24 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import { StyledAppBar, StyledLink } from './NavigationStyled';
+import AppBar from '@material-ui/core/AppBar';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { changeIsAuthentification } from '../../../store/store';
+
 
 const useStyles = makeStyles((theme) => ({
-  mylink: {
-    сolor: 'black',
+  linkAcc: {
+    color: 'black',
+    textDecoration: 'none'
+  },
+  linkHome: {
+    color: 'white',
+    textDecoration: 'none',
+    marginRight: '20px'
+  },
+  appBar: {
+    backgroundColor: '#cc1919e3'
   },
   grow: {
     flexGrow: 1,
@@ -79,7 +92,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+
+function PrimarySearchAppBar(props) {
+  const onOut = () => {
+    props.onChangeIsAuthenticated(false)};
+
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -116,7 +133,8 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}><StyledLink className={classes.mylink} to='/account'>My account</StyledLink></MenuItem>
+      <MenuItem onClick={handleMenuClose}><Link className={classes.linkAcc} to='/account'>My account</Link></MenuItem>
+      <MenuItem onClick={onOut}>Sign out</MenuItem>
     </Menu>
 
   );
@@ -148,11 +166,11 @@ export default function PrimarySearchAppBar() {
 
     return(
         <div className={classes.grow} >
-          <StyledAppBar position="static" >
+          <AppBar position="static" className={classes.appBar}>
             <Toolbar>
-              <StyledLink to='/home'>
+              <Link className={classes.linkHome} to='/home'>
                 <MenuIcon />
-              </StyledLink>
+              </Link>
               <Typography className={classes.title} variant="h6" noWrap>
                 Trello
               </Typography>
@@ -195,14 +213,15 @@ export default function PrimarySearchAppBar() {
                 </IconButton>
               </div>
             </Toolbar>
-          </StyledAppBar>
+          </AppBar>
           {renderMobileMenu}
           {renderMenu}
         </div>
   );
 };
 
+const mapDispatchToProps = (dispatch) => ({
+  onChangeIsAuthenticated: (isAuthentificated) => dispatch(changeIsAuthentification(isAuthentificated)),
+});
 
-
-
-
+export default connect(null, mapDispatchToProps)(PrimarySearchAppBar);

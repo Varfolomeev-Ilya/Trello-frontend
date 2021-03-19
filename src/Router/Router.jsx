@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Signup from '../pages/Signup/Signup';
 import Signin from '../pages/SignIn/SignIn';
 import NotFound from '../pages/NotFound/NotFound';
@@ -32,8 +32,9 @@ const routes = [
 
 function Routers() {
   return (
-       <Switch>
-        {routes.map(({ path, component, exact = true }, key  ) => (
+    <Router>
+        <Switch>
+          {routes.map(({ path, component, exact = true }, key  ) => (
           <Route
             exact={exact}
             path={path}
@@ -41,8 +42,9 @@ function Routers() {
             key={key}
           /> 
           ))}
-          <ProtectedRoute/>
-        </Switch>        
+        </Switch>
+      <ProtectedRoute/>
+    </Router>   
   );
 };
 

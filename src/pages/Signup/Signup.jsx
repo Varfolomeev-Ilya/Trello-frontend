@@ -2,12 +2,12 @@ import React from 'react';
 import background from '../../ui/images/bodyPicture-main.png';
 import Header from '../../ui/components/Header/Header'
 import Footer from '../../ui/components/Footer/Footer'
+import FollowLinkIn from './components/LinkIn';
 import { StyledBody,StyledSection,StyledForm,StyledInput,StyledDiv,StyledH2 } from '../SignIn/SignInStyled';
 import { StyledHr } from '../../ui/components/HrStyled/HrStyled';
 import { StyledButton, StyledH3 } from '../../ui/components/Buttons/ButtonStyled';
 import { StyledLoginButton,StyledSpan } from '../../ui/components/Buttons/LoginBtnStyled';
 import { StyledSpanLog } from '../../ui/components/StyledA';
-import FollowLinkIn from './components/LinkIn';
 import { connect } from 'react-redux';
 import { changeIsAuthentification } from '../../store/store.js';
 import { Link } from  'react-router-dom'
