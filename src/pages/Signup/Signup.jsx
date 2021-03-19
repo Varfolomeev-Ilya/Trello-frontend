@@ -15,7 +15,8 @@ import { Link } from  'react-router-dom'
 
 function Signup (props) {
   const onLogin = () => {
-    props.onChangeIsAuthenticated(true)};
+    props.onChangeIsAuthenticated(true);
+  };
     
   return(
     <StyledBody  style={{ backgroundImage: `url(${background})` }}>
