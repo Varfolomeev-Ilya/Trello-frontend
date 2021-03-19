@@ -10,6 +10,10 @@ import { StyledSpanLog } from '../../ui/components/StyledA';
 import FollowLinkIn from './components/LinkIn';
 
 function Signup () {
+  const onLogin = () => {
+    window.localStorage.setItem('isAuthentificated', true);
+  };
+  
   return(
     <StyledBody  style={{ backgroundImage: `url(${background})` }}>
       <Header/>
@@ -18,7 +22,7 @@ function Signup () {
           <StyledDiv>
             <StyledH2>Sign up for your account</StyledH2>
             <StyledInput placeholder="Enter email"></StyledInput>
-              <StyledButton>
+              <StyledButton onClick={onLogin}>
                 <StyledH3>Continue</StyledH3>
               </StyledButton>
             <StyledH2>or</StyledH2>
