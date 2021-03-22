@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import useStyles from './BodyContainerStyles';
 import Profile from '../ProfileContainer/Profile';
-import UploadAvatar from '../../components/Avatar/Avatar'
+import UploadAvatar from '../../components/Avatar/Avatar';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -84,7 +84,6 @@ function BodyContainer() {
           <UploadAvatar/>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          Item Three
         </TabPanel>
       </SwipeableViews>
     </div>
