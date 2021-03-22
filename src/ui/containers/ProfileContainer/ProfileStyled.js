@@ -172,9 +172,10 @@ const StyledButton = styled.button`
 `;
 
 export {
-    StyledSection,StyledH1,StyledP,
-    StyledH3,StyledHr,StyledDiv,
-    StyledForm,StyledDivUser,StyledSpanUser,
-    StyledDivSpan,StyledSpan,StyledSpanP,
-    StyledDivInput,StyledInput,StyledDivBio,
-    StyledTextarea,StyledButton};
+  StyledSection, StyledH1, StyledP,
+  StyledH3, StyledHr, StyledDiv,
+  StyledForm, StyledDivUser, StyledSpanUser,
+  StyledDivSpan, StyledSpan, StyledSpanP,
+  StyledDivInput, StyledInput, StyledDivBio,
+  StyledTextarea, StyledButton
+};

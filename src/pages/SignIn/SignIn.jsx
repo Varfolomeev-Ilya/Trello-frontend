@@ -9,6 +9,19 @@ import FollowLink from './components/LinkUp';
 import GlobalStyle from '../../ui/styles/GlobalStyles';
 
 function Signin() {
+  // const [validationMessage, setValidationMessage] = React.setState('');
+  // const [inputValid, setInputValid] = React.setState('')
+  
+  // const handleChange = (evt) => {
+  //   if(!evt.target.validity.valid) {
+  //     setValidationMessage(evt.target.validationMessage);
+  //     setInputValid(false);
+  //   } else {
+  //     setValidationMessage('');
+  //     inputValid(true);
+  //   }
+  // };
+
   return (
     <StyledBody>
       <GlobalStyle />

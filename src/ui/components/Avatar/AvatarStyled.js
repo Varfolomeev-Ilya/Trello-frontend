@@ -57,7 +57,7 @@ const StyledHr = styled.hr`
   line-height: 24px;
   font-weight: 500;
   line-height: 26px;
-  max-width: 530px;
+  min-width: 530px;
 `;
 
 const StyledInput = styled.input`
@@ -82,4 +82,4 @@ const StyledInput = styled.input`
   transition-timing-function: ease;
 `;
 
-export { StyledSection, StyledH1,StyledForm, StyledLabel, StyledHr, StyledInput, StyledDiv,StyledH3 };
+export { StyledSection, StyledH1, StyledForm, StyledLabel, StyledHr, StyledInput, StyledDiv, StyledH3 };
