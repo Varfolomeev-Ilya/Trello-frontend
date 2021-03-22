@@ -6,6 +6,7 @@ const StyledButton = styled.button`
   opacity: 0.5;
   width: 100px;
   background-color: #66297191;
+  cursor: pointer;
 `;
 
 const StyledH3 = styled.h3`

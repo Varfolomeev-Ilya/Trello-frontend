@@ -33,18 +33,18 @@ const routes = [
 function Routers() {
   return (
     <Router>
-        <Switch>
-          {routes.map(({ path, component, exact = true }, key  ) => (
+      <Switch>
+        {routes.map(({ path, component, exact = true }, key) => (
           <Route
             exact={exact}
             path={path}
             component={component}
             key={key}
-          /> 
-          ))}
-        </Switch>
-      <ProtectedRoute/>
-    </Router>   
+          />
+        ))}
+      </Switch>
+      <ProtectedRoute />
+    </Router>
   );
 };
 

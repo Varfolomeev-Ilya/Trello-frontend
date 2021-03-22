@@ -1,4 +1,5 @@
 import { fade, makeStyles } from '@material-ui/core/styles';
+
 const useStyles = makeStyles((theme) => ({
   linkAcc: {
     color: 'black',
@@ -10,7 +11,8 @@ const useStyles = makeStyles((theme) => ({
     marginRight: '20px'
   },
   appBar: {
-    backgroundColor: '#cc1919e3'
+    marginBottom: '10px',
+    backgroundColor: '#b32020'
   },
   grow: {
     flexGrow: 1,

@@ -1,5 +1,4 @@
 import React from 'react';
-import background from '../../ui/images/bodyPicture-main.png';
 import Header from '../../ui/components/Header/Header'
 import Footer from '../../ui/components/Footer/Footer'
 import FollowLinkIn from './components/LinkIn';
@@ -19,13 +18,13 @@ function Signup (props) {
   };
     
   return(
-    <StyledBody  style={{ backgroundImage: `url(${background})` }}>
+    <StyledBody>
       <Header/>
       <StyledSection>
         <StyledForm>
           <StyledDiv>
             <StyledH2>Sign up for your account</StyledH2>
-            <StyledInput placeholder="Enter email"></StyledInput>
+            <StyledInput required type='email'  name='email' placeholder="Enter email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"></StyledInput>
               <StyledButton type='button' onClick={onLogin}>
                 <Link to='/home'><StyledH3>Continue</StyledH3></Link>
               </StyledButton>

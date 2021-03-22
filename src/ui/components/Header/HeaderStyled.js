@@ -12,7 +12,6 @@ const StyledHeader = styled.header`
 `;
 
 const StyledH1 = styled.h1`
-  color: rgba(9, 9, 14, 0.41);
   font-size: 50px;
   font-weight: 100;
   width: 100px;

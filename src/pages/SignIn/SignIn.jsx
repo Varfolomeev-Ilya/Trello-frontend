@@ -1,5 +1,4 @@
 import React from 'react';
-import background from '../../ui/images/bodyPicture-main.png';
 import Header from '../../ui/components/Header/Header'
 import Footer from '../../ui/components/Footer/Footer'
 import { StyledBody,StyledSection,StyledForm,StyledInput,StyledDiv,StyledH2,StyledUl,StyledLi} from './SignInStyled';
@@ -10,14 +9,14 @@ import FollowLink from './components/LinkUp'
 
 function Signin () {
   return(
-    <StyledBody  style={{ backgroundImage: `url(${background})` }}>
+    <StyledBody>
       <Header/>
         <StyledSection>
           <StyledForm>
             <StyledDiv>
               <StyledH2>Log in to Trello</StyledH2>
-              <StyledInput type='email' placeholder="Enter email"></StyledInput>
-              <StyledInput type='password' placeholder="Enter password"></StyledInput>
+              <StyledInput required type='email' name='email' placeholder="Enter email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"></StyledInput>
+              <StyledInput required type='password'  name='password' placeholder="Enter password" pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])\S{6,}"></StyledInput>
               <StyledButton>
                 <StyledH3>Log in</StyledH3>
               </StyledButton>

@@ -8,7 +8,6 @@ const StyledBody = styled.body`
   background-size: 100% 100%;
   width: 100%;
   height: auto;
-  background-color: black
 `;
 
 const StyledSection = styled.section`
@@ -31,12 +30,11 @@ const StyledDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0 auto
+  margin: 0 auto;
 `;
 
 const StyledH2 = styled.h2`
   text-align: center;
-  color: rgba(9,9,14,0.41);
   font-size: 20px;
   letter-spacing: -0.01em;
   line-height: 28px;

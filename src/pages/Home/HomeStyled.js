@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledBody = styled.body`
+const Styledsection = styled.section`
   width: 100%;
   height: auto;
   display: flex;
@@ -9,7 +9,8 @@ const StyledBody = styled.body`
 const StyledDiv = styled.div`
   width: 500px;
   text-align: center;
+  background: white;
 `;
 
 
-export { StyledDiv, StyledBody }
+export { StyledDiv, Styledsection }
