@@ -9,8 +9,8 @@ import { StyledLoginButton,StyledSpan } from '../../ui/components/Buttons/LoginB
 import { StyledSpanLog } from '../../ui/components/StyledA';
 import { connect } from 'react-redux';
 import { changeIsAuthentification } from '../../store/store.js';
-import { Link } from  'react-router-dom'
-
+import { Link } from  'react-router-dom';
+import GlobalStyle from '../../ui/styles/GlobalStyles';
 
 function Signup (props) {
   const onLogin = () => {
@@ -19,6 +19,7 @@ function Signup (props) {
     
   return(
     <StyledBody>
+        <GlobalStyle/>
       <Header/>
       <StyledSection>
         <StyledForm>

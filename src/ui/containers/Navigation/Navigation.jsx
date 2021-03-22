@@ -12,7 +12,7 @@ import AppBar from '@material-ui/core/AppBar';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { changeIsAuthentification } from '../../../store/store';
-import useStyles from './NaigationTheme';
+import useStyles from './NavigationTheme';
 import HomeIcon from '@material-ui/icons/Home';
 
 function PrimarySearchAppBar(props) {
