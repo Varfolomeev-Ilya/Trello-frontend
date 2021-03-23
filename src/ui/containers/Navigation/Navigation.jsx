@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import { changeIsAuthentification } from '../../../store/store';
 import useStyles from './NavigationTheme';
 import HomeIcon from '@material-ui/icons/Home';
+// import makeGetRequest from '../../../api/'
 
 function PrimarySearchAppBar(props) {
   const onOut = () => { props.onChangeIsAuthenticated(false) };

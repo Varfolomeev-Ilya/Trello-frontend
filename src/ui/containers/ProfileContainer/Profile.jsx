@@ -21,7 +21,6 @@ function Profile() {
             <StyledDivSpan>
               <StyledSpan>
                 <StyledSpan>
-
                 </StyledSpan>
               </StyledSpan>
               <StyledSpanP>Always public</StyledSpanP>
@@ -29,6 +28,14 @@ function Profile() {
           </StyledDivUser>
           <StyledDivInput>
             <StyledInput type="text" name="username" autocomplete="username" />
+          </StyledDivInput>
+          <StyledDivInput>
+          <StyledSpanUser>Firstname</StyledSpanUser>
+            <StyledInput type="text" name="FirstName" autocomplete="FirstName" />
+          </StyledDivInput>
+          <StyledDivInput>
+          <StyledSpanUser>Lastname</StyledSpanUser>
+            <StyledInput type="text" name="LastName" autocomplete="LastName" />
           </StyledDivInput>
           <StyledDivBio>
             <StyledSpan>Bio</StyledSpan>

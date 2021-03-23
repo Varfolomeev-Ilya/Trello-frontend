@@ -80,8 +80,7 @@ const StyledSpanUser = styled.span`
   font-weight: 600;
   letter-spacing: -.003em;
   line-height: 16px;
-  margin-top: 16px;
-  margin-top: 0;
+  margin-bottom: 0;
 `;
 
 const StyledDivSpan = styled.div`
@@ -96,7 +95,7 @@ const StyledDivSpan = styled.div`
 const StyledSpan = styled.span`
   cursor: pointer;
   line-height: 12px;
-  color: #5e6c84;
+  color: #172b4d
 `;
 
 const StyledSpanP = styled.span`
