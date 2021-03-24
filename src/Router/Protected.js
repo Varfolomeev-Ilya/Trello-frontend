@@ -10,7 +10,7 @@ const ProtectedRoute = ({ component: Component, ...props }) => {
         if (props.isAuthentificated) {
           return <Component {...props} />;
         } else {
-          return <Redirect to='/sign-up' />;
+          return <Redirect to='/sign-in' />;
         }
       }}
     />

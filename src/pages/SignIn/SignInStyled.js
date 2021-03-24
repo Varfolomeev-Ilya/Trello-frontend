@@ -22,6 +22,12 @@ const StyledForm = styled.form`
   margin: 0 auto;
 `;
 
+const StyledContainer = styled.div`
+  max-width: 500px;
+  margin: 0 auto;
+`;
+
+
 const StyledDiv = styled.div`
   border-radius: 3px;
   padding: 25px 40px;
@@ -40,7 +46,13 @@ const StyledH2 = styled.h2`
   line-height: 28px;
   margin-top: 10px;
 `;
-
+const StyledFormInput = styled.form`
+  margin: 0 auto;
+  max-width: 450px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`;
 const StyledInput = styled.input`
   margin: 0 0 1.2em;
   opacity: 0.5;
@@ -54,6 +66,7 @@ const StyledUl = styled.ul`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  padding: 0;
 `;
 
 const StyledLi = styled.li`
@@ -64,5 +77,6 @@ const StyledLi = styled.li`
 export { 
   StyledBody,StyledSection,StyledForm,
   StyledInput,StyledDiv,StyledH2,
-  StyledUl,StyledLi
+  StyledUl,StyledLi,StyledFormInput,
+  StyledContainer
 } ;

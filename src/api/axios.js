@@ -1,10 +1,11 @@
 import axios from 'axios';
 
-async function makeGetRequest () {
-  let res = await axios.get('http://127.0.0.1:3000/home')
-  let data = res.data;
-  console.log(data);
-};
+const instance = axios.create ({
+  baseURL : 'http://localhost:3000/',
+  // headers: {
+  //   'Content-Type': 'application/json;charset=UTF-8',
+  //   "Access-Control-Allow-Origin": "*",
+  // },
+});
 
-export default makeGetRequest();
-
+export default instance;

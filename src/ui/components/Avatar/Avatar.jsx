@@ -7,7 +7,7 @@ function UploadAvatar() {
     <StyledSection>
       <StyledH1>Upload Avatar</StyledH1>
       <StyledDiv>
-        <StyledForm action="/upload" method="post" enctype="multipart/form-data">
+        <StyledForm action="/account" method="POST" enctype="multipart/form-data">
           <StyledLabel>
             <StyledH3>File</StyledH3>
             <StyledHr />
@@ -15,6 +15,8 @@ function UploadAvatar() {
           <StyledInput
           type="file"
           name="filedata" />
+          <br/>
+          <StyledInput type="submit" value="send"/>
         </StyledForm>
       </StyledDiv>
     </StyledSection>

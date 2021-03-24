@@ -14,9 +14,9 @@ import { connect } from 'react-redux';
 import { changeIsAuthentification } from '../../../store/store';
 import useStyles from './NavigationTheme';
 import HomeIcon from '@material-ui/icons/Home';
-// import makeGetRequest from '../../../api/'
 
 function PrimarySearchAppBar(props) {
+
   const onOut = () => { props.onChangeIsAuthenticated(false) };
 
   const classes = useStyles();
@@ -90,7 +90,7 @@ function PrimarySearchAppBar(props) {
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           <Link className={classes.linkHome} to='/home'>
-            <HomeIcon />
+            <HomeIcon/>
           </Link>
           <Typography className={classes.title} variant="h6" noWrap>
             Trello
