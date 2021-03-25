@@ -39,7 +39,6 @@ const StyledH3 = styled.h3`
   font-weight: 500;
   line-height: 26px;
   max-width: 530px;
-  margin-left: 185px;
 `;
 
 const StyledHr = styled.hr`
@@ -50,20 +49,22 @@ const StyledHr = styled.hr`
   line-height: 24px;
   font-weight: 500;
   line-height: 26px;
-  max-width: 530px;
+  width: 100%;
 `;
 
 const StyledDiv = styled.div`
   display: flex;
   justify-content: space-between;
-  max-width: 530px;
   margin: 0 auto;
+  width: 100%;
 `;
 
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
-  flex: 0 0 355px;
+  flex: 0 0 70%;
+  width: 100%;
+  margin: 0 auto;
 `;
 
 const StyledDivUser = styled.div`
@@ -138,7 +139,7 @@ const StyledDivBio = styled.div`
 
 const StyledTextarea = styled.textarea`
   height: 72px;
-  margin-bottom: 8px;
+  margin-bottom: 28px;
   resize: vertical;
   color: #5e6c84;
   background-color: #fafbfc;
@@ -168,6 +169,8 @@ const StyledButton = styled.button`
   transition-property: background-color,border-color,box-shadow;
   transition-duration: 85ms;
   transition-timing-function: ease;
+  margin: 0 auto;
+  width: 250px;
 `;
 
 export {

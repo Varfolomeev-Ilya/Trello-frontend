@@ -23,10 +23,14 @@ const StyledDiv = styled.div`
 `;
 
 const StyledForm = styled.form`
-  max-width: 355px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   flex: 0 0 355px;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex: 0 0 260px;
 `;
 
 const StyledLabel = styled.label`
@@ -57,7 +61,7 @@ const StyledHr = styled.hr`
   line-height: 24px;
   font-weight: 500;
   line-height: 26px;
-  min-width: 530px;
+  width: 100%;
 `;
 
 const StyledInput = styled.input`
@@ -75,11 +79,34 @@ const StyledInput = styled.input`
   justify-content: center;
   border-radius: 3px;
   cursor: pointer;
-  padding: 6px 12px;
   text-decoration: none;
   transition-property: background-color,border-color,box-shadow;
   transition-duration: 85ms;
   transition-timing-function: ease;
+  width: 250px;
+  padding: 6px 12px;
+  margin-bottom: 10px;
 `;
 
-export { StyledSection, StyledH1, StyledForm, StyledLabel, StyledHr, StyledInput, StyledDiv, StyledH3 };
+const StyledDivBtn = styled.div`
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+`;
+
+const StyledContainer = styled.div`
+  margin: 0 auto;
+  height: auto;
+`;
+
+export { 
+  StyledSection, StyledH1, StyledForm,
+  StyledLabel, StyledHr, StyledInput,
+  StyledDiv, StyledH3, StyledDivBtn,
+  StyledContainer
+ };

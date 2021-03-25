@@ -1,10 +1,12 @@
 import React from 'react';
-import { StyledSection, StyledH1, StyledForm, StyledLabel, StyledHr, StyledDiv, StyledH3, StyledInput } from './AvatarStyled'
+import ImageAvatars from './AvatarMaterial'
+import { StyledSection, StyledH1, StyledForm, StyledLabel, StyledHr, StyledDiv, StyledH3, StyledInput, StyledDivBtn, StyledContainer } from './AvatarStyled'
 
 function UploadAvatar() {
 
   return (
     <StyledSection>
+      <ImageAvatars/>
       <StyledH1>Upload Avatar</StyledH1>
       <StyledDiv>
         <StyledForm action="/account" method="POST" enctype="multipart/form-data">
@@ -12,11 +14,16 @@ function UploadAvatar() {
             <StyledH3>File</StyledH3>
             <StyledHr />
           </StyledLabel>
-          <StyledInput
-          type="file"
-          name="filedata" />
-          <br/>
-          <StyledInput type="submit" value="send"/>
+          <StyledContainer>
+            <StyledDivBtn>
+              <StyledInput
+                type="file"
+                name="filedata" />
+              <StyledInput
+                type="submit"
+                value="send"/>
+            </StyledDivBtn>
+          </StyledContainer>
         </StyledForm>
       </StyledDiv>
     </StyledSection>

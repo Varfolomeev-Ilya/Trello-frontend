@@ -1,7 +1,13 @@
-// import styled from 'styled-components';
+import styled from 'styled-components';
 
-// const StyledInput = styled.input`
-//   background-color: #F9FAFC;
-// `;
+const StyledBody = styled.body`
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: 100% 100%;
+  width: 100%;
+  height: auto;
+`;
 
-// export { StyledInput };
+export { StyledBody };

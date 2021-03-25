@@ -5,7 +5,8 @@ import Signin from '../pages/SignIn/SignIn';
 import NotFound from '../pages/NotFound/NotFound';
 import HomePage from '../pages/Home/Home';
 import Account from '../pages/Account/Account';
-import ProtectedRoute from './Protected';
+import Boards from '../pages/Boards/Boards'
+// import ProtectedRoute from './Protected';
 import { connect } from 'react-redux';
 
 const routes = [
@@ -25,6 +26,10 @@ const routes = [
     path: '/sign-in',
     component: Signin,
   },
+  { 
+    path: '/boards',
+    component: Boards,
+  },
   {
     component: NotFound,
   },
@@ -43,7 +48,7 @@ function Routers() {
           />
         ))}
       </Switch>
-      <ProtectedRoute />
+      {/* <ProtectedRoute /> */}
     </Router>
   );
 };

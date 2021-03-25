@@ -5,4 +5,4 @@ const StyledBody = styled.body`
   height: 100%;
   width: 100%;
 `;
-export { StyledBody } ;
+export { StyledBody };

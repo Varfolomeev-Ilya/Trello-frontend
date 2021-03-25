@@ -15,7 +15,7 @@ function Profile() {
       <StyledH3>About</StyledH3>
       <StyledHr />
       <StyledDiv>
-        <StyledForm>
+        <StyledForm class="form-data" method="POST">
           <StyledDivUser>
             <StyledSpanUser>Username</StyledSpanUser>
             <StyledDivSpan>
