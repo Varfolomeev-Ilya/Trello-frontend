@@ -7,7 +7,7 @@ const StyledSection = styled.section`
   overflow: visible;
 `;
 
-const StyledForm = styled.form`
+const StyledContainer = styled.div`
   max-width: 500px;
   margin: 0 auto;
 `;
@@ -30,7 +30,7 @@ const StyledH2 = styled.h2`
   line-height: 28px;
   margin-top: 10px;
 `;
-const StyledFormInput = styled.form`
+const StyledForm = styled.form`
   margin: 0 auto;
   width: 100%;
   display: flex;
@@ -62,4 +62,4 @@ const StyledMsg = styled.div`
   margin-bottom: 5px;
 `;
 
-export { StyledSection, StyledForm, StyledInput, StyledDiv, StyledH2, StyledUl, StyledLi, StyledFormInput, StyledMsg }
+export { StyledSection, StyledContainer, StyledInput, StyledDiv, StyledH2, StyledUl, StyledLi, StyledForm, StyledMsg }

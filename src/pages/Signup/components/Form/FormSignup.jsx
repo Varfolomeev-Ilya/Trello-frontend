@@ -6,7 +6,7 @@ import { StyledSection, StyledContainer, StyledInput, StyledDiv, StyledH2, Style
 import { StyledButton, StyledH3 } from '../../../../ui/components/Buttons/ButtonStyled';
 import { StyledLoginButton, StyledSpan } from '../../../../ui/components/Buttons/LoginBtnStyled';
 import { StyledSpanLog } from '../../../../ui/components/StyledA';
-// import { signUp } from '../../../../api/authApi'
+import { postRegisterUser } from '../../../../api/authApi'
 
 function SignUpForm() {
   const { handleSubmit, handleChange, values, touched, errors, handleBlur } = useFormik({
@@ -19,7 +19,7 @@ function SignUpForm() {
       password: Yup.string().min(8, 'Password should be longer than 8 characters').required('Recuired')
     }),
     onSubmit: ({ email, password }) => {
-      alert(`email: ${email}, password: ${password}`);
+      postRegisterUser({ email: email, password: password });
     }
   })
   return (
@@ -58,9 +58,7 @@ function SignUpForm() {
               <StyledMsg>{errors.password}</StyledMsg>
             ) : null}
             <StyledButton
-              type='submit'
-            // onClick={signUp}
-            >
+              type='submit'>
               <StyledH3>Continue</StyledH3>
             </StyledButton>
           </StyledFormInput>

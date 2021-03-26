@@ -1,33 +1,33 @@
 import React from 'react';
 import { StyledButton, StyledH3 } from '../../../../ui/components/Buttons/ButtonStyled';
 import { StyledLoginButton, StyledSpan } from '../../../../ui/components/Buttons/LoginBtnStyled';
-// import { signIn } from '../../../../api/authApi';
+import { postLoginUser } from '../../../../api/authApi';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import FollowLink from '../../components/LinkUp';
 import { Link } from 'react-router-dom'
-import { StyledSection, StyledForm, StyledInput, StyledDiv, StyledH2, StyledUl, StyledLi, StyledFormInput, StyledMsg } from './FormSigninStyled';
+import { StyledContainer, StyledInput, StyledDiv, StyledH2, StyledUl, StyledLi, StyledForm, StyledMsg } from './FormSigninStyled';
 
 function SigninForm() {
   const { handleSubmit, handleChange, values, touched, errors, handleBlur } = useFormik({
     initialValues: {
-      email: '',
-      password: ''
+      email: 'testuser5@test.ru',
+      password: 'test1234'
     },
     validationSchema: Yup.object({
       email: Yup.string().max(20, 'Email must be shorter than 20 characters').required('Recuired'),
       password: Yup.string().min(8, 'Password should be longer than 8 characters').required('Recuired')
     }),
     onSubmit: ({ email, password }) => {
-      alert(`email: ${email}, password: ${password}`);
+      postLoginUser({ email: email, password: password })
     }
   })
   return (
-    <StyledSection>
-      <StyledForm>
+    <>
+      <StyledContainer>
         <StyledDiv>
           <StyledH2>Log in to Trello</StyledH2>
-          <StyledFormInput
+          <StyledForm
             class="form-data"
             method="POST"
             onSubmit={handleSubmit}
@@ -56,12 +56,12 @@ function SigninForm() {
             {touched.password && errors.password ? (
               <StyledMsg>{errors.password}</StyledMsg>
             ) : null}
-            <StyledButton>
-            {/* <StyledButton onClick={signIn}> */}
+            {/* <StyledButton> */}
+            <StyledButton type='submit'>
               <Link to='/home' />
               <StyledH3>Log in</StyledH3>
             </StyledButton>
-          </StyledFormInput>
+          </StyledForm>
           <StyledH2>or</StyledH2>
           <FollowLink />
           <StyledLoginButton>
@@ -82,8 +82,8 @@ function SigninForm() {
             </StyledLi>
           </StyledUl>
         </StyledDiv>
-      </StyledForm>
-    </StyledSection>
+      </StyledContainer>
+    </>
   )
 }
 

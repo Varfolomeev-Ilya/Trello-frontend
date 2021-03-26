@@ -1,6 +1,12 @@
-import instance from './axios';
+import axios from './axios';
 
-export const postImage = (data) => {
-  return instance.post(`sign-in`,data)
+export const postImage = () => {
+  axios.post(`/account`)
+    .then((response) => {
+      alert(response.data.message)
+    })
+    .catch((error) => {
+      alert(error.response.data.message)
+    })
 };
 

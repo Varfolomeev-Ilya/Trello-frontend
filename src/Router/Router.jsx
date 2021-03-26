@@ -7,7 +7,7 @@ import HomePage from '../pages/Home/Home';
 import Account from '../pages/Account/Account';
 import Boards from '../pages/Boards/Boards'
 // import ProtectedRoute from './Protected';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 
 const routes = [
   {
@@ -53,8 +53,10 @@ function Routers() {
   );
 };
 
-const mapStateToProps = (state) => ({
-  isAuthentificated: state.checkAuth.isAuthentificated,
-});
+// const mapStateToProps = (state) => ({
+//   isAuthentificated: state.checkAuth.isAuthentificated,
+// });
 
-export default connect(mapStateToProps)(Routers);
+// export default connect(mapStateToProps)(Routers);
+
+export default Routers;
