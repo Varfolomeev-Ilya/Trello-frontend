@@ -5,9 +5,9 @@ import Signin from '../pages/SignIn/SignIn';
 import NotFound from '../pages/NotFound/NotFound';
 import HomePage from '../pages/Home/Home';
 import Account from '../pages/Account/Account';
-import Boards from '../pages/Boards/Boards'
-// import ProtectedRoute from './Protected';
-// import { connect } from 'react-redux';
+import Boards from '../pages/Boards/Boards';
+import Admin from '../pages/Admin/Admin'
+import ProtectedRoute from './Protected';
 
 const routes = [
   {
@@ -30,33 +30,33 @@ const routes = [
     path: '/boards',
     component: Boards,
   },
+  { 
+    path: '/admin',
+    component: Admin,
+  },
   {
+    path: '/',
     component: NotFound,
   },
 ];
 
+
 function Routers() {
   return (
     <Router>
-      <Switch>
+      {/* <Switch> */}
         {routes.map(({ path, component, exact = true }, key) => (
-          <Route
+         <Route
             exact={exact}
             path={path}
             component={component}
             key={key}
-          />
+          /> 
         ))}
-      </Switch>
-      {/* <ProtectedRoute /> */}
+          <ProtectedRoute />
+      {/* </Switch> */}
     </Router>
   );
 };
-
-// const mapStateToProps = (state) => ({
-//   isAuthentificated: state.checkAuth.isAuthentificated,
-// });
-
-// export default connect(mapStateToProps)(Routers);
 
 export default Routers;

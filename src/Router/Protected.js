@@ -1,29 +1,24 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-// import { connect } from 'react-redux';
+import Signup from '../pages/Signup/Signup'
 
+const isAuthentificated = window.localStorage.getItem('isAuthenticated');
 
-  // const isAuthentificated = localStorage.getItem('user', 'value')
-
-  const ProtectedRoute = ({ component: Component, value: Value}) => {
+  const ProtectedRoute = () => {
     return (
       <Route
-        render={(isAuthentificated) => {
-          if (isAuthentificated) {
-            return <Component />;
-          } else {
-            return <Redirect to='/sign-in' />;
-          }
-        }}
-      />
+      // {...rest}
+      //   render={(props) => {
+      //     if (isAuthentificated) {
+      //       return <Component {...props} />;
+      //     } else {
+      //       return <Redirect to='/sign-up' />;
+      //     }
+      //   }}
+      >
+        {isAuthentificated ? <Redirect to='/home'/> : <Redirect to='/sign-in'/>}
+      </Route>
     );
   };
-
-
-  // const mapStateToProps = (state) => ({
-  //   isAuthentificated: state.checkAuth.isAuthentificated,
-  // });
-
-  // export default connect(mapStateToProps)(ProtectedRoute);
 
 export default ProtectedRoute;

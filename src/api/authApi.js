@@ -13,7 +13,7 @@ export const postRegisterUser = (data) => {
 export const postLoginUser = (data) => {
   axios.post('/sign-in', JSON.stringify(data))
     .then((response) => {
-      localStorage.setItem(response.data.user.id, JSON.stringify(response.data.tokens.refreshToken),
+      localStorage.setItem('isAuthenticated', JSON.stringify(response.data.tokens.refreshToken),
       );
       alert(JSON.stringify(response.data.message))
     })

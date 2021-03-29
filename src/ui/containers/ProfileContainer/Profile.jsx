@@ -6,8 +6,21 @@ import {
   StyledSpanP, StyledDivInput, StyledInput,
   StyledDivBio, StyledTextarea, StyledButton
 } from './ProfileStyled.js';
+import { postInfoUser } from '../../../api/usersRequests';
+import { useFormik } from 'formik';
 
 function Profile() {
+  const { handleSubmit, values, handleChange } = useFormik({
+    initialValues: {
+      firstName: '',
+      lastName: '',
+      aboutMe: ''
+    },
+    onSubmit: ({ firstName, lastName, aboutMe }) => {
+      postInfoUser({ firstName: firstName, lastName: lastName, aboutMe: aboutMe })
+    }
+  })
+
   return (
     <StyledSection>
       <StyledH1>Manage your personal information</StyledH1>
@@ -15,7 +28,10 @@ function Profile() {
       <StyledH3>About</StyledH3>
       <StyledHr />
       <StyledDiv>
-        <StyledForm class="form-data" method="POST">
+        <StyledForm
+          class="form-data"
+          method="POST"
+          onSubmit={handleSubmit}>
           <StyledDivUser>
             <StyledSpanUser>Username</StyledSpanUser>
             <StyledDivSpan>
@@ -27,18 +43,30 @@ function Profile() {
             </StyledDivSpan>
           </StyledDivUser>
           <StyledDivInput>
-            <StyledInput type="text" name="username" autocomplete="username" />
+            {/* <StyledInput type="text" name="username" autocomplete="username" /> */}
           </StyledDivInput>
           <StyledDivInput>
-          <StyledSpanUser>Firstname</StyledSpanUser>
-            <StyledInput type="text" name="FirstName" autocomplete="FirstName" />
+            <StyledSpanUser>Firstname</StyledSpanUser>
+            <StyledInput
+              type="text"
+              name="firstName"
+              autocomplete="FirstName"
+              onChange={handleChange}
+              value={values.firstName}
+            />
           </StyledDivInput>
           <StyledDivInput>
-          <StyledSpanUser>Lastname</StyledSpanUser>
-            <StyledInput type="text" name="LastName" autocomplete="LastName" />
+            <StyledSpanUser>Lastname</StyledSpanUser>
+            <StyledInput type="text"
+              name="lastName"
+              autocomplete="LastName"
+              onChange={handleChange}
+              value={values.lastName}
+            />
           </StyledDivInput>
           <StyledDivBio>
-            <StyledSpan>Bio</StyledSpan>
+            <StyledSpanUser>aboutMe</StyledSpanUser>
+
             <StyledDivSpan>
               <StyledSpan>
                 <StyledSpan>
@@ -48,7 +76,13 @@ function Profile() {
               <StyledSpanP>Always public</StyledSpanP>
             </StyledDivSpan>
           </StyledDivBio>
-          <StyledTextarea></StyledTextarea>
+          <StyledInput
+            type="text"
+            name="aboutMe"
+            onChange={handleChange}
+            value={values.aboutMe}
+          />
+          {/* <StyledTextarea ></StyledTextarea> */}
           <StyledButton type="submit">Save</StyledButton>
         </StyledForm>
       </StyledDiv>

@@ -55,6 +55,8 @@ function PrimarySearchAppBar(props) {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}><Link className={classes.linkAcc} to='/admin'>Admin</Link></MenuItem>
+      <MenuItem onClick={handleMenuClose}><Link className={classes.linkAcc} to='/boards'>Boards</Link></MenuItem>
       <MenuItem onClick={handleMenuClose}><Link className={classes.linkAcc} to='/account'>My account</Link></MenuItem>
       <MenuItem onClick={onOut}>Sign out</MenuItem>
     </Menu>

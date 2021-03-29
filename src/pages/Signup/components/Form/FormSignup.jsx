@@ -6,7 +6,7 @@ import { StyledSection, StyledContainer, StyledInput, StyledDiv, StyledH2, Style
 import { StyledButton, StyledH3 } from '../../../../ui/components/Buttons/ButtonStyled';
 import { StyledLoginButton, StyledSpan } from '../../../../ui/components/Buttons/LoginBtnStyled';
 import { StyledSpanLog } from '../../../../ui/components/StyledA';
-import { postRegisterUser } from '../../../../api/authApi'
+import { postRegisterUser } from '../../../../api/authApi';
 
 function SignUpForm() {
   const { handleSubmit, handleChange, values, touched, errors, handleBlur } = useFormik({

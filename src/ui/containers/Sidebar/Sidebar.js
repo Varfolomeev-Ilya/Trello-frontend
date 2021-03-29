@@ -34,8 +34,9 @@ function Sidebar(props) {
       <List>
         {['Boards', 'Home'].map((text, index) => (
           <ListItem button key={text}>
-            <Link to='/boards'></Link>
-            <ListItemText primary={text} />
+            <ListItemText primary={text}>
+            <Link to='/boards'/>
+            </ListItemText>
           </ListItem>
         ))}
       </List>
