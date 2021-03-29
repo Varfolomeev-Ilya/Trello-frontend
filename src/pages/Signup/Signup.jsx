@@ -7,21 +7,7 @@ import SignUpForm from './components/Form/FormSignup'
 import GlobalStyle from '../../ui/styles/GlobalStyles';
 
 function Signup() {
-  // const signUp = async (ev) => {
-  //   try {
-  //     ev.preventDefault();
-
-  //     const response = await signUp({ email: '' });
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-  // const dispatch = useDispatch();
-
-  // const user = useSelector((store)=>store.main.user);
-
-
-  return (
+   return (
     <StyledBody>
       <GlobalStyle />
       <Header />
@@ -31,11 +17,5 @@ function Signup() {
     </StyledBody>
   );
 };
-
-// const mapDispatchToProps = (dispatch) => ({
-//   onChangeIsAuthenticated: (isAuthentificated) => dispatch(changeIsAuthentification(isAuthentificated)),
-// });
-
-// export default connect(null, mapDispatchToProps)(Signup);]
 
 export default Signup;

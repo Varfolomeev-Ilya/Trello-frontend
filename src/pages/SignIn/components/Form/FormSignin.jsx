@@ -5,14 +5,18 @@ import { postLoginUser } from '../../../../api/authApi';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import FollowLink from '../../components/LinkUp';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setAuthUser } from '../../../../store/auth';
 import { StyledSection, StyledContainer, StyledInput, StyledDiv, StyledH2, StyledUl, StyledLi, StyledForm, StyledMsg } from './FormSigninStyled';
 
 function SigninForm() {
+  const dispatch = useDispatch();
+
   const { handleSubmit, handleChange, values, touched, errors, handleBlur } = useFormik({
     initialValues: {
-      email: 'testuser5@test.ru',
-      password: 'test1234'
+      email: 'admin@admin.com',
+      password: 'admin1234'
     },
     validationSchema: Yup.object({
       email: Yup.string().max(20, 'Email must be shorter than 20 characters').required('Recuired'),
@@ -20,8 +24,10 @@ function SigninForm() {
     }),
     onSubmit: ({ email, password }) => {
       postLoginUser({ email: email, password: password })
+      dispatch(setAuthUser(true))
     }
   })
+
   return (
     <>
       <StyledSection>

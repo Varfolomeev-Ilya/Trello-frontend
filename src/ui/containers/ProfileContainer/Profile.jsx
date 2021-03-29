@@ -4,7 +4,7 @@ import {
   StyledHr, StyledDiv, StyledForm, StyledDivUser,
   StyledSpanUser, StyledDivSpan, StyledSpan,
   StyledSpanP, StyledDivInput, StyledInput,
-  StyledDivBio, StyledTextarea, StyledButton
+  StyledDivBio, StyledButton
 } from './ProfileStyled.js';
 import { postInfoUser } from '../../../api/usersRequests';
 import { useFormik } from 'formik';
@@ -33,7 +33,6 @@ function Profile() {
           method="POST"
           onSubmit={handleSubmit}>
           <StyledDivUser>
-            <StyledSpanUser>Username</StyledSpanUser>
             <StyledDivSpan>
               <StyledSpan>
                 <StyledSpan>

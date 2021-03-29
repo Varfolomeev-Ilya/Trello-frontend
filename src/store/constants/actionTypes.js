@@ -1,0 +1,5 @@
+const SET_USERS = 'SET_USERS';
+const SET_AUTH_USER = 'SET_AUTH_USER';
+const REG_USER = 'REG_USER';
+
+export { SET_USERS, SET_AUTH_USER, REG_USER };

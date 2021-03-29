@@ -10,14 +10,16 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import AppBar from '@material-ui/core/AppBar';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { changeIsAuthentification } from '../../../store/store';
 import useStyles from './NavigationTheme';
 import HomeIcon from '@material-ui/icons/Home';
+import { useDispatch } from 'react-redux';
+import { setAuthUser } from '../../../store/auth';
 
-function PrimarySearchAppBar(props) {
-
-  const onOut = () => { props.onChangeIsAuthenticated(false) };
+function PrimarySearchAppBar() {
+  const dispatch = useDispatch();
+  const onOut = () => { 
+    dispatch(setAuthUser(false))
+  };
 
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -143,8 +145,4 @@ function PrimarySearchAppBar(props) {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onChangeIsAuthenticated: (isAuthentificated) => dispatch(changeIsAuthentification(isAuthentificated)),
-});
-
-export default connect(null, mapDispatchToProps)(PrimarySearchAppBar);
+export default PrimarySearchAppBar;

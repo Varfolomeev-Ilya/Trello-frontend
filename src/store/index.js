@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { checkAuthReducer, checkTaskReducer } from './store.js';
+import { checkAuthReducer } from './auth';
+import { usersReducer } from './users';
 
 const store = configureStore({
   reducer: {
     checkAuth: checkAuthReducer,
-    checkTask: checkTaskReducer,
+    users: usersReducer,
   },
 });
 

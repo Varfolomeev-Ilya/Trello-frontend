@@ -7,21 +7,37 @@ import { StyledButton, StyledH3 } from '../../../../ui/components/Buttons/Button
 import { StyledLoginButton, StyledSpan } from '../../../../ui/components/Buttons/LoginBtnStyled';
 import { StyledSpanLog } from '../../../../ui/components/StyledA';
 import { postRegisterUser } from '../../../../api/authApi';
+import { useDispatch } from 'react-redux';
+import { regUser } from '../../../../store/users'
 
 function SignUpForm() {
+  const dispatch = useDispatch();
+
   const { handleSubmit, handleChange, values, touched, errors, handleBlur } = useFormik({
     initialValues: {
       email: '',
-      password: ''
+      password: '',
+      firstName: '',
+      lastName: ''
     },
     validationSchema: Yup.object({
       email: Yup.string().max(20, 'Email must be shorter than 20 characters').required('Recuired'),
-      password: Yup.string().min(8, 'Password should be longer than 8 characters').required('Recuired')
+      password: Yup.string().min(8, 'Password should be longer than 8 characters').required('Recuired'),
+      firstName: Yup.string().min(3, 'FirstName should be longer than 3 characters').required('Recuired'),
+      lastName: Yup.string().min(3, 'LastName should be longer than 4 characters').required('Recuired'),
     }),
-    onSubmit: ({ email, password }) => {
-      postRegisterUser({ email: email, password: password });
+    onSubmit: ({ email, password, firstName, lastName }) => {
+      postRegisterUser({ email: email, password: password, firstName: firstName, lastName: lastName })
+        .then((response) => {
+          alert(response.data.message)
+          dispatch(regUser(response.data.user))
+        })
+        .catch((error) => {
+          alert(error.response.data.message)
+        })
     }
   })
+
   return (
     <StyledSection>
       <StyledContainer>
@@ -57,6 +73,26 @@ function SignUpForm() {
             {touched.password && errors.password ? (
               <StyledMsg>{errors.password}</StyledMsg>
             ) : null}
+            <StyledInput
+              type='firstName'
+              id='firstName'
+              name='firstName'
+              placeholder="firstName"
+              pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.firstName}
+            />
+            <StyledInput
+              type='lastName'
+              id='lastName'
+              name='lastName'
+              pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$"
+              placeholder="lastName"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.lastName}
+            />
             <StyledButton
               type='submit'>
               <StyledH3>Continue</StyledH3>
