@@ -14,10 +14,15 @@ import useStyles from './NavigationTheme';
 import HomeIcon from '@material-ui/icons/Home';
 import { useDispatch } from 'react-redux';
 import { setAuthUser } from '../../../store/auth';
+import { useSelector } from 'react-redux';
 
 function PrimarySearchAppBar() {
+
+  const userInfo = useSelector((state) => state.users.registeredUser);
+  const usersId = userInfo.id;
+
   const dispatch = useDispatch();
-  const onOut = () => { 
+  const onOut = () => {
     dispatch(setAuthUser(false))
   };
 
@@ -45,8 +50,10 @@ function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
+
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -59,7 +66,7 @@ function PrimarySearchAppBar() {
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}><Link className={classes.linkAcc} to='/admin'>Admin</Link></MenuItem>
       <MenuItem onClick={handleMenuClose}><Link className={classes.linkAcc} to='/boards'>Boards</Link></MenuItem>
-      <MenuItem onClick={handleMenuClose}><Link className={classes.linkAcc} to='/account'>My account</Link></MenuItem>
+      <MenuItem onClick={handleMenuClose}><Link className={classes.linkAcc} to={`/account/${usersId}`}>My account</Link></MenuItem>
       <MenuItem onClick={onOut}>Sign out</MenuItem>
     </Menu>
 
@@ -76,13 +83,14 @@ function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem
+       onClick={handleProfileMenuOpen}
+       usersId={usersId}>
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
-          color="inherit"
-        >
+          color="inherit" >
           <AccountCircle />
         </IconButton>
         <p>Profile</p>
@@ -94,7 +102,7 @@ function PrimarySearchAppBar() {
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           <Link className={classes.linkHome} to='/home'>
-            <HomeIcon/>
+            <HomeIcon />
           </Link>
           <Typography className={classes.title} variant="h6" noWrap>
             Trello

@@ -1,7 +1,7 @@
 import axios from './axios';
 
 export const postImage = (file) => {
-  axios.post(`/account`,file)
+  axios.post(`/account/:id`,file)
     .then((response) => {
       alert(response.data.message)
     })

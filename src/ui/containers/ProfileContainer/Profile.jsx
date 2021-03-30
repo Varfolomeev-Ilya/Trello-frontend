@@ -8,16 +8,35 @@ import {
 } from './ProfileStyled.js';
 import { postInfoUser } from '../../../api/usersRequests';
 import { useFormik } from 'formik';
+import { useSelector } from 'react-redux';
+// import { useDispatch } from 'react-redux';
+
 
 function Profile() {
+  // const dispatch = useDispatch();
+  const userInfo = useSelector((state) => state.users.registeredUser);
+  const firstaName = userInfo.firstName;
+  const lastaName = userInfo.lastName;
+  const aboutMe = userInfo.aboutMe;
+  const email = userInfo.email;
+
   const { handleSubmit, values, handleChange } = useFormik({
     initialValues: {
-      firstName: '',
-      lastName: '',
-      aboutMe: ''
+      firstName: firstaName,
+      lastName: lastaName,
+      aboutMe: aboutMe,
+      email: email,
     },
-    onSubmit: ({ firstName, lastName, aboutMe }) => {
-      postInfoUser({ firstName: firstName, lastName: lastName, aboutMe: aboutMe })
+    onSubmit: ({ firstName, lastName, aboutMe, email }) => {
+      postInfoUser({
+        firstName: firstName, lastName: lastName, aboutMe: aboutMe, email: email
+      })
+        .then((response) => {
+          alert(JSON.stringify(response))
+        })
+        .catch((error) => {
+          alert(error.message)
+        })
     }
   })
 
@@ -51,8 +70,7 @@ function Profile() {
               name="firstName"
               autocomplete="FirstName"
               onChange={handleChange}
-              value={values.firstName}
-            />
+              value={values.firstName} />
           </StyledDivInput>
           <StyledDivInput>
             <StyledSpanUser>Lastname</StyledSpanUser>
@@ -60,16 +78,13 @@ function Profile() {
               name="lastName"
               autocomplete="LastName"
               onChange={handleChange}
-              value={values.lastName}
-            />
+              value={values.lastName} />
           </StyledDivInput>
           <StyledDivBio>
             <StyledSpanUser>aboutMe</StyledSpanUser>
-
             <StyledDivSpan>
               <StyledSpan>
                 <StyledSpan>
-
                 </StyledSpan>
               </StyledSpan>
               <StyledSpanP>Always public</StyledSpanP>
@@ -79,9 +94,7 @@ function Profile() {
             type="text"
             name="aboutMe"
             onChange={handleChange}
-            value={values.aboutMe}
-          />
-          {/* <StyledTextarea ></StyledTextarea> */}
+            value={values.aboutMe} />
           <StyledButton type="submit">Save</StyledButton>
         </StyledForm>
       </StyledDiv>

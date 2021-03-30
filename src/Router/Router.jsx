@@ -11,7 +11,7 @@ import ProtectedRoute from './Protected';
 
 const routes = [
   {
-    path: '/account',
+    path: '/account/:id',
     component: Account,
   },
   {
@@ -35,7 +35,6 @@ const routes = [
     component: Admin,
   },
   {
-    // path: '/',
     component: NotFound,
   },
 ];

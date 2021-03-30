@@ -171,6 +171,7 @@ const StyledButton = styled.button`
   transition-timing-function: ease;
   margin: 0 auto;
   width: 250px;
+  margin-top: 28px;
 `;
 
 export {

@@ -8,23 +8,36 @@ import FollowLink from '../../components/LinkUp';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setAuthUser } from '../../../../store/auth';
+import { regUser } from '../../../../store/users'
 import { StyledSection, StyledContainer, StyledInput, StyledDiv, StyledH2, StyledUl, StyledLi, StyledForm, StyledMsg } from './FormSigninStyled';
 
 function SigninForm() {
   const dispatch = useDispatch();
 
   const { handleSubmit, handleChange, values, touched, errors, handleBlur } = useFormik({
+    
     initialValues: {
       email: 'admin@admin.com',
       password: 'admin1234'
     },
+
     validationSchema: Yup.object({
       email: Yup.string().max(20, 'Email must be shorter than 20 characters').required('Recuired'),
       password: Yup.string().min(8, 'Password should be longer than 8 characters').required('Recuired')
     }),
+
     onSubmit: ({ email, password }) => {
       postLoginUser({ email: email, password: password })
-      dispatch(setAuthUser(true))
+        .then((response) => {
+          localStorage.setItem('isAuthenticated', JSON.stringify(response.data.tokens.refreshToken),
+          );
+          alert(JSON.stringify(response.data.message))
+          dispatch(regUser(response.data.user))
+        })
+        .catch((error) => {
+          alert(error.message)
+        });
+      dispatch(setAuthUser(true));
     }
   })
 

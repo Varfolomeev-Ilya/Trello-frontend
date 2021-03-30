@@ -5,13 +5,5 @@ export const postRegisterUser = (data) => {
 };
 
 export const postLoginUser = (data) => {
-  axios.post('/sign-in', JSON.stringify(data))
-  .then((response) => {
-    localStorage.setItem('isAuthenticated', JSON.stringify(response.data.tokens.refreshToken),
-    );
-    alert(JSON.stringify(response.data.message))
-  })
-  .catch((error) => {
-    alert(error.message)
-  })
+  return axios.post('/sign-in', JSON.stringify(data))
 };  
