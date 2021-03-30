@@ -34,7 +34,7 @@ function Profile() {
     onSubmit: ({ firstName, lastName, aboutMe, email, id, token
     }) => {
       postInfoUser({
-        firstName: firstName, lastName: lastName, aboutMe: aboutMe, email: email, id: id,       token: token
+        firstName: firstName, lastName: lastName, aboutMe: aboutMe, email: email, id: id, token: token
 
       })
         .then((response) => {
@@ -67,7 +67,6 @@ function Profile() {
             </StyledDivSpan>
           </StyledDivUser>
           <StyledDivInput>
-            {/* <StyledInput type="text" name="username" autocomplete="username" /> */}
           </StyledDivInput>
           <StyledDivInput>
             <StyledSpanUser>Firstname</StyledSpanUser>

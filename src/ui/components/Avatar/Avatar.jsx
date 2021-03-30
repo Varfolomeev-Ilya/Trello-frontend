@@ -4,8 +4,8 @@ import { postImage } from '../../../api/postImage';
 import { StyledSection, StyledH1, StyledForm, StyledLabel, StyledHr, StyledDiv, StyledH3, StyledInput, StyledDivBtn, StyledContainer } from './AvatarStyled'
 
 function UploadAvatar() {
-  const handleSubmit = (file) => {
-    postImage({file: file})
+  const handleSubmit = (formData) => {
+    postImage({formData})
   }
   return (
     <StyledSection>
