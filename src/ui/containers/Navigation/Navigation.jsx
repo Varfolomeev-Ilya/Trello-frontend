@@ -84,8 +84,7 @@ function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem
-       onClick={handleProfileMenuOpen}
-       usersId={usersId}>
+       onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"

@@ -1,7 +1,7 @@
 import axios from './axios';
 
-export const getAllUsers = () => {
-  axios.get(`/admin`)
+export const getAllUsers = (data) => {
+  axios.get(`/admin`,data)
     .then((response) => {
       alert(JSON.stringify(response.data.allUsers))
     })

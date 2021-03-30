@@ -14,11 +14,13 @@ import { useSelector } from 'react-redux';
 
 function Profile() {
   // const dispatch = useDispatch();
+  const token = localStorage.getItem('isAuthenticated')
   const userInfo = useSelector((state) => state.users.registeredUser);
   const firstaName = userInfo.firstName;
   const lastaName = userInfo.lastName;
   const aboutMe = userInfo.aboutMe;
   const email = userInfo.email;
+  const id = userInfo.id;
 
   const { handleSubmit, values, handleChange } = useFormik({
     initialValues: {
@@ -26,16 +28,20 @@ function Profile() {
       lastName: lastaName,
       aboutMe: aboutMe,
       email: email,
+      id: JSON.stringify(id),
+      token: JSON.parse(token)
     },
-    onSubmit: ({ firstName, lastName, aboutMe, email }) => {
+    onSubmit: ({ firstName, lastName, aboutMe, email, id, token
+    }) => {
       postInfoUser({
-        firstName: firstName, lastName: lastName, aboutMe: aboutMe, email: email
+        firstName: firstName, lastName: lastName, aboutMe: aboutMe, email: email, id: id,       token: token
+
       })
         .then((response) => {
-          alert(JSON.stringify(response))
+          alert((response.data.message))
         })
-        .catch((error) => {
-          alert(error.message)
+        .catch((err) => {
+          alert(err.response.data)
         })
     }
   })

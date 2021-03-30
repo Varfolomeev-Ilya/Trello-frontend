@@ -5,5 +5,5 @@ export const postRegisterUser = (data) => {
 };
 
 export const postLoginUser = (data) => {
-  return axios.post('/sign-in', JSON.stringify(data))
+  return axios.post(`/sign-in`, JSON.stringify(data))
 };  
