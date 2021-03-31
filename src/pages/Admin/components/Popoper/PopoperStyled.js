@@ -1,4 +1,22 @@
 import styled from 'styled-components';
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: 500
+  },
+  typography: {
+    padding: theme.spacing(7),
+    margin: '5px auto',
+    padding: '0',
+    marginBottom: '10px',
+    textAlign: 'center',
+  },
+  paper: {
+    height: '340px',
+    width: '220px'
+  }
+}));
 
 const StyledForm = styled.form`
   width: 100%;
@@ -31,7 +49,7 @@ const StyledButton = styled.button`
   box-shadow: none;
   border: none;
   color: #fff;
-  width: 100px;
+  width: 200px;
   border-radius: 3px;
   text-decoration: none;
   transition-property: background-color,border-color,box-shadow;
@@ -39,6 +57,8 @@ const StyledButton = styled.button`
   transition-duration: 85ms;
   transition-timing-function: ease;
   margin: 0 auto;
+  margin-top: 10px
 `;
 
 export { StyledForm, StyledInput, StyledButton }
+export default useStyles;

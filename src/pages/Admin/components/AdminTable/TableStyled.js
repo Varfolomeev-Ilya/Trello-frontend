@@ -24,6 +24,7 @@ const StyledTable = styled.div`
   margin: 0 auto;
   display: flex;
   border: 1px solid;
+  box-sizing: border-box;
 `;
 
 const StyledPID = styled.p`

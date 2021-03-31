@@ -26,26 +26,3 @@ function ProtectedRoute({ component: Component, ...props }) {
 };
 
 export default ProtectedRoute;
-
-// render={() => {
-//   if (isAuthentificated) {
-//     return <Redirect to='/home' />;
-//   } else {
-//     return <Redirect to='/sign-up' />;
-//   }
-// }}
-
-// const isAuthentificated = useSelector((state) => state.checkAuth.authUser) ? (
-//   <Component />
-// ) : (
-//     <Redirect to='/sign-in' />
-//   );
-
-// const protectRoute = () => {
-//   if (isAuthentificated) {
-//     return <Redirect to='sign-up' />
-//   } else {
-//     return <Redirect to='/home' />
-//   }
-// }
-// return <Route render={protectRoute} />
