@@ -2,7 +2,7 @@ import { createAction, createReducer } from '@reduxjs/toolkit';
 import * as actionTypes from './constants/actionTypes';
 
 const initialState = {
-  allusers: [],
+  allUsers: [],
   registeredUser: {},
 };
 

@@ -48,7 +48,7 @@ function SigninForm() {
           <StyledDiv>
             <StyledH2>Log in to Trello</StyledH2>
             <StyledForm
-              class="form-data"
+              className="form-data"
               method="POST"
               onSubmit={handleSubmit}
             >

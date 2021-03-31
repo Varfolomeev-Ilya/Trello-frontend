@@ -9,11 +9,8 @@ import {
 import { postInfoUser } from '../../../api/usersRequests';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
-// import { useDispatch } from 'react-redux';
-
 
 function Profile() {
-  // const dispatch = useDispatch();
   const token = localStorage.getItem('isAuthenticated')
   const userInfo = useSelector((state) => state.users.registeredUser);
   const firstaName = userInfo.firstName;
@@ -54,7 +51,7 @@ function Profile() {
       <StyledHr />
       <StyledDiv>
         <StyledForm
-          class="form-data"
+          className="form-data"
           method="POST"
           onSubmit={handleSubmit}>
           <StyledDivUser>

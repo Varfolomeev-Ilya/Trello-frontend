@@ -44,7 +44,7 @@ function SignUpForm() {
         <StyledDiv>
           <StyledH2>Sign up for your account</StyledH2>
           <StyledFormInput
-            class='form-data'
+            className='form-data'
             method='post'
             onSubmit={handleSubmit}
           >

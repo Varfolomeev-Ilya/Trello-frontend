@@ -1,12 +1,27 @@
 import React from 'react';
 import ImageAvatars from './AvatarMaterial';
+import { useFormik } from 'formik';
 import { postImage } from '../../../api/postImage';
 import { StyledSection, StyledH1, StyledForm, StyledLabel, StyledHr, StyledDiv, StyledH3, StyledInput, StyledDivBtn, StyledContainer } from './AvatarStyled'
 
 function UploadAvatar() {
-  const handleSubmit = (formData) => {
-    postImage({formData})
-  }
+  const { handleSubmit,
+    //  handleChange, values, errors, handleBlur
+     } = useFormik({
+    // initialValues: {
+    //   file: file,
+    // },
+
+    onSubmit: () => 
+      postImage()
+    .then((response) => {
+      alert(response.data.message)
+    })
+    .catch((error) => {
+      alert(error.response.message)
+    })
+  });
+
   return (
     <StyledSection>
       <ImageAvatars/>
@@ -26,10 +41,9 @@ function UploadAvatar() {
             <StyledDivBtn>
               <StyledInput
                 type="file"
-                name="filedata" />
+                name="filedata"/>
               <StyledInput
-                type="submit"
-                value="send"/>
+                type="submit"/>
             </StyledDivBtn>
           </StyledContainer>
         </StyledForm>
