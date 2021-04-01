@@ -11,7 +11,6 @@ import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 
 function Profile() {
-  const token = localStorage.getItem('isAuthenticated')
   const userInfo = useSelector((state) => state.users.registeredUser);
   const firstaName = userInfo.firstName;
   const lastaName = userInfo.lastName;
@@ -26,14 +25,11 @@ function Profile() {
       aboutMe: aboutMe,
       email: email,
       id: JSON.stringify(id),
-      token: JSON.parse(token)
     },
-    onSubmit: ({ firstName, lastName, aboutMe, email, id, token
+    onSubmit: ({ firstName, lastName, aboutMe, email, id, 
     }) => {
       postInfoUser({
-        firstName: firstName, lastName: lastName, aboutMe: aboutMe, email: email, id: id, token: token
-
-      })
+        firstName: firstName, lastName: lastName, aboutMe: aboutMe, email: email, id: id })
         .then((response) => {
           alert((response.data.message))
         })
