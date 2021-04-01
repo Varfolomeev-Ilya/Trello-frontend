@@ -1,9 +1,7 @@
 import React from 'react';
-// import Header from './Header';
+import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
-import { connect } from 'react-redux';
-import { changeInputValue } from '../../store/store'
 
 function Table(props) {
   
@@ -41,14 +39,14 @@ function Table(props) {
     props.setTasks(props.tasks);
   };
 
-  // const checkAll = (...props) => {
-  //   const everyDone = props.tasks.every(item => item.isDone);
-  //   const tasks = props.tasks.map(item => {
-  //     item.isDone = !everyDone;
-  //     return item;
-  //   });
-  //     changeTasksArr(tasks);
-  // }
+  const checkAll = (...props) => {
+    const everyDone = props.tasks.every(item => item.isDone);
+    const tasks = props.tasks.map(item => {
+      item.isDone = !everyDone;
+      return item;
+    });
+      changeTasksArr(tasks);
+  }
 
   const handleEnter = event => {
     if (event.key === 'Enter')
@@ -119,8 +117,8 @@ function Table(props) {
           onKeyPress={handleEnter}
           onChange={onChangeInputValue}
           // inputValue={this.inputValue}
-          // onAddBtnClick={addTask}
-          // onCheckAllBtnClick={checkAll}
+          onAddBtnClick={addTask}
+          onCheckAllBtnClick={checkAll}
         />
         <Main
           tasks={props.tasks}
@@ -141,17 +139,4 @@ function Table(props) {
     );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  letChangeInputValue: (inputValue) => dispatch(changeInputValue(inputValue)),
-  setBlurInputValue: (blurInputValue) => dispatch(changeInputValue(blurInputValue)),
-  setTasks: (tasks) => dispatch(changeInputValue(tasks)),
-});
-
-const mapStateToProps = (state) => ({
-  inputValue: state.checkTask.inputValue,
-  blurInputValue: state.checkTask.blurInputValue,
-  // tasks: state.checkTasks.tasks
-});
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Table);
+export default Table;

@@ -12,12 +12,13 @@ import { useFormik } from 'formik';
 import { StyledForm, StyledInput, StyledButton } from './PopoperStyled';
 
 function AdminPopper() {
-  const allUsers = useSelector((state) => state.users.allUsers);
-  const users = allUsers
+  const allUsers = useSelector((state) => (state.users.allUsers));
+  const users = allUsers;
+  // const mapUsers = users.map(({ id, firstName, email, roleId, createdAt }) =>
+  //   `id:${id}, firstName:${firstName}, email:${email}, roleId:${roleId}, createdAt:${createdAt}`
+  // )
+  // const newUser = mapUsers.forEach(el => console.log(el))
 
-  users.map(({ id, userName, email, roleId, createdAt }) =>
-    `id:${id}, userName:${userName}, email:${email}, roleId:${roleId}, createdAt:${createdAt}`
-  )
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [open, setOpen] = React.useState(false);
   const [placement, setPlacement] = React.useState();
@@ -30,13 +31,13 @@ function AdminPopper() {
   };
 
   const { handleSubmit, handleChange, values } = useFormik({
-    initialValues: {
-      id: 'id',
-      userName: 'userName',
-      email: 'email',
-      roleId: 'roleId',
-      createdAt: 'createdAt',
-    },
+    // initialValues: {
+    //   id: 'id',
+    //   userName: 'userName',
+    //   email: 'email',
+    //   roleId: 'roleId',
+    //   createdAt: 'createdAt',
+    // },
 
     onSubmit: () => {
 
@@ -56,37 +57,16 @@ function AdminPopper() {
                 className="form-data"
                 method="POST"
                 onSubmit={handleSubmit}
-              >
-                <StyledInput
-                  type="text"
-                  name="id"
-                  onChange={handleChange}
-                  value={values.id}
-                />
-                <StyledInput
-                  type="text"
-                  name="userName"
-                  onChange={handleChange}
-                  value={values.userName}
-                />
-                <StyledInput
-                  type="text"
-                  name="email"
-                  onChange={handleChange}
-                  value={values.email}
-                />
-                <StyledInput
-                  type="text"
-                  name="roleId"
-                  onChange={handleChange}
-                  value={values.roleId}
-                />
-                <StyledInput
-                  type="text"
-                  name="createdAt"
-                  onChange={handleChange}
-                  value={values.createdAt}
-                />
+              > 
+                {users.map(({ id, userName, email, roleId, createdAt }) =>
+                  <>
+                  <input placeholder={`id:${id}`} />
+                  <input placeholder={`userName:${userName}`} />
+                  <input placeholder={`email:${email}`} />
+                  <input placeholder={`roleId:${roleId}`} />
+                  <input placeholder={`createdAt:${createdAt}`} />
+                  </>
+                )}
                 <StyledButton type='submit'>Save changes</StyledButton>
               </StyledForm>
             </Paper>
@@ -103,3 +83,35 @@ function AdminPopper() {
 }
 
 export default AdminPopper;
+                // <StyledInput
+                //   type="text"
+                //   name="id"
+                //   onChange={handleChange}
+                //   value={values.id}
+                // />
+                // <StyledInput
+                //   type="text"
+                //   name="userName"
+                //   onChange={handleChange}
+                //   value={values.userName}
+                // />
+                // <StyledInput
+                //   type="text"
+                //   name="email"
+                //   onChange={handleChange}
+                //   value={values.email}
+                // />
+                // <StyledInput
+                //   type="text"
+                //   name="roleId"
+                //   onChange={handleChange}
+                //   value={values.roleId}
+                // />
+                // <StyledInput
+                //   type="text"
+                //   name="createdAt"
+                //   onChange={handleChange}
+                //   value={values.createdAt}
+                // />
+
+                

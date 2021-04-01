@@ -9,13 +9,4 @@ const instance = axios.create({
   setTimeout: 1000
 });
 
-instance.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
-  if (!token) {
-    return config;
-  }
-  config.headers['x-access-token'] = token;
-  return config;
-});
-
 export default instance;

@@ -1,16 +1,20 @@
 import React from 'react';
-import { StyledContainer, StyledMenu, StyledBtnContainer, StyledUl, StyledLi, StyledSpan, StyledBoards, StyledH2, LinkHome } from './BoardsContainerStyled';;;
+import { StyledContainer, StyledMenu, StyledBtnContainer, StyledUl, StyledLi, StyledSpan, StyledBoards, StyledH2, LinkHome } from './BoardsContainerStyled';
+import { postBoard } from '../../../api/boardsRequests';
 
 function BoardContainer() {
+  const handleClick = () => {
+    postBoard({name:'firstBoard', id:'4', email:'admin@admin.com'})
+  }
   return(
-    <StyledContainer>
+    <>
       <StyledMenu>
         <StyledBtnContainer>
           <StyledUl>
             <StyledLi>
-              <StyledSpan>
+              <butto onClick={handleClick}>
               <StyledH2>Create board</StyledH2>
-              </StyledSpan>
+              </butto>
             </StyledLi>
             <StyledLi>
             <StyledSpan>
@@ -28,8 +32,8 @@ function BoardContainer() {
         </StyledBtnContainer>
       </StyledMenu>
       <StyledBoards>123</StyledBoards>
-    </StyledContainer>
-  )
+    </>
+   )
 }
 
 export default BoardContainer;

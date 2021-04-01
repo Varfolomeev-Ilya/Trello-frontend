@@ -1,6 +1,5 @@
 import React from 'react';
 import Task from './Task';
-import { connect } from 'react-redux';
 
 function Main(props) {
   const activeFilter = props.tasks;
@@ -48,11 +47,5 @@ function Main(props) {
   );
 };
 
-const mapStateToProps = (state) => ({
-  tasks: state.checkTask.tasks,
-});
-
-
-
-export default connect(mapStateToProps)(Main);
+export default Main;
 
