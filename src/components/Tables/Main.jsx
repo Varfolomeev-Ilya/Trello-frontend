@@ -23,7 +23,7 @@ function Main(props) {
   return (
     <main>
       {/* {tasks.map(task => (
-        tass.isInput
+        task.isInput
           ? (<input
             key={task.id}
             onBlur={() => props.onInputBlur(task.id)}

@@ -1,8 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { changeInputValue } from '../../store/store'
+// import { useState , usersReducer } from 'react-redux';
 
-function TaskInput(props) {
+function TaskInput() {
 
   const addTask = (event) => {
     const {input} = event.target.value;
@@ -18,7 +17,6 @@ function TaskInput(props) {
   };
 
   const inputChange = (event) => {
-    props.onChangeIsTask(event.target.value);
   };
 
   return (
@@ -34,13 +32,5 @@ function TaskInput(props) {
   )
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  onChangeIsTask: (inputValue) => dispatch(changeInputValue(inputValue)),
-  setTasks: (tasks) => dispatch(changeInputValue(tasks)),
-});
 
-const mapStateToProps = (state) => ({
-  inputValue: state.checkTask.inputValue,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(TaskInput);
+export default TaskInput;

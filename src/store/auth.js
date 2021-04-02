@@ -5,7 +5,7 @@ const initialState = {
   authUser: false,
 };
 
-const setAuthUser = createAction(actionTypes.SET_AUTH_USER)
+const setAuthUser = createAction(actionTypes.SET_AUTH_USER);
 
 const checkAuthReducer = createReducer(initialState, {
   [setAuthUser]: (state, action) => {

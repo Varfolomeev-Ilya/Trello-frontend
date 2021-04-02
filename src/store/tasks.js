@@ -4,13 +4,13 @@ import * as actionTypes from './constants/actionTypes';
 const initialState = {
   inputValue: '',
   blurInputValue: '',
-  tasks: [],
+  allTasks: [],
   activeFilter: 'all'
 };
 
 const changeInputValue = createAction(actionTypes.CHANGE_INPUT_VALUE);
 const changeBlurInputValue = createAction(actionTypes.CHANGE_BLUR_INPUT_VALUE);
-const setTasks = createAction(actionTypes.Set_TASKS);
+const setTasks = createAction(actionTypes.SET_TASKS);
 const filterTasks = createAction(actionTypes.FILTER_TASKS);
 
 
@@ -22,7 +22,7 @@ const tasksReduser = createReducer(initialState, {
     state.blurInputValue = action.payload;
   },
   [setTasks]: (state, action) => {
-    state.tasks = action.payload;
+    state.allTasks = action.payload;
   },
   [filterTasks]: (state, action) => {
     state.activeFilter = action.payload;

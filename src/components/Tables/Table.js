@@ -1,35 +1,46 @@
 import React from 'react';
-import Header from './Header';
+// import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeInputValue, changeBlurInputValue, setTasks,
+  //  filterTasks
+   } from '../../store/tasks'
+
 
 function Table(props) {
-  
+  const dispatch = useDispatch();
+  const inputValue = useSelector((state) =>state.tasks.inputValue)
+  const tasks = useSelector((state) => state.tasks.allTasks)
   const onChangeInputValue = event => {
-    // inputValue: event.target.value
+    dispatch(changeInputValue(event.target.value))
   };
 
-  const changeBlurInputValue = event => {
-   
+  const changesBlurInputValue = event => {
+    dispatch(changeBlurInputValue(event.target.value))
   };
-
-  const changeTasksArr = arr => {
   
-  };  
-
-  const addTasks = (inputValue) => {
+  const changeTasksArr = (arr) => {
+    dispatch(setTasks(arr));
+    localStorage.setItem('todos', JSON.stringify(arr))
+  };
+  const addTasks = () => {
     const newTask = {
       id: Date.now(),
-      title: inputValue,
+      title: `${inputValue}`,
       isDone: false,
       isInput: false
     }
-    const updatedTasks = [newTask];
-    changeTasksArr(updatedTasks);
+    const updatedTasks = [newTask,...tasks];
+    // changeTasksArr(updatedTasks);
+    dispatch(setTasks(updatedTasks));
   };
 
   const addTask = () => {
-    addTasks();
+    if (`${inputValue}`) {
+      addTasks(`${inputValue}`);
+      dispatch(changeInputValue(''))
+    }
   };
 
   const checkAll = (...props) => {
@@ -38,13 +49,15 @@ function Table(props) {
       item.isDone = !everyDone;
       return item;
     });
-      changeTasksArr(tasks);
+    changeTasksArr(tasks);
   }
 
   const handleEnter = event => {
     if (event.key === 'Enter')
-      addTask();
+      addTask(dispatch(setTasks(event.target.value)));
   };
+
+  // mark
 
   const deleteTask = (id, ...props) => {
     const filteredTasks = props.tasks.filter(item => id !== item.id);
@@ -97,38 +110,39 @@ function Table(props) {
   }
 
   const handleFilterBtnClick = event => {
-    props.isTask ({
+    props.isTask({
       activeFilter: event.target.id
     });
   }
 
-    return (
-      <>
-        <input
-          addTask={addTask}
-          onKeyPress={handleEnter}
-          onChange={onChangeInputValue}
-          // inputValue={this.inputValue}
-          onAddBtnClick={addTask}
-          onCheckAllBtnClick={checkAll}
-        />
-        <Main
-          tasks={props.tasks}
-          onDoneBtnClick={checkTask}
-          onDeleteBtnClick={deleteTask}
-          onTaskDblClick={handleTaskDblClick}
-          onInputBlur={handleInputBlur}
-          onBlurInputChange={changeBlurInputValue}
-          blurInputValue={props.blurInputValue}
-          // activeFilter={props.isTask.activeFilter}
-        />
-        <Footer
-          // allTasks={props.tasks}
-          onClearComplited={handleClearComplited}
-          onFilterBtnClick={handleFilterBtnClick}
-        />
-      </>
-    );
+  return (
+    <>
+      {/* <Header/> */}
+      <input
+        addTask={addTask}
+        onKeyPress={handleEnter}
+        onChange={onChangeInputValue}
+        inputValue={`${inputValue}`}
+        onAddBtnClick={addTask}
+        onCheckAllBtnClick={checkAll}
+      />
+      <Main
+        tasks={props.tasks}
+        onDoneBtnClick={checkTask}
+        onDeleteBtnClick={deleteTask}
+        onTaskDblClick={handleTaskDblClick}
+        onInputBlur={handleInputBlur}
+        onBlurInputChange={changesBlurInputValue}
+        blurInputValue={props.blurInputValue}
+      // activeFilter={props.isTask.activeFilter}
+      />
+      <Footer
+        // allTasks={props.tasks}
+        onClearComplited={handleClearComplited}
+        onFilterBtnClick={handleFilterBtnClick}
+      />
+    </>
+  );
 };
 
 export default Table;

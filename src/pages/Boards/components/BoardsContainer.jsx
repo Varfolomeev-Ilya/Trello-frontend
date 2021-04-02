@@ -12,9 +12,9 @@ function BoardContainer() {
         <StyledBtnContainer>
           <StyledUl>
             <StyledLi>
-              <butto onClick={handleClick}>
+              <button onClick={handleClick}>
               <StyledH2>Create board</StyledH2>
-              </butto>
+              </button>
             </StyledLi>
             <StyledLi>
             <StyledSpan>
