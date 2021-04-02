@@ -33,10 +33,7 @@ function SigninForm() {
           );
           alert(JSON.stringify(response.data.message))
           dispatch(regUser(response.data.user))
-          
-        })
-        .then((response) =>{
-          if(response === 200) {
+          if(response.status === 200) {
             dispatch(setAuthUser(true));
           }
         })

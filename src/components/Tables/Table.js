@@ -6,21 +6,15 @@ import Footer from './Footer';
 function Table(props) {
   
   const onChangeInputValue = event => {
-    props.letChangeInputValue(
-      event.target.value
-    );
+    // inputValue: event.target.value
   };
 
   const changeBlurInputValue = event => {
-    props.setBlurInputValue(
-     event.target.value
-    );
+   
   };
 
   const changeTasksArr = arr => {
-    props.setTasks(
-      arr
-    );
+  
   };  
 
   const addTasks = (inputValue) => {
@@ -36,7 +30,6 @@ function Table(props) {
 
   const addTask = () => {
     addTasks();
-    props.setTasks(props.tasks);
   };
 
   const checkAll = (...props) => {
@@ -51,7 +44,6 @@ function Table(props) {
   const handleEnter = event => {
     if (event.key === 'Enter')
       addTask();
-      props.setTasks(props.tasks);
   };
 
   const deleteTask = (id, ...props) => {

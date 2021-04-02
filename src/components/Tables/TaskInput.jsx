@@ -4,14 +4,12 @@ import { changeInputValue } from '../../store/store'
 
 function TaskInput(props) {
 
-  const addTask = () => {
-    // const {input} = event.target.value;
-    // if (input) {
-    //   addTask(input);
-    //   // this.setState({input: ''});
-    //   props.onChangeIsTask({input: ''})
-    // }
-    // props.setTasks()
+  const addTask = (event) => {
+    const {input} = event.target.value;
+    if (input) {
+      addTask(input);
+    }
+    
   };
 
   const handleEnter = event => {
