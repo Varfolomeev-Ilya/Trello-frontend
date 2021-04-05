@@ -10,14 +10,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setUsers } from '../../../../store/users';
 import { useFormik } from 'formik';
 import { StyledForm, StyledInput, StyledButton } from './PopoperStyled';
+import { getOneUser } from '../../../../api/adminRequests'
 
 function AdminPopper() {
   const allUsers = useSelector((state) => (state.users.allUsers));
   const users = allUsers;
-  // const mapUsers = users.map(({ id, firstName, email, roleId, createdAt }) =>
-  //   `id:${id}, firstName:${firstName}, email:${email}, roleId:${roleId}, createdAt:${createdAt}`
-  // )
-  // const newUser = mapUsers.forEach(el => console.log(el))
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [open, setOpen] = React.useState(false);
@@ -38,10 +35,8 @@ function AdminPopper() {
     //   roleId: 'roleId',
     //   createdAt: 'createdAt',
     // },
-
     onSubmit: () => {
-
-    }
+    },
   })
 
   return (

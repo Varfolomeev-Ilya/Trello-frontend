@@ -29,8 +29,7 @@ function SigninForm() {
     onSubmit: ({ email, password }) => {
       postLoginUser({ email: email, password: password })
         .then((response) => {
-          localStorage.setItem('isAuthenticated', JSON.stringify(response.data.tokens.refreshToken),
-          );
+          localStorage.setItem('isAuthenticated', JSON.stringify(response.data.tokens.accessToken))
           alert(JSON.stringify(response.data.message))
           dispatch(regUser(response.data.user))
           if(response.status === 200) {

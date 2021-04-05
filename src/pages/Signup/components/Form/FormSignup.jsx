@@ -8,7 +8,8 @@ import { StyledLoginButton, StyledSpan } from '../../../../ui/components/Buttons
 import { StyledSpanLog } from '../../../../ui/components/StyledA';
 import { postRegisterUser } from '../../../../api/authApi';
 import { useDispatch } from 'react-redux';
-import { regUser } from '../../../../store/users'
+import { regUser } from '../../../../store/users';
+import { setAuthUser } from '../../../../store/auth'
 
 function SignUpForm() {
   const dispatch = useDispatch();
@@ -31,6 +32,9 @@ function SignUpForm() {
         .then((response) => {
           alert(response.data.message)
           dispatch(regUser(response.data.user))
+          if(response.status === 201) {
+            dispatch(setAuthUser(true));
+          }
         })
         .catch((error) => {
           alert(error.response.data.message)
@@ -52,8 +56,7 @@ function SignUpForm() {
               type='email'
               id='email'
               name='email'
-              placeholder="Enter email"
-              pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+              placeholder='Enter email'
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.email}
@@ -65,7 +68,7 @@ function SignUpForm() {
               type='password'
               id='password'
               name='password'
-              placeholder="Enter password"
+              placeholder='Enter password'
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.password}
@@ -77,8 +80,7 @@ function SignUpForm() {
               type='firstName'
               id='firstName'
               name='firstName'
-              placeholder="firstName"
-              pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$"
+              placeholder='firstName'
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.firstName}
@@ -87,8 +89,7 @@ function SignUpForm() {
               type='lastName'
               id='lastName'
               name='lastName'
-              pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$"
-              placeholder="lastName"
+              placeholder='lastName'
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.lastName}

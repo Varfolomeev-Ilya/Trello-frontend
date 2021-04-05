@@ -9,9 +9,54 @@ const StyledContainer = styled.section`
   margin: 0 auto;
 `;
 
+const StyledMenu = styled.div`
+  margin: 40px 0 0;
+  padding: 0 16px;
+  width: 240px;
+`;
+
+const StyledBtnContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
+const StyledUl = styled.ul`
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  margin-bottom: 12px;
+`;
+
+const StyledLi = styled.li`
+  margin-bottom: 4px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  margin: 0 auto;
+`;
+
+const StuledButton = styled.button`
+  
+`;
+
+const StyledH2 = styled.h2`
+  text-align: center;
+  font-size: 1.25rem;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0.0075em;
+`;
+
+const LinkHome = styled(Link)`
+  text-decoration: none;
+  color: black;
+`;
+
 // BOARDS
 const StyledBoards = styled.div`
-  background-color: rgba(9,30,66,.04);
   background-size: cover;
   background-position: 50%;
   color: #fff;
@@ -25,7 +70,7 @@ const StyledBoards = styled.div`
   cursor: pointer;
 `;
 const StyledSpan = styled.span`
- background-color: rgba(9,30,66,.04);
+  background-color: rgba(9,30,66,.04);
   box-shadow: none;
   border: none;
   color: #172b4d;

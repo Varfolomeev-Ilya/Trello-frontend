@@ -27,7 +27,7 @@ const routes = [
     component: Signin,
   },
   {
-    path: '/boards',
+    path: '/boards/:id',
     component: Boards,
   },
   {
@@ -43,12 +43,12 @@ function Routers() {
   return (
     <Switch>
       {routes.map(({ path, component, exact = true }, key) => (
-          <ProtectedRoute
-            exact={exact}
-            path={path}
-            key={key}
-            component={component}
-          /> 
+        <ProtectedRoute
+          exact={exact}
+          path={path}
+          key={key}
+          component={component}
+        />
       ))}
     </Switch>
   );

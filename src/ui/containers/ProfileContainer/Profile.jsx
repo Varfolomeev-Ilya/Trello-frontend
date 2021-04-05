@@ -31,7 +31,7 @@ function Profile() {
       postInfoUser({
         firstName: firstName, lastName: lastName, aboutMe: aboutMe, email: email, id: id })
         .then((response) => {
-          alert((response.data.message))
+          alert((response.message))
         })
         .catch((err) => {
           alert(err.response.data)

@@ -3,25 +3,24 @@ import { useFormik } from 'formik';
 import { StyledSection, StyledContainer, StyledTable, StyledPID } from './TableStyled';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUsers } from '../../../../store/users';
-import { getAllUsers } from '../../../../api/adminRequests';
-import AdminPopper from '../Popoper/Popoper'
+import { getAllUsers, getOneUser} from '../../../../api/adminRequests';
+import AdminPopper from '../Popoper/Popoper';
 
 function AdminTable() {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.users.registeredUser);
   const roleId = userInfo.roleId;
+  console.log(roleId)
   const allUsers = useSelector((state) => state.users.allUsers);
   const users = allUsers
-
-  const { handleSubmit,
-    //  handleChange, values, errors, handleBlur
-  } = useFormik({
+  
+  const { handleSubmit } = useFormik({
     initialValues: {
       roleId: roleId,
     },
 
-    onSubmit: () => {
-      getAllUsers()
+    onSubmit: ({roleId}) => {
+      getAllUsers({roleId:roleId})
         .then((response) => {
           // alert(JSON.stringify(response.data.allUsers));
           dispatch(setUsers(response.data.allUsers));
@@ -29,7 +28,8 @@ function AdminTable() {
         .catch((error) => {
           alert(error.response.data.message);
         })
-    }
+    },
+  
   })
 
   return (
@@ -40,9 +40,9 @@ function AdminTable() {
           method="POST"
           onSubmit={handleSubmit}
         >
-          <button type='sybmit'>get all users</button>
+          <button type='submit'>get all users</button>
         </form>
-        
+
         {users.map(({ id, firstName, lastName, email }) =>
           <StyledTable>
             <StyledPID key={`id:${id}`}>{id}</StyledPID>
@@ -50,7 +50,7 @@ function AdminTable() {
             <StyledPID key={`lastName:${lastName}`}>{lastName}</StyledPID>
             <StyledPID key={`email:${email}`}>{email}</StyledPID>
             <StyledPID>
-              <AdminPopper/>
+              <AdminPopper onClick={getOneUser}/>
             </StyledPID>
           </StyledTable>
         )}

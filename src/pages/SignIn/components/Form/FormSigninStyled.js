@@ -41,6 +41,8 @@ const StyledInput = styled.input`
   margin-bottom: 5px;
   opacity: 0.5;
   width: 100%;
+  border-radius: 5px;
+  border: 1px solid #cecece;
 `;
 
 const StyledUl = styled.ul`

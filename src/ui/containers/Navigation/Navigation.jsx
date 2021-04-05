@@ -23,7 +23,8 @@ function PrimarySearchAppBar() {
 
   const dispatch = useDispatch();
   const onOut = () => {
-    dispatch(setAuthUser(false))
+    dispatch(setAuthUser(false));
+    localStorage.removeItem('isAuthenticated');
   };
 
   const classes = useStyles();
@@ -65,11 +66,10 @@ function PrimarySearchAppBar() {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}><Link className={classes.linkAcc} to='/admin'>Admin</Link></MenuItem>
-      <MenuItem onClick={handleMenuClose}><Link className={classes.linkAcc} to='/boards'>Boards</Link></MenuItem>
+      <MenuItem onClick={handleMenuClose}><Link className={classes.linkAcc} to={`/boards/${usersId}`}>Boards</Link></MenuItem>
       <MenuItem onClick={handleMenuClose}><Link className={classes.linkAcc} to={`/account/${usersId}`}>My account</Link></MenuItem>
       <MenuItem onClick={onOut}>Sign out</MenuItem>
     </Menu>
-
   );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
