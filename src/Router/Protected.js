@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 function ProtectedRoute({ component: Component, ...props }) {
-  const checkLoggedIn = useSelector((state) => state.checkAuth.authUser)
+  const checkLoggedIn = useSelector((state) => state.users.registeredUser.id)
   const isAuthRoute = props.path === '/sign-up' || props.path === '/sign-in';
   const isPublicRoute = isAuthRoute || props.path === '/';
   const isAuthentificated = checkLoggedIn ?
@@ -12,7 +12,6 @@ function ProtectedRoute({ component: Component, ...props }) {
     ) : (
       <Redirect to='/sign-in' />
     );
-
   const protectRoute = () => {
     if (checkLoggedIn && isAuthRoute) {
       return <Redirect to='/home' />

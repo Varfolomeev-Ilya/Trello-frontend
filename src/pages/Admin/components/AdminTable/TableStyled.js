@@ -31,7 +31,7 @@ const StyledPID = styled.p`
   width:150px;
   height: auto;
   text-align: center;
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   font-weight: 500;
   line-height: 2.75;
   border-radius: 4px;

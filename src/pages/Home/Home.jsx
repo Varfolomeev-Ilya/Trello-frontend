@@ -1,19 +1,18 @@
 import React from 'react';
-import Navigation from '../../ui/containers/Navigation/Navigation'; 
+import Navigation from '../../ui/components/Navigation/Navigation';
 import { Styledsection, StyledDiv } from './HomeStyled';
 
 function HomePage() {
-  return(
+  return (
     <>
-      <Navigation/>
-        <Styledsection>
-        <StyledDiv>
-        </StyledDiv>
+      <Navigation />
+      <Styledsection>
+        <StyledDiv>1</StyledDiv>
         <StyledDiv>2</StyledDiv>
         <StyledDiv>3</StyledDiv>
         <StyledDiv>4</StyledDiv>
-        <StyledDiv>5</StyledDiv>                    
-        </Styledsection>
+        <StyledDiv>5</StyledDiv>
+      </Styledsection>
     </>
   );
 };

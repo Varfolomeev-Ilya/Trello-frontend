@@ -1,15 +1,15 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import FollowLinkIn from '../LinkIn';
-import { StyledSection, StyledContainer, StyledInput, StyledDiv, StyledH2, StyledFormInput, StyledMsg } from './FormSignupStyled';
+import FollowLinkIn from '../Link/LinkIn';
+import { StyledSection, StyledContainer, StyledInput, StyledDiv, StyledH2, StyledFormInput, StyledSpanLog } from './FormSignupStyled';
+import { StyledMsg } from '../../../../ui/components/Message/MessageStyled';
 import { StyledButton, StyledH3 } from '../../../../ui/components/Buttons/ButtonStyled';
 import { StyledLoginButton, StyledSpan } from '../../../../ui/components/Buttons/LoginBtnStyled';
-import { StyledSpanLog } from '../../../../ui/components/StyledA';
 import { postRegisterUser } from '../../../../api/authApi';
 import { useDispatch } from 'react-redux';
 import { regUser } from '../../../../store/users';
-import { setAuthUser } from '../../../../store/auth'
+import * as validation from '../../../../utils/validationConsts'
 
 function SignUpForm() {
   const dispatch = useDispatch();
@@ -22,23 +22,45 @@ function SignUpForm() {
       lastName: ''
     },
     validationSchema: Yup.object({
-      email: Yup.string().max(20, 'Email must be shorter than 20 characters').required('Recuired'),
-      password: Yup.string().min(8, 'Password should be longer than 8 characters').required('Recuired'),
-      firstName: Yup.string().min(3, 'FirstName should be longer than 3 characters').required('Recuired'),
-      lastName: Yup.string().min(3, 'LastName should be longer than 4 characters').required('Recuired'),
+      email:
+        Yup
+          .string()
+          .email()
+          .trim()
+          .max(validation.EMAIL_LENGTH, validation.EMAIL_LENGTH_MESSAGE)
+          .required(validation.EMAIL_REQUIRED_MESSAGE)
+          .matches(validation.EMAIL_MATCHES, validation.EMAIL_MATCHES_MESSAGE),
+      password:
+        Yup
+          .string()
+          .trim()
+          .min(validation.PASSWORD_LENGTH, validation.PASSWORD_LENGTH_MESSAGE)
+          .required(validation.PASSWORD_REQIERED_MESSAGE)
+          .matches(validation.PASSWORD_MATCHES, validation.PASSWORD_MATCHES_MESSAGE),
+      firstName:
+        Yup
+          .string()
+          .trim()
+          .min(validation.FIRSTNAME_LENGTH, validation.FIRSTNAME_LENGTH_MESSAGE)
+          .required(validation.FIRSTNAME_REQUIRED_MESSAGE)
+          .matches(validation.FIRSTNAME_MATCHES, validation.FIRSTNAME_MATCHES_MESSAGE),
+      lastName:
+        Yup
+          .string()
+          .trim()
+          .min(validation.LASTNAME_LENGTH, validation.LASTNAME_LENGTH_MESSAGE)
+          .required(validation.LASTNAME_REQUIRED_MESSAGE)
+          .matches(validation.LASTNAME_MATCHES, validation.LASTNAME_MATCHES_MESSAGE),
     }),
-    onSubmit: ({ email, password, firstName, lastName }) => {
-      postRegisterUser({ email: email, password: password, firstName: firstName, lastName: lastName })
-        .then((response) => {
-          alert(response.data.message)
-          dispatch(regUser(response.data.user))
-          if(response.status === 201) {
-            dispatch(setAuthUser(true));
-          }
-        })
-        .catch((error) => {
-          alert(error.response.data.message)
-        })
+    onSubmit: async ({ email, password, firstName, lastName }) => {
+      try {
+        const response = await postRegisterUser({ email: email, password: password, firstName: firstName, lastName: lastName });
+        alert(JSON.stringify(response.data.message))
+        localStorage.setItem('isAuthenticated', JSON.stringify(response.data.tokens.accessToken));
+        dispatch(regUser(response.data.user))
+      } catch (error) {
+        alert(error);
+      }
     }
   })
 
@@ -85,6 +107,9 @@ function SignUpForm() {
               onBlur={handleBlur}
               value={values.firstName}
             />
+            {touched.firstName && errors.firstName ? (
+              <StyledMsg>{errors.firstName}</StyledMsg>
+            ) : null}
             <StyledInput
               type='lastName'
               id='lastName'
@@ -94,6 +119,9 @@ function SignUpForm() {
               onBlur={handleBlur}
               value={values.lastName}
             />
+            {touched.lastName && errors.lastName ? (
+              <StyledMsg>{errors.lastName}</StyledMsg>
+            ) : null}
             <StyledButton
               type='submit'>
               <StyledH3>Continue</StyledH3>

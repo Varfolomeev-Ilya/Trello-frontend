@@ -1,10 +1,10 @@
 import React from 'react';
-import { StyledLink, StyledA } from './LinkStyled';
+import { StyledLink, StyledH3 } from './LinkStyled';
 
 function FollowLinkIn() {
-  return(
+  return (
     <StyledLink to='/sign-in'>
-      <StyledA>Already have an account? Log In</StyledA>
+      <StyledH3>Already have an account? Log In</StyledH3>
     </StyledLink>
   )
 }

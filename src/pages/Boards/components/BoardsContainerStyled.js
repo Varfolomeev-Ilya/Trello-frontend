@@ -42,8 +42,8 @@ const StyledSpan = styled.span`
 const StyledP = styled.p`
   margin: 0 0 8px;
 `;
-export { 
+export {
   StyledContainer, StyledMenu, StyledBtnContainer,
   StyledUl, StyledLi, StyledSpan, StyledBoards,
-  StuledButton, StyledH2,LinkHome,StyledP
+  StuledButton, StyledH2, LinkHome, StyledP
 }

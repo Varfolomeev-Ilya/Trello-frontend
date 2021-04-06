@@ -58,13 +58,14 @@ const StyledLi = styled.li`
   padding: 10px 10px;
 `;
 
-const StyledMsg = styled.div`
-  margin: 0 auto;
-  margin-bottom: 5px;
+const StyledSpanLog = styled.span`
+  display: inline-block;
+  border-radius: 1px;
+  margin-top: 10px;
 `;
 
 export {
   StyledSection, StyledInput, StyledDiv, StyledH2,
   StyledUl, StyledLi, StyledFormInput,
-  StyledContainer, StyledMsg
+  StyledContainer, StyledSpanLog
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import Navigation from '../../ui/containers/Navigation/Navigation';
+import Navigation from '../../ui/components/Navigation/Navigation';
 import AdminTable from './components/AdminTable/AdminTable';
 
 function Admin() {

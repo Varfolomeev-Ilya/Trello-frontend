@@ -8,14 +8,14 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import useStyles from './BodyContainerStyles';
-import Profile from '../ProfileContainer/Profile';
-import UploadAvatar from '../../components/Avatar/Avatar';
+import Profile from '../ProfileContainer//Profile';
+import UploadAvatar from '../Avatar/UploadAvatar';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
     <div
-      role="tabpanel"
+      role='tabpanel'
       hidden={value !== index}
       id={`full-width-tabpanel-${index}`}
       aria-labelledby={`full-width-tab-${index}`}
@@ -58,17 +58,17 @@ function BodyContainer() {
 
   return (
     <div className={classes.bodyStyles}>
-      <AppBar position="static" color="default">
+      <AppBar position='static' color='default'>
         <Tabs
           value={value}
           onChange={handleChange}
           className={classes.indicatorStyles}
-          variant="fullWidth"
-          aria-label="full width tabs example"
+          variant='fullWidth'
+          aria-label='full width tabs example'
         >
-          <Tab label="Edit profile" {...a11yProps(0)} />
-          <Tab label="Upload your avatar" {...a11yProps(1)} />
-          <Tab label="Settings" {...a11yProps(2)} />
+          <Tab label='Edit profile' {...a11yProps(0)} />
+          <Tab label='Upload your avatar' {...a11yProps(1)} />
+          <Tab label='Settings' {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -78,10 +78,10 @@ function BodyContainer() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-        <Profile/>
+          <Profile />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <UploadAvatar/>
+          <UploadAvatar />
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
         </TabPanel>

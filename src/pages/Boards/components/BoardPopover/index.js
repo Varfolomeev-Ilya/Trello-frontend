@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2),
     },
     textStyled: {
-        textAlign: "center",
+        textAlign: 'center',
     }
 }));
 
@@ -38,24 +38,24 @@ function BoardPopover() {
                 <p>Create new board</p>
             </Button>
             <Popover
-                    id={id}
-                    open={open}
-                    anchorEl={anchorEl}
-                    onClose={handleClose}
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'center',
-                    }}
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'center',
-                    }}
+                id={id}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center',
+                }}
+            >
+                <Typography
+                    className={classes.typography}
                 >
-                    <Typography
-                        className={classes.typography}
-                    >
-                    </Typography>
-                </Popover>
+                </Typography>
+            </Popover>
         </div>
     );
 }

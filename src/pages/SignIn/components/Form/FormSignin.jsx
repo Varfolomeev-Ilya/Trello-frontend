@@ -4,41 +4,50 @@ import { StyledLoginButton, StyledSpan } from '../../../../ui/components/Buttons
 import { postLoginUser } from '../../../../api/authApi';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import FollowLink from '../../components/LinkUp';
+import FollowLink from '../../../../ui//components/Link/LinkUp';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setAuthUser } from '../../../../store/auth';
+import { StyledSection, StyledContainer, StyledInput, StyledDiv, StyledH2, StyledUl, StyledLi, StyledForm } from './FormSigninStyled';
+import { StyledMsg } from '../../../../ui/components/Message/MessageStyled';
+import * as validation from '../../../../utils/validationConsts';
 import { regUser } from '../../../../store/users'
-import { StyledSection, StyledContainer, StyledInput, StyledDiv, StyledH2, StyledUl, StyledLi, StyledForm, StyledMsg } from './FormSigninStyled';
+import { useDispatch } from 'react-redux';
 
 function SigninForm() {
   const dispatch = useDispatch();
 
   const { handleSubmit, handleChange, values, touched, errors, handleBlur } = useFormik({
-    
+
     initialValues: {
       email: 'admin@admin.com',
       password: 'admin1234'
     },
-
     validationSchema: Yup.object({
-      email: Yup.string().max(20, 'Email must be shorter than 20 characters').required('Recuired'),
-      password: Yup.string().min(8, 'Password should be longer than 8 characters').required('Recuired')
+      email:
+        Yup
+          .string()
+          .trim()
+          .email()
+          .max(validation.EMAIL_LENGTH, validation.EMAIL_LENGTH_MESSAGE)
+          .required(validation.EMAIL_REQUIRED_MESSAGE)
+          .matches(validation.EMAIL_MATCHES, validation.EMAIL_MATCHES_MESSAGE),
+      password:
+        Yup
+          .string()
+          .trim()
+          .min(validation.PASSWORD_LENGTH, validation.PASSWORD_LENGTH_MESSAGE)
+          .required(validation.PASSWORD_REQIERED_MESSAGE)
+          .matches(validation.PASSWORD_MATCHES, validation.PASSWORD_MATCHES_MESSAGE),
     }),
-
-    onSubmit: ({ email, password }) => {
-      postLoginUser({ email: email, password: password })
-        .then((response) => {
-          localStorage.setItem('isAuthenticated', JSON.stringify(response.data.tokens.accessToken))
-          alert(JSON.stringify(response.data.message))
-          dispatch(regUser(response.data.user))
-          if(response.status === 200) {
-            dispatch(setAuthUser(true));
-          }
-        })
-        .catch((error) => {
-          alert(error.message)
-        });
+    onSubmit: async ({ email, password }) => {
+      try {
+        const response = await postLoginUser({ email: email, password: password });
+        localStorage.setItem('isAuthenticated', JSON.stringify(response.data.tokens.accessToken));
+        alert(JSON.stringify(response.data.message));
+        dispatch(regUser(response.data.user));
+      }
+      catch (error) {
+        alert(error.message);
+      };
     }
   })
 
@@ -49,16 +58,15 @@ function SigninForm() {
           <StyledDiv>
             <StyledH2>Log in to Trello</StyledH2>
             <StyledForm
-              className="form-data"
-              method="POST"
+              className='form-data'
+              method='POST'
               onSubmit={handleSubmit}
             >
               <StyledInput
                 type='email'
-                id='email'
                 name='email'
-                placeholder="Enter email"
-                pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                placeholder='Enter email'
+                pattern='^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.email}
@@ -69,7 +77,7 @@ function SigninForm() {
               <StyledInput
                 type='password'
                 name='password'
-                placeholder="Enter password"
+                placeholder='Enter password'
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.password}

@@ -59,9 +59,4 @@ const StyledLi = styled.li`
   padding: 10px 10px;
 `;
 
-const StyledMsg = styled.div`
-  margin: 0 auto;
-  margin-bottom: 5px;
-`;
-
-export { StyledSection, StyledContainer, StyledInput, StyledDiv, StyledH2, StyledUl, StyledLi, StyledForm, StyledMsg }
+export { StyledSection, StyledContainer, StyledInput, StyledDiv, StyledH2, StyledUl, StyledLi, StyledForm }

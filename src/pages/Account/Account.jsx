@@ -1,6 +1,6 @@
 import React from 'react';
-import Navigation from '../../ui/containers/Navigation/Navigation';
-import BodyContainer from '../../ui/containers/BodyContainer/BodyContainer';
+import Navigation from '../../ui/components/Navigation/Navigation';
+import BodyContainer from './Components//BodyContainer/BodyContainer';
 
 function Account() {
   return (

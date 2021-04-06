@@ -7,11 +7,11 @@ import SignUpForm from './components/Form/FormSignup'
 import GlobalStyle from '../../ui/styles/GlobalStyles';
 
 function Signup() {
-   return (
+  return (
     <StyledBody>
       <GlobalStyle />
       <Header />
-      <SignUpForm/>
+      <SignUpForm />
       <StyledHr />
       <Footer />
     </StyledBody>

@@ -1,5 +1,5 @@
 import axios from './axios';
 
 export const postInfoUser = (data) => {
-  axios.patch(`/account`, JSON.stringify(data))
+  return axios.patch(`/account` , JSON.stringify(data))
 };

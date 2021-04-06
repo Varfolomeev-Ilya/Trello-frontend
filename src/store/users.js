@@ -16,7 +16,7 @@ const usersReducer = createReducer(initialState, {
   [regUser]: (state, action) => {
     state.registeredUser = action.payload;
   },
-  
+
 });
 
 export { usersReducer, setUsers, regUser };

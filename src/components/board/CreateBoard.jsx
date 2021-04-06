@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createBoard, boardInputValue } from '../../store/boards';
+import { createBoard } from '../../store/boards';
 // import { postBoard } from '../../api/boardsRequests'
 import { StyledContainer, StyledSpan, StyledInput } from './CreateBoardStyled'
 
@@ -36,7 +36,7 @@ function CreateBoard() {
         value={inputValue}
         onKeyPress={handleEnter}
         onChange={onChangeInputValue}
-        placeholder="Enter name board"
+        placeholder='Enter name board'
       />
     </StyledSpan>
     </StyledContainer>

@@ -10,10 +10,10 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import AppBar from '@material-ui/core/AppBar';
 import { Link } from 'react-router-dom';
-import useStyles from './NavigationTheme';
+import useStyles from './NavigationStyled';
 import HomeIcon from '@material-ui/icons/Home';
 import { useDispatch } from 'react-redux';
-import { setAuthUser } from '../../../store/auth';
+import { regUser } from '../../../store/users';
 import { useSelector } from 'react-redux';
 
 function PrimarySearchAppBar() {
@@ -23,7 +23,7 @@ function PrimarySearchAppBar() {
 
   const dispatch = useDispatch();
   const onOut = () => {
-    dispatch(setAuthUser(false));
+    dispatch(regUser({}));
     localStorage.removeItem('isAuthenticated');
   };
 
@@ -64,7 +64,6 @@ function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}><Link className={classes.linkAcc} to='/admin'>Admin</Link></MenuItem>
       <MenuItem onClick={handleMenuClose}><Link className={classes.linkAcc} to={`/boards/${usersId}`}>Boards</Link></MenuItem>
       <MenuItem onClick={handleMenuClose}><Link className={classes.linkAcc} to={`/account/${usersId}`}>My account</Link></MenuItem>
@@ -86,10 +85,10 @@ function PrimarySearchAppBar() {
       <MenuItem
        onClick={handleProfileMenuOpen}>
         <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit" >
+          aria-label='account of current user'
+          aria-controls='primary-search-account-menu'
+          aria-haspopup='true'
+          color='inherit' >
           <AccountCircle />
         </IconButton>
         <p>Profile</p>
@@ -98,12 +97,12 @@ function PrimarySearchAppBar() {
   );
   return (
     <div className={classes.grow} >
-      <AppBar position="static" className={classes.appBar}>
+      <AppBar position='static' className={classes.appBar}>
         <Toolbar>
           <Link className={classes.linkHome} to='/home'>
             <HomeIcon />
           </Link>
-          <Typography className={classes.title} variant="h6" noWrap>
+          <Typography className={classes.title} variant='h6' noWrap>
             Trello
               </Typography>
 
@@ -112,7 +111,7 @@ function PrimarySearchAppBar() {
               <SearchIcon />
             </div>
             <InputBase
-              placeholder="Search…"
+              placeholder='Search…'
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
@@ -123,23 +122,23 @@ function PrimarySearchAppBar() {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton
-              edge="end"
-              aria-label="account of current user"
+              edge='end'
+              aria-label='account of current user'
               aria-controls={menuId}
-              aria-haspopup="true"
+              aria-haspopup='true'
               onClick={handleProfileMenuOpen}
-              color="inherit"
+              color='inherit'
             >
               <AccountCircle />
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
-              aria-label="show more"
+              aria-label='show more'
               aria-controls={mobileMenuId}
-              aria-haspopup="true"
+              aria-haspopup='true'
               onClick={handleMobileMenuOpen}
-              color="inherit"
+              color='inherit'
             >
               <MoreIcon />
             </IconButton>

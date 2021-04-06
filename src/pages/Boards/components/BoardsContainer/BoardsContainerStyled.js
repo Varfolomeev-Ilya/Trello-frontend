@@ -44,7 +44,7 @@ const StuledButton = styled.button`
 const StyledH2 = styled.h2`
   text-align: center;
   font-size: 1.25rem;
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   font-weight: 500;
   line-height: 1.6;
   letter-spacing: 0.0075em;
@@ -87,8 +87,8 @@ const StyledSpan = styled.span`
 const StyledP = styled.p`
   margin: 0 0 8px;
 `;
-export { 
+export {
   StyledContainer, StyledMenu, StyledBtnContainer,
   StyledUl, StyledLi, StyledSpan, StyledBoards,
-  StuledButton, StyledH2,LinkHome,StyledP
+  StuledButton, StyledH2, LinkHome, StyledP
 }
