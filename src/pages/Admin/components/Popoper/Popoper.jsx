@@ -6,11 +6,11 @@ import Button from '@material-ui/core/Button';
 import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
 import useStyles from './PopoperStyled';
-import { useSelector, useDispatch } from 'react-redux';
-import { setUsers } from '../../../../store/users';
+import { useSelector } from 'react-redux';
+// import { setUsers } from '../../../../store/users';
 import { useFormik } from 'formik';
-import { StyledForm, StyledInput, StyledButton } from './PopoperStyled';
-import { getOneUser } from '../../../../api/adminRequests'
+import { StyledForm, StyledButton } from './PopoperStyled';
+// import { getOneUser } from '../../../../api/adminRequests'
 
 function AdminPopper() {
   const allUsers = useSelector((state) => (state.users.allUsers));
@@ -27,7 +27,7 @@ function AdminPopper() {
     setPlacement(newPlacement);
   };
 
-  const { handleSubmit, handleChange, values } = useFormik({
+  const { handleSubmit } = useFormik({
     // initialValues: {
     //   id: 'id',
     //   userName: 'userName',

@@ -59,7 +59,7 @@ function SignUpForm() {
         localStorage.setItem('isAuthenticated', JSON.stringify(response.data.tokens.accessToken));
         dispatch(regUser(response.data.user))
       } catch (error) {
-        alert(error);
+        alert(error.response.data.message);
       }
     }
   })

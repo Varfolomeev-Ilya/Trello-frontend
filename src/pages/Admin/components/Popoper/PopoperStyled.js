@@ -8,7 +8,6 @@ const useStyles = makeStyles((theme) => ({
   typography: {
     padding: theme.spacing(7),
     margin: '5px auto',
-    padding: '0',
     marginBottom: '10px',
     textAlign: 'center',
   },

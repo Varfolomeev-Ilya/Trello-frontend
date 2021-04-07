@@ -9,11 +9,13 @@ import {
 import { StyledMsg } from '../../../../ui/components/Message/MessageStyled'
 import { postInfoUser } from '../../../../api/usersRequests';
 import { useFormik } from 'formik';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import * as validation from '../../../../utils/validationConsts';
+import { regUser } from '../../../../store/users';
 
 function Profile() {
+  const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.users.registeredUser);
   const firstaName = userInfo.firstName;
   const lastaName = userInfo.lastName;
@@ -58,9 +60,9 @@ function Profile() {
         const response = await postInfoUser({
           firstName: firstName, lastName: lastName, aboutMe: aboutMe, email: email, id: id
         });
-        alert(response.data.message);
-      } catch (err) {
-        alert(err.response.data);
+        dispatch(regUser(response.data))
+      } catch (error) {
+        alert(error.response.data.message);
       }
     }
   })

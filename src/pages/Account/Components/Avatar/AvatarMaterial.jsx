@@ -19,6 +19,8 @@ const useStyles = makeStyles((theme) => ({
     height: theme.spacing(20),
   },
 }));
+const url = localStorage.getItem('avataURL');
+console.log(url)
 
 function ImageAvatars() {
   const classes = useStyles();
@@ -26,7 +28,7 @@ function ImageAvatars() {
   return (
     <div className={classes.root}>
      
-      <Avatar alt='Remy Sharp' src='/static/images/avatar/1.jpg' className={classes.large} />
+      <Avatar alt='Remy Sharp' src='' className={classes.large} />
     </div>
   );
 }

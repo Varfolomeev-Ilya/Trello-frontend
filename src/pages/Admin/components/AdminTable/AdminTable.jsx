@@ -17,9 +17,9 @@ function AdminTable() {
     initialValues: {
       roleId: role,
     },
-    onSubmit: async ({ roleId }) => {
+    onSubmit: async () => {
       try {
-        const response = await getAllUsers({ roleId: roleId });
+        const response = await getAllUsers();
         dispatch(setUsers(response.data.allUsers));
       } catch (error) {
         alert(error.response.data.message);

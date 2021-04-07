@@ -46,7 +46,7 @@ function SigninForm() {
         dispatch(regUser(response.data.user));
       }
       catch (error) {
-        alert(error.message);
+        alert(error.response.data.message);
       };
     }
   })
