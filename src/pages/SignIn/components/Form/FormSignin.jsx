@@ -11,6 +11,8 @@ import { StyledMsg } from '../../../../ui/components/Message/MessageStyled';
 import * as validation from '../../../../utils/validationConsts';
 import { regUser } from '../../../../store/users'
 import { useDispatch } from 'react-redux';
+// import AdminPopper from '../../../Admin/components/Popoper/PopoperStyled'
+
 
 function SigninForm() {
   const dispatch = useDispatch();
@@ -66,7 +68,6 @@ function SigninForm() {
                 type='email'
                 name='email'
                 placeholder='Enter email'
-                pattern='^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.email}

@@ -55,11 +55,11 @@ function AdminPopper() {
               > 
                 {users.map(({ id, userName, email, roleId, createdAt }) =>
                   <>
-                  <input placeholder={`id:${id}`} />
-                  <input placeholder={`userName:${userName}`} />
-                  <input placeholder={`email:${email}`} />
-                  <input placeholder={`roleId:${roleId}`} />
-                  <input placeholder={`createdAt:${createdAt}`} />
+                  <input value={`id:${id}`} />
+                  <input value={`userName:${userName}`} />
+                  <input value={`email:${email}`} />
+                  <input value={`roleId:${roleId}`} />
+                  <input value={`createdAt:${createdAt}`} />
                   </>
                 )}
                 <StyledButton type='submit'>Save changes</StyledButton>

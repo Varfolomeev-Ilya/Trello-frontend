@@ -26,8 +26,8 @@ export const ABOUTME_MIN_LENGTH = 10;
 export const ABOUTME_LENGTH_MESSAGE = 'Aboutme should be longer than 10 characters and shorter than 250 characters';
 export const ABOUTME_MAX_LENGTH = 250;
 export const ABOUTME_REQUIRED_MESSAGE = 'Please Enter your information';
-export const ABOUTME_MATCHES = /[a-zA-Z]*[0-9]/;
-export const ABOUTME_MATCHES_MESSAGE = 'Your information can only contain Latin letters, and numbers'
+export const ABOUTME_MATCHES = /[a-zA-Z]/;
+export const ABOUTME_MATCHES_MESSAGE = 'Your information can only contain Latin letters'
 
 
 

@@ -4,9 +4,9 @@ import { useFormik } from 'formik';
 import { postImage } from '../../../../api//postImage';
 import { StyledSection, StyledH1, StyledForm, StyledLabel, StyledHr, StyledDiv, StyledH3, StyledInput, StyledDivBtn, StyledContainer } from './AvatarStyled'
 import { useSelector, useDispatch } from 'react-redux';
-import { regUser } from '../../../../store/users'
+import { regUser } from '../../../../store/users';
 
-function UploadAvatar(localImageUrl) {
+function UploadAvatar() {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.users.registeredUser);
   const id = userInfo.id;
@@ -14,17 +14,12 @@ function UploadAvatar(localImageUrl) {
 
   const handleFile = (e) => {
     const file = e.target.files[0];
-    // const localImageUrl = URL.createObjectURL(file);
-    // const url = localImageUrl.substr(5);
-    // localStorage.setItem('avataURL', url);
-    // console.log(url)
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      console.log(reader.result)
-    }
+    const imgURL = localStorage.setItem('url', URL.createObjectURL(file));
+    // const newUser = { ...userInfo, avatar: reader.result }
+    //  dispatch(regUser(newUser));
     setAvatarFile(file);
   };
+
   const { handleSubmit } = useFormik({
     initialValues: {
       firstname: "",
@@ -43,14 +38,10 @@ function UploadAvatar(localImageUrl) {
       }
     }
   })
-  // const url = localStorage.getItem('avataURL');
-  // console.log(url)
+
   return (
     <StyledSection>
-      {/* <ImageAvatars /> */}
-      <div>
-          <img src='' alt='avatar'></img>
-      </div>
+      <ImageAvatars />
       <StyledH1>Upload Avatar</StyledH1>
       <StyledDiv>
         <StyledForm
@@ -67,7 +58,7 @@ function UploadAvatar(localImageUrl) {
               <StyledInput
                 type='file'
                 name='files'
-                onChange={(e) => handleFile(e)}
+                onChange={handleFile}
               />
               <StyledInput
                 type='submit'

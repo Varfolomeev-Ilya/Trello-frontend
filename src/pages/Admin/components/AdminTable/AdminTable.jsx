@@ -11,15 +11,16 @@ function AdminTable() {
   const userInfo = useSelector((state) => state.users.registeredUser);
   const role = userInfo.roleId;
   const allUsers = useSelector((state) => state.users.allUsers);
-  const users = allUsers
+  const users = allUsers;
 
   const { handleSubmit } = useFormik({
     initialValues: {
       roleId: role,
     },
-    onSubmit: async () => {
+    onSubmit: async (roleId) => {
       try {
-        const response = await getAllUsers();
+        const response = await getAllUsers(roleId);
+        console.log(roleId)
         dispatch(setUsers(response.data.allUsers));
       } catch (error) {
         alert(error.response.data.message);

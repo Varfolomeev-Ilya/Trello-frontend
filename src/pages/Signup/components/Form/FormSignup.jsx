@@ -9,7 +9,7 @@ import { StyledLoginButton, StyledSpan } from '../../../../ui/components/Buttons
 import { postRegisterUser } from '../../../../api/authApi';
 import { useDispatch } from 'react-redux';
 import { regUser } from '../../../../store/users';
-import * as validation from '../../../../utils/validationConsts'
+import * as validation from '../../../../utils/validationConsts';
 
 function SignUpForm() {
   const dispatch = useDispatch();

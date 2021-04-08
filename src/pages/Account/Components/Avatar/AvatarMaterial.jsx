@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,20 +16,22 @@ const useStyles = makeStyles((theme) => ({
     height: theme.spacing(3),
   },
   large: {
-    width: theme.spacing(20),
-    height: theme.spacing(20),
+    width: theme.spacing(25),
+    height: theme.spacing(25),
   },
 }));
-const url = localStorage.getItem('avataURL');
-console.log(url)
 
 function ImageAvatars() {
+  // const userInfo = useSelector((state) => state.users.registeredUser);
+  const avatarUrl = localStorage.getItem('url')
+  // userInfo.avatar;
+
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-     
-      <Avatar alt='Remy Sharp' src='' className={classes.large} />
+
+      <Avatar alt='Remy Sharp' src={avatarUrl} className={classes.large} />
     </div>
   );
 }
