@@ -43,7 +43,7 @@ const StyledP = styled.p`
   margin: 0 0 8px;
 `;
 export {
-  StyledContainer, StyledMenu, StyledBtnContainer,
+  StyledContainer, StyledBtnContainer,
   StyledUl, StyledLi, StyledSpan, StyledBoards,
   StuledButton, StyledH2, LinkHome, StyledP
 }

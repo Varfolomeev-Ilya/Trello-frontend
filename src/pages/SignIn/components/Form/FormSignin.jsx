@@ -11,14 +11,11 @@ import { StyledMsg } from '../../../../ui/components/Message/MessageStyled';
 import * as validation from '../../../../utils/validationConsts';
 import { regUser } from '../../../../store/users'
 import { useDispatch } from 'react-redux';
-// import AdminPopper from '../../../Admin/components/Popoper/PopoperStyled'
-
 
 function SigninForm() {
   const dispatch = useDispatch();
 
   const { handleSubmit, handleChange, values, touched, errors, handleBlur } = useFormik({
-
     initialValues: {
       email: 'admin@admin.com',
       password: 'admin1234'
@@ -88,7 +85,7 @@ function SigninForm() {
               ) : null}
               <StyledButton type='submit'>
                 <Link to='/home' />
-                <StyledH3>Log in</StyledH3>
+                <StyledH3>Log in</StyledH3>            
               </StyledButton>
             </StyledForm>
             <StyledH2>or</StyledH2>

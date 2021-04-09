@@ -12,7 +12,6 @@ function App() {
     try {
       const response = await tokenChecker();
       if (response.data) {
-        console.log(response.data)
         dispatch(regUser(response.data));
       } else {
         localStorage.removeItem('isAuthenticated');

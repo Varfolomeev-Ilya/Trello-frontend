@@ -1,36 +1,46 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createBoard } from '../../store/boards';
-// import { postBoard } from '../../api/boardsRequests'
+import { createBoard } from '../../../../store/boards';
+import { postBoard } from '../../../../api/boardsRequests'
 import { StyledContainer, StyledSpan, StyledInput } from './CreateBoardStyled'
 
 function CreateBoard() {
   const dispatch = useDispatch();
   const boards = useSelector((state) => state.boards.allBoards);
+  const userInfo = useSelector((state) => state.users.registeredUser);
   const [inputValue, setInputValue] = React.useState('');
+  const id = userInfo.id;
+  const email = userInfo.email;
 
   const onChangeInputValue = event => {
     setInputValue(event.target.value);
   };
 
-  const addBoard = () => {
+  const addBoard = async () => {
     if (inputValue) {
       const newBoard = {
-        id: Date.now(),
         name: inputValue,
+        id,
+        email,
       }
-      const newBoards = [newBoard, ...boards];
-      dispatch(createBoard(newBoards));
+      try {
+        const response = await postBoard(newBoard);
+        const newBoards = [...boards, response.data]
+        dispatch(createBoard(newBoards));
+      } catch (error) {
+        alert(error)
+      }
     }
-  };
+  
+};
 
-  const handleEnter = event => {
-    if (event.key === 'Enter')
-      addBoard();
-  };
+const handleEnter = event => {
+  if (event.key === 'Enter')
+    addBoard();
+};
 
-  return (
-    <StyledContainer>
+return (
+  <StyledContainer>
     <StyledSpan>
       <StyledInput
         value={inputValue}
@@ -39,8 +49,7 @@ function CreateBoard() {
         placeholder='Enter name board'
       />
     </StyledSpan>
-    </StyledContainer>
-  )
-}
+  </StyledContainer>
+)}
 
 export default CreateBoard;

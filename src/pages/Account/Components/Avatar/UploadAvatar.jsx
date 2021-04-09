@@ -11,13 +11,13 @@ function UploadAvatar() {
   const userInfo = useSelector((state) => state.users.registeredUser);
   const id = userInfo.id;
   const [avatarFile, setAvatarFile] = useState(null);
+  // const [imgUrl, setImgUrl] = useState(null);
 
   const handleFile = (e) => {
     const file = e.target.files[0];
-    const imgURL = localStorage.setItem('url', URL.createObjectURL(file));
-    // const newUser = { ...userInfo, avatar: reader.result }
-    //  dispatch(regUser(newUser));
+    // const imgURL = URL.createObjectURL(file);
     setAvatarFile(file);
+    // setImgUrl(imgURL)
   };
 
   const { handleSubmit } = useFormik({
@@ -31,10 +31,11 @@ function UploadAvatar() {
         const formData = new FormData();
         formData.append('filedata', avatarFile);
         formData.set('id', id);
+        // formData.set('imgUrl', imgUrl);
         const response = await postImage(formData);
-        dispatch(regUser(response.data))
+        dispatch(regUser(response.data));
       } catch (error) {
-        alert(error.response.data.message)
+        alert(error.response.data.message);
       }
     }
   })
@@ -42,7 +43,7 @@ function UploadAvatar() {
   return (
     <StyledSection>
       <ImageAvatars />
-      <StyledH1>Upload Avatar</StyledH1>
+      <StyledH1>Your Avatar</StyledH1>
       <StyledDiv>
         <StyledForm
           method='post'

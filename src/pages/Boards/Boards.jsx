@@ -3,8 +3,7 @@ import Navigation from '../../ui/components/Navigation/Navigation';
 import BoardCard from './components/BoardsContainer/BoardCard.jsx';
 import { useSelector } from 'react-redux';
 import { StyledSection } from './BoardsStyled';
-import CreateBoard from '../../components/board/CreateBoard'
-
+import CreateBoard from './components/CreateBoard/CreateBoard'
 
 function Boards() {
   const boards = useSelector((state) => state.boards.allBoards);
@@ -15,7 +14,9 @@ function Boards() {
       <StyledSection>
         <CreateBoard />
         {boards.map((board) => (
+          <>
           <BoardCard id={board.id} key={board.id} name={board.name} />
+          </>
         ))}
       </StyledSection>
     </>

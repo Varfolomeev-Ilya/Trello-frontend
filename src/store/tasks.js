@@ -13,7 +13,6 @@ const changeBlurInputValue = createAction(actionTypes.CHANGE_BLUR_INPUT_VALUE);
 const setTasks = createAction(actionTypes.SET_TASKS);
 const filterTasks = createAction(actionTypes.FILTER_TASKS);
 
-
 const tasksReduser = createReducer(initialState, {
   [changeInputValue]: (state, action) => {
     state.inputValue = action.payload;
