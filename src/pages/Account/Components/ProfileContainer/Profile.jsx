@@ -62,7 +62,7 @@ function Profile() {
         });
         dispatch(regUser(response.data))
       } catch (error) {
-        alert(error.response.data.message);
+        console.log(error.response.data.message);
       }
     }
   })
