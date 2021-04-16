@@ -14,6 +14,9 @@ import { setUsers } from '../../../../store/users';
 
 function AdminPopper({ id }) {
   const dispatch = useDispatch();
+
+
+
   const allUsers = useSelector((state) => (state.users.allUsers));
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [open, setOpen] = React.useState(false);
@@ -24,7 +27,7 @@ function AdminPopper({ id }) {
   const handleClick = (newPlacement) => (event) => {
     setAnchorEl(event.currentTarget);
     setOpen((prev) => placement !== newPlacement || !prev);
-    setPlacement(newPlacement);
+    setPlacement(newPlacement);  
   };
 
   const { handleSubmit, handleChange, handleBlur, values } = useFormik({
@@ -38,8 +41,7 @@ function AdminPopper({ id }) {
     onSubmit: async ({ firstName, createdAt, roleId, email, id }) => {
       try {
         const response = await updateUser(
-          {
-            firstName: firstName,
+          { firstName: firstName,
             createdAt: createdAt,
             roleId: roleId,
             email: email,
@@ -62,10 +64,11 @@ function AdminPopper({ id }) {
         });
         dispatch(setUsers(newUsers));
       } catch (error) {
-        console.log(error)
+          console.log(error)
       }
     },
   })
+
 
   return (
     <div className={classes.root}>
@@ -86,58 +89,28 @@ function AdminPopper({ id }) {
                 method='POST'
                 onSubmit={handleSubmit}
               >
-                <>
+                  <>
                   <StyledDiv>
                     <StyledP>id</StyledP>
-                    <StyledInput
-                      id='id'
-                      type='id'
-                      value={values.id}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
+                    <StyledInput id='id' type='id' value={values.id} onChange={handleChange} onBlur={handleBlur}/>
                   </StyledDiv>
                   <StyledDiv>
-                    <StyledP>name</StyledP>
-                    <StyledInput
-                      id='firstName'
-                      type='firstName'
-                      value={values.firstName}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
+                  <StyledP>name</StyledP>
+                  <StyledInput id='firstName' type='firstName' value={values.firstName} onChange={handleChange} onBlur={handleBlur}/>
                   </StyledDiv>
                   <StyledDiv>
-                    <StyledP>email</StyledP>
-                    <StyledInput
-                      id='email'
-                      type='email'
-                      value={values.email}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
+                  <StyledP>email</StyledP>
+                  <StyledInput id='email' type='email' value={values.email} onChange={handleChange} onBlur={handleBlur}/>
                   </StyledDiv>
                   <StyledDiv>
-                    <StyledP>role</StyledP>
-                    <StyledInput
-                      id='roleId'
-                      type='roleId'
-                      value={values.roleId}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
+                  <StyledP>role</StyledP>
+                  <StyledInput id='roleId' type='roleId' value={values.roleId} onChange={handleChange} onBlur={handleBlur}/>
                   </StyledDiv>
                   <StyledDiv>
-                    <StyledP>created</StyledP>
-                    <StyledInput
-                      id='createdAt'
-                      type='createdAt'
-                      value={values.createdAt}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
+                  <StyledP>created</StyledP>
+                  <StyledInput id='createdAt' type='createdAt' value={values.createdAt} onChange={handleChange} onBlur={handleBlur}/>
                   </StyledDiv>
-                </>
+                  </>
                 <StyledButton type='submit' >Save changes</StyledButton>
               </StyledForm>
             </Paper>
