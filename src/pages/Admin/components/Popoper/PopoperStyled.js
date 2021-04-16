@@ -3,17 +3,22 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: 500
+    width: '350px',
+    height: 'auto',
   },
   typography: {
-    padding: theme.spacing(7),
-    margin: '5px auto',
-    marginBottom: '10px',
+    padding: theme.spacing(0),
     textAlign: 'center',
   },
   paper: {
-    height: '340px',
-    width: '220px'
+    height: 'auto',
+    width: '250px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    border: 'solid 1px',
+    borderRadius: '10px',
+    borderColor: '#b32020',
   }
 }));
 
@@ -28,19 +33,28 @@ const StyledForm = styled.form`
 
 const StyledInput = styled.input`
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
-  width: 200px;
-  margin: 10px auto;
+  width: 170px;
   font-size: 14px;
   transition-property: background-color,border-color,box-shadow;
   transition-duration: 85ms;
   transition-timing-function: ease;
   border-radius: 3px;
-  padding: 8px 12px;
   box-shadow: inset 0 0 0 2px #dfe1e6;
   background-color: #fafbfc;
   outline: none;
   border: none;
-  box-sizing: border-box;
+`;
+
+const StyledP = styled.p`
+  /* margin: 0 auto, */
+`;
+const StyledDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 35px;
+  margin-bottom: 10px;
 `;
 
 const StyledButton = styled.button`
@@ -59,5 +73,5 @@ const StyledButton = styled.button`
   margin-top: 10px
 `;
 
-export { StyledForm, StyledInput, StyledButton }
+export { StyledForm, StyledInput, StyledButton, StyledP, StyledDiv }
 export default useStyles;

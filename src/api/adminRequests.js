@@ -1,9 +1,11 @@
 import axios from './axios';
 
-export const getAllUsers = (data) => {
-  return axios.get(`/admin`, data)
+export const getAllUsers = async (roleId) => {
+  return await axios.get(`/admin`, {
+    params: roleId,
+  })
 };
 
-export const getOneUser = (data) => {
-  return axios.get(`/admin`, data)
+export const updateUser = async (data) => {
+  return await axios.patch(`/admin/user`, data )
 };

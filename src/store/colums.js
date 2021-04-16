@@ -2,14 +2,14 @@ import { createAction, createReducer } from '@reduxjs/toolkit';
 import * as actionTypes from './constants/actionTypes';
 
 const initialState = {
-  allColums: [],
+  allColumns: [],
 };
 
 const createColumn = createAction(actionTypes.CREATE_COLUMN);
 
 const columnReducer = createReducer(initialState, {
   [createColumn]: (state, action) => {
-    state.allColums = action.payload;
+    state.allColumns = action.payload;
   },
 });
 

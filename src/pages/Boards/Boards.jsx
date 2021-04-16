@@ -1,24 +1,51 @@
 import React from 'react';
 import Navigation from '../../ui/components/Navigation/Navigation';
-import BoardCard from './components/BoardsContainer/BoardCard.jsx';
-import { useSelector } from 'react-redux';
-import { StyledSection } from './BoardsStyled';
-import CreateBoard from './components/CreateBoard/CreateBoard'
+import BoardCard from './components/BoardCard/BoardCard';
+import { useSelector, useDispatch } from 'react-redux';
+import { StyledSection, StyledContainer } from './BoardsStyled';
+import CreateBoard from './components/CreateBoard/CreateBoard';
+import { getBoards } from '../../api/boardsRequests';
+import { createBoard } from '../../store/boards';
+import CircularIndeterminate from '../../ui/components/Spinner/Spinner'
 
 function Boards() {
   const boards = useSelector((state) => state.boards.allBoards);
+  const dispatch = useDispatch(); 
+  const [isLoading, setIsLoading] = React.useState(false);
+  const getAllBoards = async () => {
+    setIsLoading(true);
+    try{
+      const response = await getBoards();
+      dispatch(createBoard(response.data))
+    }catch(error) {
+      console.log(error.response.data.message)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
+  React.useEffect(() => {
+    getAllBoards();
+  }, []);
   return (
     <>
-      <Navigation />
+    {isLoading ? (
+      <>
+      <CircularIndeterminate/>
+      </>
+    ) : (
+      <>
+      <Navigation/>
       <StyledSection>
-        <CreateBoard />
+       <StyledContainer>
+       <CreateBoard />
         {boards.map((board) => (
-          <>
           <BoardCard id={board.id} key={board.id} name={board.name} />
-          </>
         ))}
+       </StyledContainer>
       </StyledSection>
+      </>
+    )}
     </>
   );
 };

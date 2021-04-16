@@ -12,14 +12,13 @@ import AppBar from '@material-ui/core/AppBar';
 import { Link } from 'react-router-dom';
 import useStyles from './NavigationStyled';
 import HomeIcon from '@material-ui/icons/Home';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { regUser } from '../../../store/users';
-import { useSelector } from 'react-redux';
 
 function PrimarySearchAppBar() {
-
   const userInfo = useSelector((state) => state.users.registeredUser);
   const usersId = userInfo.id;
+  // const userRoleId = userInfo.roleId;
 
   const dispatch = useDispatch();
   const onOut = () => {
@@ -51,10 +50,8 @@ function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
-
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -64,9 +61,9 @@ function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}><Link className={classes.linkAcc} to='/admin'>Admin</Link></MenuItem>
-      <MenuItem onClick={handleMenuClose}><Link className={classes.linkAcc} to={`/boards/${usersId}`}>Boards</Link></MenuItem>
-      <MenuItem onClick={handleMenuClose}><Link className={classes.linkAcc} to={`/account/${usersId}`}>My account</Link></MenuItem>
+      <MenuItem><Link className={classes.linkAcc} to='/admin'>Admin</Link></MenuItem>
+      <MenuItem><Link className={classes.linkAcc} to={`/boards/${usersId}`}>Boards</Link></MenuItem>
+      <MenuItem><Link className={classes.linkAcc} to={`/account/${usersId}`}>My account</Link></MenuItem>
       <MenuItem onClick={onOut}>Sign out</MenuItem>
     </Menu>
   );
@@ -95,6 +92,7 @@ function PrimarySearchAppBar() {
       </MenuItem>
     </Menu>
   );
+  
   return (
     <div className={classes.grow} >
       <AppBar position='static' className={classes.appBar}>

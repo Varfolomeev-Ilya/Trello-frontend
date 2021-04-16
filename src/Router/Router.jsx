@@ -8,6 +8,7 @@ import Account from '../pages/Account/Account';
 import Boards from '../pages/Boards/Boards';
 import Admin from '../pages/Admin/Admin'
 import ProtectedRoute from './Protected';
+import Column from '../pages/Boards/components/Column/Column';
 
 const routes = [
   {
@@ -29,6 +30,10 @@ const routes = [
   {
     path: '/boards/:id',
     component: Boards,
+  },
+  {
+    path: '/column/:id',
+    component: Column
   },
   {
     path: '/admin',

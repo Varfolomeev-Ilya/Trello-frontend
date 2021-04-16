@@ -3,6 +3,7 @@ import Routers from '../src/Router/Router';
 import { regUser } from '../src/store/users';
 import { useDispatch } from 'react-redux';
 import { tokenChecker } from '../src//api/authApi';
+import CircularIndeterminate from './ui/components/Spinner/Spinner'
 
 function App() {
   const dispatch = useDispatch();
@@ -29,7 +30,9 @@ function App() {
   return (
     <>
       {isLoading ? (
-        <></>
+        <>
+        <CircularIndeterminate/>
+        </>
       ) : (
           <>
             <Routers />

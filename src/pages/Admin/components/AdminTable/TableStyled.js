@@ -27,7 +27,7 @@ const StyledTable = styled.div`
   box-sizing: border-box;
 `;
 
-const StyledPID = styled.p`
+const StyledP = styled.p`
   width:150px;
   height: auto;
   text-align: center;
@@ -41,4 +41,4 @@ const StyledPID = styled.p`
   font-size: 0.875rem;
 `;
 
-export { StyledSection, StyledContainer, StyledForm, StyledTable, StyledPID }
+export { StyledSection, StyledContainer, StyledForm, StyledTable, StyledP }
