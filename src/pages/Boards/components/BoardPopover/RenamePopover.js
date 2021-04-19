@@ -98,6 +98,7 @@ function RenamePopover() {
                         placeholder="name of board"
                         value={inputValue}
                         onChange={onChangeInputValue}
+                        color='secondary'
                     />
 
                 </Typography>

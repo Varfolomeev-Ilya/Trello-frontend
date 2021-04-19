@@ -7,13 +7,14 @@ import TaskCard from '../Tasks/TaskCard/TaskCard';
 import { createColumn } from '../../../../../../store/colums';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, Draggable } from 'react-smooth-dnd';
-// import { updateColumns } from '../../../../../../api/columnsRequests';
+import { columnsBoardPosition } from '../../../../../../api/boardsRequests';
 
-function ColumnCard({ id, name }) {
+function ColumnCard({ id, name, boardId }) {
   const dispatch = useDispatch();
   const allColumns = useSelector((state) => state.columns.allColumns);
   const currentColumn = allColumns.find((item) => item.id === id);
   const columnTasks = currentColumn.Tasks;
+
   const applyDrag = (arr, dragResult) => {
     const { removedIndex, addedIndex, payload } = dragResult;
 
@@ -35,23 +36,26 @@ function ColumnCard({ id, name }) {
 
   const onDrop = (dropResult) => {
     const { removedIndex, addedIndex } = dropResult;
-
     if (removedIndex !== null || addedIndex !== null) {
-      const newTasks = applyDrag(columnTasks, dropResult);
+      const newTasks = applyDrag(allColumns,dropResult);
+      const columnsPosition = allColumns.map((item) => {
+        return item.id
+      })
       const newColumns = allColumns.map((item) => {
         if (item.id === id) {
           return { ...item, Tasks: newTasks };
         }
         return item;
       });
-      dispatch(createColumn(newColumns));
+      // const response = columnsBoardPosition({ boardId, columnsPosition });
+      // dispatch(createColumn(newColumns));
     }
   }
   return (
     <Container
       onDrop={onDrop}
-      orientation='horizontal'
       groupName='groupColumns'
+      orientation='horizontal'
     >
       <Draggable key={id}>
         <StyledCard>

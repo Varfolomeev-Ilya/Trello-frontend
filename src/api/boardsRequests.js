@@ -18,3 +18,7 @@ export const getBoards = async (data) => {
   const response =  await axios.get('/boards',data);
   return response;
 }
+
+export const columnsBoardPosition = async (data) => {
+  return await axios.patch('/board-column', data)
+}

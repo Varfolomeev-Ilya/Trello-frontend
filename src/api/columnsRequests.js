@@ -23,4 +23,9 @@ export const deleteColumn = async (columnId) => {
 
 export const updateColumns = async (data) => {
     return await axios.put('/column', data)
-}
+
+};
+
+export const taskColumnPosition = async (data) => {
+    return await axios.patch('/column-tasks', data)
+};

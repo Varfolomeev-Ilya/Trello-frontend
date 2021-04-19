@@ -6,12 +6,15 @@ import Button from '@material-ui/core/Button';
 import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
 import useStyles from './PopoperStyled';
-import { useSelector } from 'react-redux';
+import TextField from '@material-ui/core/TextField';
+import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
-import { StyledForm, StyledButton, StyledInput, StyledP, StyledDiv } from './PopoperStyled';
+import { StyledForm, StyledButton } from './PopoperStyled';
 import { updateUser } from '../../../../api/adminRequests';
+import { setUsers } from '../../../../store/users';
 
-function AdminPopper({id}) {
+function AdminPopper({ id }) {
+  const dispatch = useDispatch();
   const allUsers = useSelector((state) => (state.users.allUsers));
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [open, setOpen] = React.useState(false);
@@ -22,9 +25,9 @@ function AdminPopper({id}) {
   const handleClick = (newPlacement) => (event) => {
     setAnchorEl(event.currentTarget);
     setOpen((prev) => placement !== newPlacement || !prev);
-    setPlacement(newPlacement);  
+    setPlacement(newPlacement);
   };
-  
+
   const { handleSubmit, handleChange, handleBlur, values } = useFormik({
     initialValues: {
       firstName: currentUser.firstName,
@@ -33,23 +36,39 @@ function AdminPopper({id}) {
       email: currentUser.email,
       id: currentUser.id
     },
+    
     onSubmit: async ({ firstName, createdAt, roleId, email, id }) => {
       try {
         const response = await updateUser(
-          { firstName: firstName,
+          {
+            firstName: firstName,
             createdAt: createdAt,
             roleId: roleId,
             email: email,
             id: id,
           });
-          console.log(response)
-      }catch (error) {
+
+        const newUsers = allUsers.map((item) => {
+          if (item.id === id) {
+            return {
+              ...item,
+              firstName: response.data.firstName,
+              createdAt: response.data.createdAt,
+              lastname: response.data.lastname,
+              roleId: response.data.roleId,
+              email: response.data.email,
+              id: response.data.id
+            }
+          }
+          return item;
+        });
+        dispatch(setUsers(newUsers));
+      } catch (error) {
         console.log(error)
       }
     },
   })
-
-
+  console.log(values)
   return (
     <div className={classes.root}>
       <Popper
@@ -57,7 +76,7 @@ function AdminPopper({id}) {
         anchorEl={anchorEl}
         placement={placement}
         transition
-        >
+      >
         {({ TransitionProps }) => (
           <Fade {...TransitionProps} timeout={450}>
             <Paper className={classes.paper}>
@@ -68,29 +87,14 @@ function AdminPopper({id}) {
                 className='form-data'
                 method='POST'
                 onSubmit={handleSubmit}
-              > 
-                  <>
-                  <StyledDiv>
-                    <StyledP>id</StyledP>
-                    <StyledInput id='id' type='id' value={values.id} onChange={handleChange} onBlur={handleBlur}/>
-                  </StyledDiv>
-                  <StyledDiv>
-                  <StyledP>name</StyledP>
-                  <StyledInput id='firstName' type='firstName' value={values.firstName} onChange={handleChange} onBlur={handleBlur}/>
-                  </StyledDiv>
-                  <StyledDiv>
-                  <StyledP>email</StyledP>
-                  <StyledInput id='email' type='email' value={values.email} onChange={handleChange} onBlur={handleBlur}/>
-                  </StyledDiv>
-                  <StyledDiv>
-                  <StyledP>role</StyledP>
-                  <StyledInput id='roleId' type='roleId' value={values.roleId} onChange={handleChange} onBlur={handleBlur}/>
-                  </StyledDiv>
-                  <StyledDiv>
-                  <StyledP>created</StyledP>
-                  <StyledInput id='createdAt' type='createdAt' value={values.createdAt} onChange={handleChange} onBlur={handleBlur}/>
-                  </StyledDiv>
-                  </>
+              >
+                <>
+                  <TextField className={classes.textField} color='secondary' label="id" variant="outlined" id='id' type='id' value={values.id} onChange={handleChange} onBlur={handleBlur} />
+                  <TextField className={classes.textField} color='secondary' label="firstName" variant="outlined" id='firstName' type='firstName' value={values.firstName} onChange={handleChange} onBlur={handleBlur} />
+                  <TextField className={classes.textField} color='secondary' label="email" variant="outlined" id='email' type='email' value={values.email} onChange={handleChange} onBlur={handleBlur} />
+                  <TextField className={classes.textField} color='secondary' label="roleId" variant="outlined" id='roleId' type='roleId' value={values.roleId} onChange={handleChange} onBlur={handleBlur} />
+                  <TextField className={classes.textField} color='secondary' label="createdAt" variant="outlined" id='createdAt' type='createdAt' value={values.createdAt} onChange={handleChange} onBlur={handleBlur} />
+                </>
                 <StyledButton type='submit' >Save changes</StyledButton>
               </StyledForm>
             </Paper>

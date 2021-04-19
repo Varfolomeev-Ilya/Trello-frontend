@@ -5,6 +5,8 @@ import { Container, Draggable } from "react-smooth-dnd";
 import DeleteTask from '../DeleteTask/DeleteTask';
 import RenameTask from '../RenameTask/RenameTask';
 import { createColumn } from '../../../../../../../store/colums';
+import { taskColumnPosition } from '../../../../../../../api//columnsRequests';
+import { movingTasks } from '../../../../../../../api/tasksRequests';
 
 function TaskCard({ columnId }) {
   const dispatch = useDispatch();
@@ -27,22 +29,50 @@ function TaskCard({ columnId }) {
     if (addedIndex !== null) {
       result.splice(addedIndex, 0, itemToAdd);
     }
-
     return result;
   };
 
-  const onDrop = (dropResult) => {
-    const { removedIndex, addedIndex } = dropResult;
+  const getTaskPayLoad = (index) => columnTasks[index]
 
+  const onDrop = async (dropResult) => {
+
+    const { removedIndex, addedIndex, payload } = dropResult;
     if (removedIndex !== null || addedIndex !== null) {
+      const draggedTask = payload;
       const newTasks = applyDrag(columnTasks, dropResult);
-      const newColumns = allColumns.map((column) => {
-        if (column.id === columnId) {
-          return { ...column, Tasks: newTasks };
-        }
-        return column;
+      const tasksPosition = newTasks.map((item) => {
+        return item.id;
       });
-      dispatch(createColumn(newColumns));
+
+      if (draggedTask.columnId !== columnId) {
+        const editedTasks = newTasks.map((item) => {
+          if (item.id === draggedTask.id) {
+            return { ...item, columnId };
+          }
+          return item;
+        })
+
+        const newColumns = allColumns.map((item) => {
+          if (item.id === columnId) {
+            return { ...item, tasksPosition, Tasks: editedTasks };
+          }
+          return item;
+        })
+        
+        const taskId = draggedTask.id;
+        dispatch(createColumn(newColumns));
+        const response = await movingTasks({ columnId, taskId })
+
+      } else {
+        const newColumns = allColumns.map((column) => {
+          if (column.id === columnId) {
+            return { ...column, Tasks: newTasks, tasksPosition };
+          }
+          return column;
+        });
+        dispatch(createColumn(newColumns));
+        taskColumnPosition({ columnId, tasksPosition });
+      }
     }
   };
 
@@ -52,6 +82,7 @@ function TaskCard({ columnId }) {
         onDrop={onDrop}
         orientation='vertical'
         groupName='groupTasks'
+        getChildPayload={(index) => getTaskPayLoad(index)}
       >
         {columnTasks.map((task) =>
           <Draggable key={task.id}>

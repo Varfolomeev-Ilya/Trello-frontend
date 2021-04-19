@@ -11,13 +11,13 @@ function UploadAvatar() {
   const userInfo = useSelector((state) => state.users.registeredUser);
   const id = userInfo.id;
   const [avatarFile, setAvatarFile] = useState(null);
-  // const [imgUrl, setImgUrl] = useState(null);
+  const [imgUrl, setImgUrl] = useState(null);
 
   const handleFile = (e) => {
     const file = e.target.files[0];
-    // const imgURL = URL.createObjectURL(file);
+    const imgURL = URL.createObjectURL(file);
     setAvatarFile(file);
-    // setImgUrl(imgURL)
+    setImgUrl(imgURL);
   };
 
   const { handleSubmit } = useFormik({
@@ -31,7 +31,7 @@ function UploadAvatar() {
         const formData = new FormData();
         formData.append('filedata', avatarFile);
         formData.set('id', id);
-        // formData.set('imgUrl', imgUrl);
+        formData.set('imgUrl', imgUrl);
         const response = await postImage(formData);
         dispatch(regUser(response.data));
       } catch (error) {

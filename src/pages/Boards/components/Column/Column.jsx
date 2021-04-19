@@ -15,14 +15,33 @@ function Column() {
     const routParams = useParams();
     const boardId = Number(routParams.id);
     const allColumns = useSelector((state) => state.columns.allColumns);
-
     const [isLoading, setIsLoading] = React.useState(false);
 
     const getallColumns = async () => {
         setIsLoading(true);
         try {
             const response = await getColumns(boardId);
-            dispatch(createColumn(response.data));
+
+            const sortedColumns = response.data.map((column) => {
+                const tasks = column.Tasks;
+                const sortedTasks = [];
+                const { tasksPosition } = column;
+
+                if (tasksPosition) {
+                    for (let i = 0; i < tasksPosition.length; i++) {
+                        tasks.forEach((task) => {
+                            if (task.id === tasksPosition[i]) {
+                                sortedTasks.push(task);
+                            }
+                        });
+                        return { ...column, Tasks: sortedTasks};
+                    }
+                    dispatch(createColumn(sortedColumns));
+                } else {
+                    dispatch(createColumn(response.data));
+                }
+               
+            })
         } catch (error) {
             console.log(error);
         } finally {
@@ -46,18 +65,19 @@ function Column() {
                     <StyledMain>
                         <StyledContainer>
                             <StyledMenu>
-                                <RenamePopover id={boardId}/>
+                                <RenamePopover id={boardId} />
                             </StyledMenu>
                             <StyledSection>
                                 <StyledBoard>
-                                    <CreateColumn/>
-                                      {allColumns.map((column) => (
+                                    <CreateColumn />
+                                    {allColumns.map((column) => (
                                         <ColumnCard
-                                          id={column.id}
-                                          key={column.id}
-                                          name={column.name}
+                                            id={column.id}
+                                            key={column.id}
+                                            name={column.name}
+                                            boardId={boardId}
                                         />
-                                      ))}
+                                    ))}
                                 </StyledBoard>
                             </StyledSection>
                         </StyledContainer>

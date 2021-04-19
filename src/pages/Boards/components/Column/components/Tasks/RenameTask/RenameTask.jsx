@@ -7,7 +7,6 @@ import TextField from '@material-ui/core/TextField';
 import { useSelector, useDispatch } from 'react-redux';
 import { createColumn } from '../../../../../../../store/colums';
 import { updateTask } from '../../../../../../../api/tasksRequests';
-// import RenamePopper from '../../../../../../../ui/components/RenamePopper/RenamePopper';
 
 const useStyles = makeStyles((theme) => ({
     typography: {
@@ -62,8 +61,8 @@ function RenameTask({taskText, columnId, taskId}) {
                 }
                 return item;
             });
-            dispatch(createColumn(newColumns));
-            setInputValue('');
+                dispatch(createColumn(newColumns));
+                setInputValue('');
         }   
       } catch (error) {
           console.log(error)
@@ -104,6 +103,7 @@ function RenameTask({taskText, columnId, taskId}) {
                         placeholder="name of card"
                         value={inputValue}
                         onChange={onChangeInputValue}
+                        color='secondary'
                     />
                 </Typography>
             </Popover>

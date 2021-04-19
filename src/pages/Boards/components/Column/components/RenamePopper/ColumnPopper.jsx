@@ -96,6 +96,7 @@ function ColumnPopper({ columnId, name}) {
                         placeholder="name of column"
                         value={inputValue}
                         onChange={onChangeInputValue}
+                        color='secondary'
                     />
 
                 </Typography>
