@@ -111,8 +111,8 @@ function RenameTask({taskText, columnId, taskId}) {
                         value={inputValue}
                         onChange={onChangeInputValue}
                         color='secondary'
-                        onKeyPress={handleEnter}
-                    />
+                        onKeyPress={handleEnter} 
+                   />
                 </Typography>
             </Popover>
         </div>

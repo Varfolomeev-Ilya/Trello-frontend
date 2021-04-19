@@ -36,8 +36,7 @@ function AdminPopper({ id }) {
   }
   const handleDelete = async () => {
     try {
-      const response = await deleteUser({ id });
-      dispatch(setUsers(response.data))
+      await deleteUser({ id })
     } catch (error) {
       console.log(error)
     } finally {

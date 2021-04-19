@@ -27,70 +27,67 @@ function Column() {
         try {
             const response = await getColumns(boardId);
             const sortedTasksColumn = response.data.map((column) => {
-                const tasks = column.Tasks;
-                const sortedTasks = [];
-                const { tasksPosition } = column;
-
-                if (tasksPosition) {
-                    for (let i = 0; i < tasksPosition.length; i++) {
-                        tasks.forEach((task) => {
-                            if (task.id === tasksPosition[i]) {
-                                sortedTasks.push(task);
-                            }
-                        });
-                        return { ...column, Tasks: sortedTasks};
+                    const tasks = column.Tasks;
+                    const sortedTasks = [];
+                    const { tasksPosition } = column;
+                    if (tasksPosition) {
+                        for (let i = 0; i < tasksPosition.length; i++) {
+                            tasks.forEach((task) => {
+                                if (task.id === tasksPosition[i]) {
+                                    sortedTasks.push(task);
+                                }
+                            });
+                            return { ...column, Tasks: sortedTasks };
+                        }
+                        dispatch(createColumn(sortedTasksColumn));
+                    } else {
+                        dispatch(createColumn(response.data));
                     }
-                    dispatch(createColumn(sortedTasksColumn));
-                } else {
-                    dispatch(createColumn(response.data));
-
                 }
-               
-            })
-        } catch (error) {
-            console.log(error);
-        } finally {
-            setIsLoading(false);
-        }
+             } catch (error) {
+                console.log(error);
+            } finally {
+                setIsLoading(false);
+            }
+     
+       
+        React.useEffect(() => {
+            getallColumns();
+        }, []);
+
+        return (
+            <>
+                {isLoading ? (
+                    <>
+                        <CircularProgress />
+                    </>
+                ) : (
+                        <>
+                            <Navigation />
+                            <StyledMain>
+                                <StyledContainer>
+                                    <StyledMenu>
+                                        <RenamePopover id={boardId} />
+                                    </StyledMenu>
+                                    <StyledSection>
+                                        <StyledBoard>
+                                            <CreateColumn />
+                                            {allColumns.map((column) => (
+                                                <ColumnCard
+                                                    id={column.id}
+                                                    key={column.id}
+                                                    name={column.name}
+                                                    boardId={boardId}
+                                                />
+                                            ))}
+                                        </StyledBoard>
+                                    </StyledSection>
+                                </StyledContainer>
+                            </StyledMain>
+                        </>
+                    )}
+            </>
+        );
     };
 
-    React.useEffect(() => {
-        getallColumns();
-    }, []);
-
-    return (
-        <>
-            {isLoading ? (
-                <>
-                  <CircularProgress />
-                </>
-            ) : (
-                <>
-                    <Navigation />
-                    <StyledMain>
-                        <StyledContainer>
-                            <StyledMenu>
-                                <RenamePopover id={boardId} />
-                            </StyledMenu>
-                            <StyledSection>
-                                <StyledBoard>
-                                    <CreateColumn />
-                                    {allColumns.map((column) => (
-                                        <ColumnCard
-                                            id={column.id}
-                                            key={column.id}
-                                            name={column.name}
-                                            boardId={boardId}
-                                        />
-                                    ))}
-                                </StyledBoard>
-                            </StyledSection>
-                        </StyledContainer>
-                    </StyledMain>
-                </>
-            )}
-        </>
-    );
-};
-
-export default Column;
+    export default Column;

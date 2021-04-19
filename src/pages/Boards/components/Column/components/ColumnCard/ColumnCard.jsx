@@ -20,6 +20,9 @@ function ColumnCard({ id, name, boardId }) {
     }
   });
   const currentBoard = allBoards.find((item) => item.boardId === boardId);
+  const currentColumn = allColumns.find((item) => item.id === id);
+  const columnTasks = currentColumn.Tasks;
+
   const applyDrag = (arr, dragResult) => {
     const { removedIndex, addedIndex, payload } = dragResult;
 
@@ -51,6 +54,18 @@ function ColumnCard({ id, name, boardId }) {
       const newBoard = { ...currentBoard, columnPosition };
       // dispatch(createBoard(newBoard))
       // const response = columnsBoardPosition({ boardId, columnsPosition });
+      const newTasks = applyDrag(allColumns,dropResult);
+      const columnsPosition = allColumns.map((item) => {
+        return item.id
+      })
+      const newColumns = allColumns.map((item) => {
+        if (item.id === id) {
+          return { ...item, Tasks: newTasks };
+        }
+        return item;
+      });
+      // const response = columnsBoardPosition({ boardId, columnsPosition });
+      // dispatch(createColumn(newColumns));
     }
   }
   return (
