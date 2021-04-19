@@ -15,8 +15,14 @@ function Column() {
     const routParams = useParams();
     const boardId = Number(routParams.id);
     const allColumns = useSelector((state) => state.columns.allColumns);
+    const currentColumn = allColumns.find((item) => item.id);
     const [isLoading, setIsLoading] = React.useState(false);
-
+    // const position = allcolumns.taskPosition
+    // console.log(currentColumn)
+    // const sortTasks = () => {
+    //   for(l)
+    // }
+    console.log(currentColumn)
     const getallColumns = async () => {
         setIsLoading(true);
         try {
@@ -57,7 +63,7 @@ function Column() {
         <>
             {isLoading ? (
                 <>
-                    <CircularProgress />
+                  <CircularProgress />
                 </>
             ) : (
                 <>

@@ -37,6 +37,9 @@ function TaskCard({ columnId }) {
   const onDrop = async (dropResult) => {
 
     const { removedIndex, addedIndex, payload } = dropResult;
+  const onDrop = (dropResult) => {
+   try {
+    const { removedIndex, addedIndex } = dropResult;
     if (removedIndex !== null || addedIndex !== null) {
       const draggedTask = payload;
       const newTasks = applyDrag(columnTasks, dropResult);
@@ -61,20 +64,23 @@ function TaskCard({ columnId }) {
         
         const taskId = draggedTask.id;
         dispatch(createColumn(newColumns));
-        const response = await movingTasks({ columnId, taskId })
+         await movingTasks({ columnId, taskId })
 
       } else {
-        const newColumns = allColumns.map((column) => {
-          if (column.id === columnId) {
-            return { ...column, Tasks: newTasks, tasksPosition };
-          }
-          return column;
-        });
-        dispatch(createColumn(newColumns));
-        taskColumnPosition({ columnId, tasksPosition });
-      }
-    }
-  };
+      const newColumns = allColumns.map((column) => {
+        if (column.id === columnId) {
+          return { ...column, Tasks: newTasks, tasksPosition };
+        }
+        return column;
+      });
+     
+      console.log(tasksPosition)
+      dispatch(createColumn(newColumns));
+      await taskColumnPosition({ columnId, tasksPosition });
+    
+   }} catch(error) {
+     console.log(error);
+   }
 
   return (
     <>

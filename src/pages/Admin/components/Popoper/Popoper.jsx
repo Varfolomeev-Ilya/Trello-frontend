@@ -64,7 +64,11 @@ function AdminPopper({ id }) {
         });
         dispatch(setUsers(newUsers));
       } catch (error) {
+
         console.log(error)
+
+          console.log(error)
+
       }
     },
   })
