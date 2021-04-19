@@ -7,13 +7,19 @@ import TaskCard from '../Tasks/TaskCard/TaskCard';
 import { createColumn } from '../../../../../../store/colums';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, Draggable } from 'react-smooth-dnd';
-// import { updateColumns } from '../../../../../../api/columnsRequests';
+import { columnsBoardPosition } from '../../../../../../api/boardsRequests';
+import { createBoard } from '../../../../../../store/boards';
 
-function ColumnCard({ id, name }) {
+function ColumnCard({ id, name, boardId }) {
   const dispatch = useDispatch();
   const allColumns = useSelector((state) => state.columns.allColumns);
-  const currentColumn = allColumns.find((item) => item.id === id);
-  const columnTasks = currentColumn.Tasks;
+  const allBoards = useSelector((state) => state.boards.allBoards);
+  const boardColumns = allColumns.map((item) => {
+    if (item.boardId === boardId) {
+      return item;
+    }
+  });
+  const currentBoard = allBoards.find((item) => item.boardId === boardId);
   const applyDrag = (arr, dragResult) => {
     const { removedIndex, addedIndex, payload } = dragResult;
 
@@ -27,7 +33,7 @@ function ColumnCard({ id, name }) {
     }
 
     if (addedIndex !== null) {
-      result.splice(addedIndex, 0, itemToAdd);
+      result.splice(addedIndex, 1, itemToAdd);
     }
 
     return result;
@@ -35,23 +41,23 @@ function ColumnCard({ id, name }) {
 
   const onDrop = (dropResult) => {
     const { removedIndex, addedIndex } = dropResult;
-
     if (removedIndex !== null || addedIndex !== null) {
-      const newTasks = applyDrag(columnTasks, dropResult);
-      const newColumns = allColumns.map((item) => {
-        if (item.id === id) {
-          return { ...item, Tasks: newTasks };
-        }
-        return item;
-      });
-      dispatch(createColumn(newColumns));
+      const newColumns = applyDrag(boardColumns, dropResult);
+      const columnPosition = newColumns.map((item) => {
+        return item.id
+      })
+      console.log(columnPosition);
+      // console.log(columnPosition)
+      const newBoard = { ...currentBoard, columnPosition };
+      // dispatch(createBoard(newBoard))
+      // const response = columnsBoardPosition({ boardId, columnsPosition });
     }
   }
   return (
     <Container
       onDrop={onDrop}
-      orientation='horizontal'
       groupName='groupColumns'
+      orientation='horizontal'
     >
       <Draggable key={id}>
         <StyledCard>

@@ -9,21 +9,23 @@ import { createBoard } from '../../store/boards';
 import CircularIndeterminate from '../../ui/components/Spinner/Spinner'
 
 function Boards() {
-  const boards = useSelector((state) => state.boards.allBoards);
   const dispatch = useDispatch(); 
+  const currentUser = useSelector((state) => state.users.registeredUser);
+  const userId = currentUser.id;
   const [isLoading, setIsLoading] = React.useState(false);
   const getAllBoards = async () => {
     setIsLoading(true);
     try{
-      const response = await getBoards();
-      dispatch(createBoard(response.data))
+      const response = await getBoards(userId);
+      dispatch(createBoard(response.data));
+      console.log('boards', response.data);
     }catch(error) {
       console.log(error.response.data.message)
     } finally {
       setIsLoading(false)
     }
   }
-
+  const boards = useSelector((state) => state.boards.allBoards);
   React.useEffect(() => {
     getAllBoards();
   }, []);

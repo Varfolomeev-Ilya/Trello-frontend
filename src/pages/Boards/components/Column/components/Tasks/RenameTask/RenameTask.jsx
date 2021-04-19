@@ -61,12 +61,19 @@ function RenameTask({taskText, columnId, taskId}) {
                 }
                 return item;
             });
-            dispatch(createColumn(newColumns));
-            setInputValue('');
+                dispatch(createColumn(newColumns));
+                setInputValue('');
         }   
       } catch (error) {
           console.log(error)
       }  
+    };
+
+    const handleEnter = event => {
+        if (event.key === 'Enter') {
+            handleClose();
+            setInputValue('');
+        }
     };
 
     const open = Boolean(anchorEl);
@@ -103,6 +110,8 @@ function RenameTask({taskText, columnId, taskId}) {
                         placeholder="name of card"
                         value={inputValue}
                         onChange={onChangeInputValue}
+                        color='secondary'
+                        onKeyPress={handleEnter}
                     />
                 </Typography>
             </Popover>

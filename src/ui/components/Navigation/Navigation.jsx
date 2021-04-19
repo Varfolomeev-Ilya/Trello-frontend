@@ -18,8 +18,6 @@ import { regUser } from '../../../store/users';
 function PrimarySearchAppBar() {
   const userInfo = useSelector((state) => state.users.registeredUser);
   const usersId = userInfo.id;
-  // const userRoleId = userInfo.roleId;
-
   const dispatch = useDispatch();
   const onOut = () => {
     dispatch(regUser({}));

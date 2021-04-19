@@ -4,6 +4,7 @@ const StyledMain = styled.div`
     width: 100%;
     height: auto;
     margin: 0 auto;
+    overflow-x: auto;
 `;
 
 const StyledContainer = styled.div`

@@ -61,6 +61,13 @@ function ColumnPopper({ columnId, name}) {
         }
     };
 
+    const handleEnter = event => {
+        if (event.key === 'Enter') {
+            handleClose();
+            setInputValue('');
+        }
+    };
+
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
 
@@ -96,6 +103,8 @@ function ColumnPopper({ columnId, name}) {
                         placeholder="name of column"
                         value={inputValue}
                         onChange={onChangeInputValue}
+                        color='secondary'
+                        onKeyPress={handleEnter}
                     />
 
                 </Typography>

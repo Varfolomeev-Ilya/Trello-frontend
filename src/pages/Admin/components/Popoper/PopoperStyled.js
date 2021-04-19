@@ -11,50 +11,27 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
   },
   paper: {
-    height: 'auto',
+    height: '400px',
     width: '250px',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+    alignItems: 'space-around',
     border: 'solid 1px',
     borderRadius: '10px',
     borderColor: '#b32020',
-  }
+  },
+  textField: {
+    marginBottom: '10px',
+  },
 }));
 
 const StyledForm = styled.form`
-  width: 100%;
-  height: auto;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
-`;
-
-const StyledInput = styled.input`
-  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
-  width: 170px;
-  font-size: 14px;
-  transition-property: background-color,border-color,box-shadow;
-  transition-duration: 85ms;
-  transition-timing-function: ease;
-  border-radius: 3px;
-  box-shadow: inset 0 0 0 2px #dfe1e6;
-  background-color: #fafbfc;
-  outline: none;
-  border: none;
-`;
-
-const StyledP = styled.p`
-  /* margin: 0 auto, */
-`;
-const StyledDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  height: 35px;
-  margin-bottom: 10px;
+  align-items: space-around;
 `;
 
 const StyledButton = styled.button`
@@ -62,7 +39,7 @@ const StyledButton = styled.button`
   box-shadow: none;
   border: none;
   color: #fff;
-  width: 200px;
+  width: 100px;
   border-radius: 3px;
   text-decoration: none;
   transition-property: background-color,border-color,box-shadow;
@@ -70,8 +47,18 @@ const StyledButton = styled.button`
   transition-duration: 85ms;
   transition-timing-function: ease;
   margin: 0 auto;
-  margin-top: 10px
+  margin-top: 10px;
+  cursor: pointer;
 `;
 
-export { StyledForm, StyledInput, StyledButton, StyledP, StyledDiv }
+const StyledSpan = styled.span`
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: space-between;
+`;
+
+export { StyledForm, StyledButton, StyledSpan }
 export default useStyles;

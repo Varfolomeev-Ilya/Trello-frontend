@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(1),
     },
     pStyled: {
-        margin: '6px' ,
+        margin: '6px',
         fontSize: '18px',
         fontWeight: '700',
         lineHeight: '32px',
@@ -39,30 +39,38 @@ function RenamePopover() {
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
+
     const onChangeInputValue = event => {
         setInputValue(event.target.value);
     };
 
-    const handleClose = async () => {
+    const mouseClick = async (event) => {
         try {
             if (onChangeInputValue) {
-            setAnchorEl(null);
-            const boardName = inputValue;
-            const response = await updateBoard({ boardName, boardId });
-            const newBoards = allBoards.map((item) => {
-                if (item.id === boardId) {
-                    return { ...item, name: boardName };
-                }
-                return item;
-            })   
-            dispatch(createBoard(newBoards));
-            setInputValue('');
-        }} catch (error) {
+                setAnchorEl(null);
+                const boardName = inputValue;
+                await updateBoard({ boardName, boardId });
+                const newBoards = allBoards.map((item) => {
+                    if (item.id === boardId) {
+                        return { ...item, name: boardName };
+                    }
+                    return item;
+                })
+                dispatch(createBoard(newBoards));
+                setInputValue('');
+            }
+        } catch (error) {
             console.log(error.message)
-        }
-
+        }         
     };
 
+    const handleEnter = event => {
+        if (event.key === 'Enter') {
+            mouseClick();
+            setInputValue('');
+        }
+    };
+    
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
 
@@ -79,7 +87,7 @@ function RenamePopover() {
                 id={id}
                 open={open}
                 anchorEl={anchorEl}
-                onClose={handleClose}
+                onClose={mouseClick}
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'center',
@@ -91,15 +99,15 @@ function RenamePopover() {
             >
                 <Typography
                     className={classes.typography}
-
                 >
                     <TextField
                         id={boardId}
                         placeholder="name of board"
                         value={inputValue}
                         onChange={onChangeInputValue}
+                        color='secondary'
+                        onKeyPress={handleEnter}
                     />
-
                 </Typography>
             </Popover>
         </div>

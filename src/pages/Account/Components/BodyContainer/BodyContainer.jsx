@@ -68,7 +68,6 @@ function BodyContainer() {
         >
           <Tab label='Edit profile' {...a11yProps(0)} />
           <Tab label='Upload your avatar' {...a11yProps(1)} />
-          <Tab label='Settings' {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -82,8 +81,6 @@ function BodyContainer() {
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           <UploadAvatar />
-        </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
         </TabPanel>
       </SwipeableViews>
     </div>

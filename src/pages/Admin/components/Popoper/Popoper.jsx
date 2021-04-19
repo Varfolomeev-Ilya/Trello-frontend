@@ -6,17 +6,18 @@ import Button from '@material-ui/core/Button';
 import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
 import useStyles from './PopoperStyled';
+import TextField from '@material-ui/core/TextField';
+import * as Yup from 'yup';
+import * as validation from '../../../../utils/validationConsts';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
-import { StyledForm, StyledButton, StyledInput, StyledP, StyledDiv } from './PopoperStyled';
+import { StyledForm, StyledButton, StyledSpan } from './PopoperStyled';
 import { updateUser } from '../../../../api/adminRequests';
 import { setUsers } from '../../../../store/users';
+import { deleteUser } from '../../../../api/adminRequests';
 
 function AdminPopper({ id }) {
   const dispatch = useDispatch();
-
-
-
   const allUsers = useSelector((state) => (state.users.allUsers));
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [open, setOpen] = React.useState(false);
@@ -27,8 +28,22 @@ function AdminPopper({ id }) {
   const handleClick = (newPlacement) => (event) => {
     setAnchorEl(event.currentTarget);
     setOpen((prev) => placement !== newPlacement || !prev);
-    setPlacement(newPlacement);  
+    setPlacement(newPlacement);
   };
+
+  const handleClose = () => {
+    setOpen(false);
+  }
+  const handleDelete = async () => {
+    try {
+      const response = await deleteUser({ id });
+      dispatch(setUsers(response.data))
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setOpen(false);
+    }
+  }
 
   const { handleSubmit, handleChange, handleBlur, values } = useFormik({
     initialValues: {
@@ -38,10 +53,43 @@ function AdminPopper({ id }) {
       email: currentUser.email,
       id: currentUser.id
     },
+    validationSchema: Yup.object({
+      firstName:
+        Yup
+          .string()
+          .trim()
+          .min(validation.FIRSTNAME_LENGTH, validation.FIRSTNAME_LENGTH_MESSAGE)
+          .matches(validation.FIRSTNAME_MATCHES, validation.FIRSTNAME_MATCHES_MESSAGE),
+      createdAt:
+        Yup
+          .string()
+          .trim()
+          .min(validation.CREATEDAT_MIN_LENGTH, validation.CREATEDAT_LENGTH_MESSAGE)
+          .max(validation.CREATEDAT_MAX_LENGTH, validation.CREATEDAT_LENGTH_MESSAGE)
+          .matches(validation.CREATEDAT_MATCHES, validation.CREATEDAT_MATCHES_MESSAGE),
+      roleId:
+        Yup
+          .string()
+          .trim()
+          .matches(validation.NUMB_MATCHES, validation.NUMB_MATCHES_MESSAGE),
+      email:
+        Yup
+          .string()
+          .trim()
+          .email()
+          .max(validation.EMAIL_LENGTH, validation.EMAIL_LENGTH_MESSAGE)
+          .matches(validation.EMAIL_MATCHES, validation.EMAIL_MATCHES_MESSAGE),
+      id:
+        Yup
+          .string()
+          .trim()
+          .matches(validation.NUMB_MATCHES, validation.NUMB_MATCHES_MESSAGE),
+    }),
     onSubmit: async ({ firstName, createdAt, roleId, email, id }) => {
       try {
         const response = await updateUser(
-          { firstName: firstName,
+          {
+            firstName: firstName,
             createdAt: createdAt,
             roleId: roleId,
             email: email,
@@ -64,11 +112,10 @@ function AdminPopper({ id }) {
         });
         dispatch(setUsers(newUsers));
       } catch (error) {
-          console.log(error)
+        console.log(error)
       }
     },
   })
-
 
   return (
     <div className={classes.root}>
@@ -89,29 +136,17 @@ function AdminPopper({ id }) {
                 method='POST'
                 onSubmit={handleSubmit}
               >
-                  <>
-                  <StyledDiv>
-                    <StyledP>id</StyledP>
-                    <StyledInput id='id' type='id' value={values.id} onChange={handleChange} onBlur={handleBlur}/>
-                  </StyledDiv>
-                  <StyledDiv>
-                  <StyledP>name</StyledP>
-                  <StyledInput id='firstName' type='firstName' value={values.firstName} onChange={handleChange} onBlur={handleBlur}/>
-                  </StyledDiv>
-                  <StyledDiv>
-                  <StyledP>email</StyledP>
-                  <StyledInput id='email' type='email' value={values.email} onChange={handleChange} onBlur={handleBlur}/>
-                  </StyledDiv>
-                  <StyledDiv>
-                  <StyledP>role</StyledP>
-                  <StyledInput id='roleId' type='roleId' value={values.roleId} onChange={handleChange} onBlur={handleBlur}/>
-                  </StyledDiv>
-                  <StyledDiv>
-                  <StyledP>created</StyledP>
-                  <StyledInput id='createdAt' type='createdAt' value={values.createdAt} onChange={handleChange} onBlur={handleBlur}/>
-                  </StyledDiv>
-                  </>
-                <StyledButton type='submit' >Save changes</StyledButton>
+                <>
+                  <TextField className={classes.textField} color='secondary' label="id" variant="outlined" id='id' type='id' value={values.id} onChange={handleChange} onBlur={handleBlur} />
+                  <TextField className={classes.textField} color='secondary' label="firstName" variant="outlined" id='firstName' type='firstName' value={values.firstName} onChange={handleChange} onBlur={handleBlur} />
+                  <TextField className={classes.textField} color='secondary' label="email" variant="outlined" id='email' type='email' value={values.email} onChange={handleChange} onBlur={handleBlur} />
+                  <TextField className={classes.textField} color='secondary' label="roleId" variant="outlined" id='roleId' type='roleId' value={values.roleId} onChange={handleChange} onBlur={handleBlur} />
+                  <TextField className={classes.textField} color='secondary' label="createdAt" variant="outlined" id='createdAt' type='createdAt' value={values.createdAt} onChange={handleChange} onBlur={handleBlur} />
+                </>
+                <StyledSpan>
+                  <StyledButton onClick={handleClose} >Save changes</StyledButton>
+                  <StyledButton onClick={handleDelete}>delete</StyledButton>
+                </StyledSpan>
               </StyledForm>
             </Paper>
           </Fade>

@@ -27,7 +27,18 @@ export const ABOUTME_LENGTH_MESSAGE = 'Aboutme should be longer than 10 characte
 export const ABOUTME_MAX_LENGTH = 250;
 export const ABOUTME_REQUIRED_MESSAGE = 'Please Enter your information';
 export const ABOUTME_MATCHES = /[a-zA-Z]/;
-export const ABOUTME_MATCHES_MESSAGE = 'Your information can only contain Latin letters'
+export const ABOUTME_MATCHES_MESSAGE = 'Your information can only contain Latin letters';
+
+export const NUMB_MATCHES = /[0-9]/;
+export const NUMB_MATCHES_MESSAGE = 'Id information can only contain numbers';
+
+export const CREATEDAT_MATCHES = /[0-9]*[:,-]*[a-zA-Z]/;
+export const CREATEDAT_MATCHES_MESSAGE = 'Created At can only contain format 0000-00-00T00:00:00.000Z';
+export const CREATEDAT_MIN_LENGTH = 23;
+export const CREATEDAT_MAX_LENGTH = 24;
+export const CREATEDAT_LENGTH_MESSAGE = 'CREATEDAT should be 24 characters';
+
+
 
 
 

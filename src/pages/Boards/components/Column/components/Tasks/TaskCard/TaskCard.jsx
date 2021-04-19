@@ -6,6 +6,7 @@ import DeleteTask from '../DeleteTask/DeleteTask';
 import RenameTask from '../RenameTask/RenameTask';
 import { createColumn } from '../../../../../../../store/colums';
 import { taskColumnPosition } from '../../../../../../../api//columnsRequests';
+import { movingTasks } from '../../../../../../../api/tasksRequests';
 
 function TaskCard({ columnId }) {
   const dispatch = useDispatch();
@@ -31,29 +32,52 @@ function TaskCard({ columnId }) {
     return result;
   };
 
-  const onDrop = (dropResult) => {
-   try {
-    const { removedIndex, addedIndex } = dropResult;
-    if (removedIndex !== null || addedIndex !== null) {
-      const newTasks = applyDrag(columnTasks, dropResult);
-      const tasksPosition = newTasks.map((item) => {
-        return item.id;
-      });
-      const newColumns = allColumns.map((column) => {
-        if (column.id === columnId) {
-          return { ...column, Tasks: newTasks, tasksPosition };
+  const getTaskPayLoad = (index) => columnTasks[index];
+
+  const onDrop = async (dropResult) => {
+    try {
+      const { removedIndex, addedIndex, payload } = dropResult;
+      if (removedIndex !== null || addedIndex !== null) {
+        const draggedTask = payload;
+        const newTasks = applyDrag(columnTasks, dropResult);
+        const tasksPosition = newTasks.map((item) => {
+          return item.id;
+        });
+        console.log(tasksPosition)
+        if (draggedTask.columnId !== columnId) {
+          const displacedTasks = newTasks.map((item) => {
+            if (item.id === draggedTask.id) {
+              return { ...item, columnId };
+            }
+            return item;
+          })
+
+          const newColumns = allColumns.map((item) => {
+            if (item.id === columnId) {
+              return { ...item, tasksPosition, Tasks: displacedTasks };
+            }
+            return item;
+          })
+
+          const taskId = draggedTask.id;
+          dispatch(createColumn(newColumns));
+          movingTasks({ columnId, taskId });
+
+        } else {
+          const newColumns = allColumns.map((column) => {
+            if (column.id === columnId) {
+              return { ...column, Tasks: newTasks, tasksPosition };
+            }
+            return column;
+          });
+          dispatch(createColumn(newColumns));
+          taskColumnPosition({ columnId, tasksPosition });
         }
-        return column;
-      });
-     
-      console.log(tasksPosition)
-      const response = taskColumnPosition({ columnId, tasksPosition });
-      dispatch(createColumn(newColumns));
-    
-   }} catch(error) {
-     console.log(error);
-   }
-  };
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <>
@@ -61,6 +85,7 @@ function TaskCard({ columnId }) {
         onDrop={onDrop}
         orientation='vertical'
         groupName='groupTasks'
+        getChildPayload={(index) => getTaskPayLoad(index)}
       >
         {columnTasks.map((task) =>
           <Draggable key={task.id}>
