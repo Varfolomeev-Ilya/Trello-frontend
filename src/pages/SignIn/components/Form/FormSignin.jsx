@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyledButton, StyledH3 } from '../../../../ui/components/Buttons/ButtonStyled';
 import { StyledLoginButton, StyledSpan } from '../../../../ui/components/Buttons/LoginBtnStyled';
 import { postLoginUser } from '../../../../api/authApi';
@@ -12,8 +12,9 @@ import * as validation from '../../../../utils/validationConsts';
 import { regUser } from '../../../../store/users'
 import { useDispatch } from 'react-redux';
 
-function SigninForm() {
+const SigninForm = () => {
   const dispatch = useDispatch();
+  const [error, setError] = useState(null);
 
   const { handleSubmit, handleChange, values, touched, errors, handleBlur } = useFormik({
     initialValues: {
@@ -41,12 +42,15 @@ function SigninForm() {
       try {
         const response = await postLoginUser({ email: email, password: password });
         localStorage.setItem('isAuthenticated', JSON.stringify(response.data.tokens.accessToken));
-        alert(JSON.stringify(response.data.message));
         dispatch(regUser(response.data.user));
       }
       catch (error) {
-        alert(error.response.data.message);
-      };
+        setError(error.response.data.message);
+      } finally {
+        setTimeout(() => {
+          setError(null)
+        },2000);
+      }
     }
   })
 
@@ -80,8 +84,8 @@ function SigninForm() {
                 onBlur={handleBlur}
                 value={values.password}
               />
-              {touched.password && errors.password ? (
-                <StyledMsg>{errors.password}</StyledMsg>
+              {touched.password || errors.password ? (
+                <StyledMsg>{errors.password || error}</StyledMsg>
               ) : null}
               <StyledButton type='submit'>
                 <Link to='/home' />

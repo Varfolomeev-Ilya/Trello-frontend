@@ -1,6 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { postColumn } from '../../../../../../api/columnsRequests';
+import { setColumnsPosition } from '../../../../../../api/boardsRequests';
+import { createBoard } from '../../../../../../store/boards';
 import { createColumn } from '../../../../../../store/colums';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -19,9 +21,9 @@ function CreateColumn() {
         },
     }));
     const classes = useStyles();
-
     const dispatch = useDispatch();
     const columns = useSelector((state) => state.columns.allColumns);
+    const allBoards = useSelector((state) => state.boards.allBoards);
     const [inputValue, setInputValue] = React.useState('');
     const routParams = useParams();
     const boardId = Number(routParams.id);
@@ -36,22 +38,36 @@ function CreateColumn() {
                 name: inputValue,
                 boardId: boardId,
             }
-
             try {
                 const response = await postColumn(newColumn);
                 const newColumns = [...columns,
                 {
                     ...response.data,
                     Tasks: [],
-                },
-                ];
+                },];
                 dispatch(createColumn(newColumns));
+
+                const column = newColumns.map((item) => {
+                    if (item.boardId === boardId) {
+                        return item.id
+                    }
+                    return item
+                })
+                const newBoard = allBoards.map((item) => {
+                    if (item.id === boardId) {
+                        return { ...item, columnsPosition: column }
+                    }
+                    return item;
+                });
+
+                const columnsPosition = newColumns.map((item) => item.id);
+                dispatch(createBoard(newBoard));
+                await setColumnsPosition({ boardId, columnsPosition });
             } catch (error) {
                 alert(error)
             }
         }
     };
-
     const handleEnter = event => {
         if (event.key === 'Enter') {
             addColumn();

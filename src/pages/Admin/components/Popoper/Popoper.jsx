@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Popper from '@material-ui/core/Popper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -15,9 +15,11 @@ import { StyledForm, StyledButton, StyledSpan } from './PopoperStyled';
 import { updateUser } from '../../../../api/adminRequests';
 import { setUsers } from '../../../../store/users';
 import { deleteUser } from '../../../../api/adminRequests';
+import { StyledMsg } from '../../../../ui/components/Message/MessageStyled';
 
 function AdminPopper({ id }) {
   const dispatch = useDispatch();
+  const [error, setError] = useState(null);
   const allUsers = useSelector((state) => (state.users.allUsers));
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [open, setOpen] = React.useState(false);
@@ -36,15 +38,19 @@ function AdminPopper({ id }) {
   }
   const handleDelete = async () => {
     try {
-      await deleteUser({ id })
+      const response = await deleteUser({ id });
+      dispatch(setUsers(response.data))
     } catch (error) {
-      console.log(error)
+      setError(error.response.data.message)
     } finally {
-      setOpen(false);
+      setTimeout(() => {
+        setError(null);
+        setOpen(false);
+      },2000);
     }
   }
 
-  const { handleSubmit, handleChange, handleBlur, values } = useFormik({
+  const { handleSubmit, handleChange, handleBlur, values, touched, errors } = useFormik({
     initialValues: {
       firstName: currentUser.firstName,
       createdAt: currentUser.createdAt,
@@ -136,11 +142,96 @@ function AdminPopper({ id }) {
                 onSubmit={handleSubmit}
               >
                 <>
-                  <TextField className={classes.textField} color='secondary' label="id" variant="outlined" id='id' type='id' value={values.id} onChange={handleChange} onBlur={handleBlur} />
-                  <TextField className={classes.textField} color='secondary' label="firstName" variant="outlined" id='firstName' type='firstName' value={values.firstName} onChange={handleChange} onBlur={handleBlur} />
-                  <TextField className={classes.textField} color='secondary' label="email" variant="outlined" id='email' type='email' value={values.email} onChange={handleChange} onBlur={handleBlur} />
-                  <TextField className={classes.textField} color='secondary' label="roleId" variant="outlined" id='roleId' type='roleId' value={values.roleId} onChange={handleChange} onBlur={handleBlur} />
-                  <TextField className={classes.textField} color='secondary' label="createdAt" variant="outlined" id='createdAt' type='createdAt' value={values.createdAt} onChange={handleChange} onBlur={handleBlur} />
+                  <TextField
+                    className={classes.textField}
+                    color='secondary'
+                    label="id"
+                    variant="outlined"
+                    id='id'
+                    type='id'
+                    value={values.id}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  {touched.id && errors.id ? (
+                    <StyledMsg
+                      className={classes.mesage}
+                    >
+                      {errors.id}
+                    </StyledMsg>
+                  ) : null}
+                  <TextField
+                    className={classes.textField}
+                    color='secondary'
+                    label="firstName"
+                    variant="outlined"
+                    id='firstName'
+                    type='firstName'
+                    value={values.firstName}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  {touched.firstName && errors.firstName ? (
+                    <StyledMsg
+                      className={classes.mesage}
+                    >
+                      {errors.firstName}
+                    </StyledMsg>
+                  ) : null}
+                  <TextField
+                    className={classes.textField}
+                    color='secondary'
+                    label="email"
+                    variant="outlined"
+                    id='email'
+                    type='email'
+                    value={values.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  {touched.email || errors.email ? (
+                    <StyledMsg
+                      className={classes.mesage}
+                    >
+                      {errors.email || error}
+                    </StyledMsg>
+                  ) : null}
+                  <TextField
+                    className={classes.textField}
+                    color='secondary'
+                    label="roleId"
+                    variant="outlined"
+                    id='roleId'
+                    type='roleId'
+                    value={values.roleId}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  {touched.roleId && errors.roleId ? (
+                    <StyledMsg
+                      className={classes.mesage}
+                    >
+                      {errors.roleId}
+                    </StyledMsg>
+                  ) : null}
+                  <TextField
+                    className={classes.textField}
+                    color='secondary'
+                    label="createdAt"
+                    variant="outlined"
+                    id='createdAt'
+                    type='createdAt'
+                    value={values.createdAt}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  {touched.createdAt && errors.createdAt ? (
+                    <StyledMsg
+                      className={classes.mesage}
+                    >
+                      {errors.createdAt}
+                    </StyledMsg>
+                  ) : null}
                 </>
                 <StyledSpan>
                   <StyledButton onClick={handleClose} >Save changes</StyledButton>

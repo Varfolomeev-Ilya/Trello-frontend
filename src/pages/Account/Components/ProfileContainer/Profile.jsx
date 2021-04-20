@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyledSection, StyledH1, StyledP, StyledH3,
   StyledHr, StyledDiv, StyledForm, StyledDivUser,
@@ -16,6 +16,7 @@ import { regUser } from '../../../../store/users';
 
 function Profile() {
   const dispatch = useDispatch();
+  const [error, setError] = useState(null);
   const userInfo = useSelector((state) => state.users.registeredUser);
   const firstaName = userInfo.firstName;
   const lastaName = userInfo.lastName;
@@ -62,7 +63,11 @@ function Profile() {
         });
         dispatch(regUser(response.data))
       } catch (error) {
-        console.log(error.response.data.message);
+        setError(error.response.data.message)
+      } finally {
+        setTimeout(() => {
+          setError(null)
+        },2000);
       }
     }
   })
@@ -137,8 +142,8 @@ function Profile() {
             onBlur={handleBlur}
             value={values.aboutMe}
           />
-          {touched.aboutMe && errors.aboutMe ? (
-            <StyledMsg>{errors.aboutMe}</StyledMsg>
+          {touched.aboutMe || errors.aboutMe ? (
+            <StyledMsg>{errors.aboutMe || error}</StyledMsg>
           ) : null}
           <StyledButton type='submit'>Save</StyledButton>
         </StyledForm>

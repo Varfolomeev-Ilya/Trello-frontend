@@ -43,7 +43,6 @@ function TaskCard({ columnId }) {
         const tasksPosition = newTasks.map((item) => {
           return item.id;
         });
-        console.log(tasksPosition)
         if (draggedTask.columnId !== columnId) {
           const displacedTasks = newTasks.map((item) => {
             if (item.id === draggedTask.id) {

@@ -18,11 +18,10 @@ function Boards() {
     try{
       const response = await getBoards(userId);
       dispatch(createBoard(response.data));
-      console.log('boards', response.data);
     }catch(error) {
-      console.log(error.response.data.message)
+      console.log(error.response.data.message);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
   }
   const boards = useSelector((state) => state.boards.allBoards);

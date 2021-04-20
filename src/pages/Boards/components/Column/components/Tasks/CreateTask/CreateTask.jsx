@@ -49,7 +49,6 @@ function CreateTask({ columnId }) {
         setAnchorEl(null);
         const text = inputValue;
         const response = await postTask({ columnId, text });
-
         const newTasks = [...columnTasks, response.data];
         const newColumns = allColumns.map((item) => {
             if (item.id === columnId) {
@@ -63,6 +62,11 @@ function CreateTask({ columnId }) {
 
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
+    const handleEnter = event => {
+        if (event.key === 'Enter') {
+            handleClose();
+        }
+    };
 
     return (
         <div>
@@ -96,6 +100,7 @@ function CreateTask({ columnId }) {
                         value={inputValue}
                         onChange={onChangeInputValue}
                         color='secondary'
+                        onKeyPress={handleEnter}
                     />
                 </Typography>
             </Popover>

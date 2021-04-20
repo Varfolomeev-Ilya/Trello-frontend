@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import FollowLinkIn from '../Link/LinkIn';
@@ -13,6 +13,7 @@ import * as validation from '../../../../utils/validationConsts';
 
 function SignUpForm() {
   const dispatch = useDispatch();
+  const [error, setError] = useState(null);
 
   const { handleSubmit, handleChange, values, touched, errors, handleBlur } = useFormik({
     initialValues: {
@@ -55,11 +56,15 @@ function SignUpForm() {
     onSubmit: async ({ email, password, firstName, lastName }) => {
       try {
         const response = await postRegisterUser({ email: email, password: password, firstName: firstName, lastName: lastName });
-        alert(JSON.stringify(response.data.message))
         localStorage.setItem('isAuthenticated', JSON.stringify(response.data.tokens.accessToken));
-        dispatch(regUser(response.data.user))
+        dispatch(regUser(response.data.user));
+        setError(response.data.message);
       } catch (error) {
-        alert(error.response.data.message);
+        setError(error.response.data.message);
+      } finally {
+        setTimeout(() => {
+          setError(null);
+        }, 1500);
       }
     }
   })
@@ -119,8 +124,8 @@ function SignUpForm() {
               onBlur={handleBlur}
               value={values.lastName}
             />
-            {touched.lastName && errors.lastName ? (
-              <StyledMsg>{errors.lastName}</StyledMsg>
+            {touched.lastName || errors.lastName ? (
+              <StyledMsg>{errors.lastName || error}</StyledMsg>
             ) : null}
             <StyledButton
               type='submit'>

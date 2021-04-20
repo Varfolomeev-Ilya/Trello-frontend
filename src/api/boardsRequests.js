@@ -21,6 +21,6 @@ export const getBoards = async (userId) => {
   return response;
 }
 
-export const columnsBoardPosition = async (data) => {
+export const setColumnsPosition = async (data) => {
   return await axios.patch('/board-column', data)
 }
