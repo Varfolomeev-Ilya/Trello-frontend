@@ -49,7 +49,7 @@ const SigninForm = () => {
       } finally {
         setTimeout(() => {
           setError(null)
-        },2000);
+        }, 2000);
       }
     }
   })
@@ -89,7 +89,7 @@ const SigninForm = () => {
               ) : null}
               <StyledButton type='submit'>
                 <Link to='/home' />
-                <StyledH3>Log in</StyledH3>            
+                <StyledH3>Log in</StyledH3>
               </StyledButton>
             </StyledForm>
             <StyledH2>or</StyledH2>

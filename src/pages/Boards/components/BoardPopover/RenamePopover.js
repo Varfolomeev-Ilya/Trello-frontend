@@ -44,7 +44,7 @@ function RenamePopover() {
         setInputValue(event.target.value);
     };
 
-    const mouseClick = async (event) => {
+    const mouseClick = async () => {
         try {
             if (onChangeInputValue) {
                 setAnchorEl(null);
@@ -87,7 +87,7 @@ function RenamePopover() {
                 id={id}
                 open={open}
                 anchorEl={anchorEl}
-                onClose={mouseClick}
+                onClose={handleEnter}
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'center',
@@ -102,11 +102,11 @@ function RenamePopover() {
                 >
                     <TextField
                         id={boardId}
-                        placeholder="name of board"
-                        value={inputValue}
+                        defaultValue={name}
                         onChange={onChangeInputValue}
                         color='secondary'
                         onKeyPress={handleEnter}
+                        autoFocus
                     />
                 </Typography>
             </Popover>

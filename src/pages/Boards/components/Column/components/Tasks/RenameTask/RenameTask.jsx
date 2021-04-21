@@ -46,7 +46,7 @@ function RenameTask({taskText, columnId, taskId}) {
     const handleClose = async () => {
       try {
         setAnchorEl(null);
-        const text = inputValue;
+        const text = inputValue.trim();
         await updateTask({text, taskId});
         if (onChangeInputValue) {
             const newTasks = columnTask.map((item) => {
@@ -92,7 +92,7 @@ function RenameTask({taskText, columnId, taskId}) {
                 id={id}
                 open={open}
                 anchorEl={anchorEl}
-                onClose={handleClose}
+                onClose={handleEnter}
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'center',
@@ -104,14 +104,13 @@ function RenameTask({taskText, columnId, taskId}) {
             >
                 <Typography
                     className={classes.typography}
-
                 >
                     <TextField
-                        placeholder="name of card"
-                        value={inputValue}
+                        defaultValue={taskText}
                         onChange={onChangeInputValue}
                         color='secondary'
-                        onKeyPress={handleEnter} 
+                        onKeyPress={handleEnter}
+                        autoFocus 
                    />
                 </Typography>
             </Popover>

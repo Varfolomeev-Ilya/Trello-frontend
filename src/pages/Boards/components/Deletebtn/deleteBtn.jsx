@@ -17,7 +17,7 @@ function DeleteBtn({boardId}) {
 
   const handleClick = async () => {
     try {
-      const response = await deleteBoard(boardId);
+      await deleteBoard(boardId);
       const newBoards = boards.filter((board) => board.id !== boardId);
       dispatch(createBoard(newBoards))
     } catch (error) {

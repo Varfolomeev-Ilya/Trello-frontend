@@ -5,12 +5,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import RenamePopover from '../../components/BoardPopover/RenamePopover';
 import { createColumn } from '../../../../store/colums';
-import { createBoard } from '../../../../store/boards';
 import { getColumns } from '../../../../api/columnsRequests';
 import CircularProgress from '../../../../ui/components/Spinner/Spinner';
 import ColumnCard from '../Column/components/ColumnCard/ColumnCard';
 import CreateColumn from '../Column/components/CreateColumn/CreateColumn';
 import { Container, Draggable } from 'react-smooth-dnd';
+import { setColumnsPosition } from '../../../../api/boardsRequests';
 
 function Column() {
     const dispatch = useDispatch();
@@ -18,6 +18,45 @@ function Column() {
     const boardId = Number(routParams.id);
     const allColumns = useSelector((state) => state.columns.allColumns);
     const [isLoading, setIsLoading] = React.useState(false);
+    const allBoards = useSelector((state) => state.boards.allBoards);
+    const currentBoard = allBoards.find((board) => board.id === boardId);
+    const currentColumnsPosition = currentBoard.columnsPosition;
+    const boardColumns = allColumns.map((column) => {
+        if (column.boardId === boardId) {
+            return column;
+        }
+        return column;
+    });
+    const applyDrag = (arr, dragResult) => {
+        const { removedIndex, addedIndex, payload } = dragResult;
+
+        if (removedIndex === null && addedIndex === null) return arr;
+
+        const result = [...arr];
+        let itemToAdd = payload;
+
+        if (removedIndex !== null) {
+            itemToAdd = result.splice(removedIndex, 1)[0];
+        }
+
+        if (addedIndex !== null) {
+            result.splice(addedIndex, 0, itemToAdd);
+        }
+        return result;
+    };
+
+    const onDrop = async (dropResult) => {
+        
+            const { removedIndex, addedIndex } = dropResult;
+            if (removedIndex !== null && addedIndex !== null) {
+                const newColumns = applyDrag(boardColumns, dropResult);
+                const columnsPosition = newColumns.map((column) => {
+                    return column.id;
+                });
+                dispatch(createColumn(newColumns))
+                await setColumnsPosition({ boardId, columnsPosition });
+            }
+    };
 
     const getallColumns = async () => {
         setIsLoading(true);
@@ -27,7 +66,7 @@ function Column() {
                 const tasks = column.Tasks;
                 const sortedTasks = [];
                 const { tasksPosition } = column;
-
+                
                 if (tasksPosition) {
                     for (let i = 0; i < tasksPosition.length; i++) {
                         tasks.forEach((task) => {
@@ -35,13 +74,27 @@ function Column() {
                                 sortedTasks.push(task);
                             }
                         });
-                        return { ...column, Tasks: sortedTasks };
                     }
-                    dispatch(createColumn(sortedTasksColumn));
-                } else {
-                    dispatch(createColumn(response.data));
                 }
-            })
+                return { ...column, Tasks: sortedTasks };
+            });
+            // console.log(response.data)
+            if (currentColumnsPosition) {
+                const sortedColumnsBoard = [];
+
+                for (let i = 0; i < currentColumnsPosition.length; i++) {
+                    sortedTasksColumn.forEach((column) => {
+                        if (column.id === currentColumnsPosition[i]) {
+                            sortedColumnsBoard.push(column);
+                        }
+                    });
+                }
+                dispatch(createColumn(sortedColumnsBoard));
+            } else {
+                dispatch(createColumn(sortedTasksColumn));
+
+            }
+
         } catch (error) {
             console.log(error);
         } finally {
@@ -52,43 +105,6 @@ function Column() {
     React.useEffect(() => {
         getallColumns();
     }, []);
-
-    const allBoards = useSelector((state) => state.boards.allBoards);
-    const currentBoard = allBoards.find((item) => item.id === boardId);
-    const boardColumns = currentBoard.columnsPosition;
-  
-    const applyDrag = (arr, dragResult) => {
-      const { removedIndex, addedIndex, payload } = dragResult;
-  
-      if (removedIndex === null && addedIndex === null) return arr;
-  
-      const result = [...arr];
-      let itemToAdd = payload;
-  
-      if (removedIndex !== null) {
-        itemToAdd = result.splice(removedIndex, 1)[0];
-      }
-  
-      if (addedIndex !== null) {
-        result.splice(addedIndex, 0, itemToAdd);
-      }
-      return result;
-    };
-  
-    const onDrop = (dropResult) => {
-      const { removedIndex, addedIndex } = dropResult;
-      if (removedIndex !== null || addedIndex !== null) {
-        const newColumns = applyDrag(boardColumns, dropResult);
-        // const columnsPosition = newColumns.map((item) => {
-        //     return item
-        // });
-        const newBoard = { ...currentBoard, columnsPosition: newColumns };
-        console.log('1',newColumns)
-        console.log('2',newBoard)
-        dispatch(createColumn(newColumns));
-        dispatch(createBoard(newBoard));
-      }
-    }
 
     return (
         <>
@@ -122,15 +138,15 @@ function Column() {
                                                     />
                                                 </Draggable>
                                             ))}
-                                        </Container>    
-                                </StyledBoard>
-                            </StyledSection>
-                        </StyledContainer>
-                    </StyledMain>
-                </>
-            )}
+                                        </Container>
+                                    </StyledBoard>
+                                </StyledSection>
+                            </StyledContainer>
+                        </StyledMain>
                     </>
-                );
+                )}
+        </>
+    );
 };
 
 export default Column;

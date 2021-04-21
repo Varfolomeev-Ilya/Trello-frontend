@@ -5,7 +5,7 @@ import { setUsers } from '../../../../store/users';
 import { getAllUsers } from '../../../../api/adminRequests';
 import AdminPopper from '../Popoper/Popoper';
 import CircularIndeterminate from '../../../../ui/components/Spinner/Spinner';
-import { DataGrid } from '@material-ui/data-grid';
+// import { DataGrid } from '@material-ui/data-grid';
 
 function AdminTable() {
   const dispatch = useDispatch();
@@ -15,15 +15,15 @@ function AdminTable() {
   const allUsers = useSelector((state) => state.users.allUsers);
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'firstName', headerName: 'First name', width: 130 },
-    { field: 'lastName', headerName: 'Last name', width: 130 },
-    { field: 'email', headerName: 'email', width: 130 },
-    { field: 'change info', headerName: 'change info', width: 200},
-  ];
+  // const columns = [
+  //   { field: 'id', headerName: 'ID', width: 70 },
+  //   { field: 'firstName', headerName: 'First name', width: 130 },
+  //   { field: 'lastName', headerName: 'Last name', width: 130 },
+  //   { field: 'email', headerName: 'email', width: 130 },
+  //   { field: 'change info', headerName: 'change info', width: 200},
+  // ];
 
-  const rows = useSelector((state) => state.users.allUsers);
+  // const rows = useSelector((state) => state.users.allUsers);
 
   const loadUsers = async () => {
     setIsLoading(true);
@@ -39,7 +39,6 @@ function AdminTable() {
   React.useEffect(() => {
     loadUsers();
   }, []);
-
 
   return (
     <>

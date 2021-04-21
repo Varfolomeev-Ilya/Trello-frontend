@@ -15,5 +15,5 @@ export const updateTask = async (data) => {
 };
 
 export const movingTasks = async (data) => {
-  return await axios.patch('/tasks-column', data);
+  return await axios.patch('/tasks/column', data);
 }

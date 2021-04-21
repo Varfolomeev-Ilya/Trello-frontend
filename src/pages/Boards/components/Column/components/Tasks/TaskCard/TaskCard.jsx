@@ -46,7 +46,7 @@ function TaskCard({ columnId }) {
         if (draggedTask.columnId !== columnId) {
           const displacedTasks = newTasks.map((item) => {
             if (item.id === draggedTask.id) {
-              return { ...item, columnId };
+              return { ...item, columnId: columnId };
             }
             return item;
           })
@@ -60,7 +60,7 @@ function TaskCard({ columnId }) {
 
           const taskId = draggedTask.id;
           dispatch(createColumn(newColumns));
-          movingTasks({ columnId, taskId });
+          await movingTasks({ columnId, taskId });
 
         } else {
           const newColumns = allColumns.map((column) => {
@@ -70,7 +70,7 @@ function TaskCard({ columnId }) {
             return column;
           });
           dispatch(createColumn(newColumns));
-          taskColumnPosition({ columnId, tasksPosition });
+          await taskColumnPosition({ columnId, tasksPosition });
         }
       }
     } catch (error) {

@@ -26,10 +26,9 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function ColumnPopper({ columnId, name}) {
+function ColumnPopper({ columnId, name }) {
     const classes = useStyles();
     const allColumns = useSelector((state) => state.columns.allColumns);
-    const column = allColumns.find((column) => column.id === columnId);
 
     const [inputValue, setInputValue] = React.useState('');
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -43,20 +42,21 @@ function ColumnPopper({ columnId, name}) {
     };
 
     const handleClose = async () => {
-        try{
-            if(onChangeInputValue) {
-            setAnchorEl(null);
-            const columnName = inputValue;
-            const response = await updateNameColumn({columnName,columnId});
-            const newColumns = allColumns.map((item) => {
-                if( item.id === columnId) {
-                    return { ...item, name: columnName };
-                }
-                return item;
-            });
-            dispatch(createColumn(newColumns));
-            setInputValue('');
-        }} catch(error) {
+        try {
+            if (onChangeInputValue) {
+                setAnchorEl(null);
+                const columnName = inputValue.trim();
+                await updateNameColumn({ columnName, columnId });
+                const newColumns = allColumns.map((item) => {
+                    if (item.id === columnId) {
+                        return { ...item, name: columnName };
+                    }
+                    return item;
+                });
+                dispatch(createColumn(newColumns));
+                setInputValue('');
+            }
+        } catch (error) {
             console.log(error);
         }
     };
@@ -84,7 +84,7 @@ function ColumnPopper({ columnId, name}) {
                 id={id}
                 open={open}
                 anchorEl={anchorEl}
-                onClose={handleClose}
+                onClose={handleEnter}
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'center',
@@ -96,15 +96,14 @@ function ColumnPopper({ columnId, name}) {
             >
                 <Typography
                     className={classes.typography}
-
                 >
                     <TextField
                         id={columnId}
-                        placeholder="name of column"
-                        value={inputValue}
+                        defaultValue={name}
                         onChange={onChangeInputValue}
                         color='secondary'
                         onKeyPress={handleEnter}
+                        autoFocus
                     />
 
                 </Typography>

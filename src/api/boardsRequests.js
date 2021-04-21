@@ -11,7 +11,7 @@ export const deleteBoard = async (boardId) => {
 }
 
 export const updateBoard = async (data) => {
-  return await axios.patch('/board', data)
+  return await axios.patch('/boards', data)
 }
 
 export const getBoards = async (userId) => {
@@ -22,5 +22,5 @@ export const getBoards = async (userId) => {
 }
 
 export const setColumnsPosition = async (data) => {
-  return await axios.patch('/board-column', data)
+  return await axios.patch('/boards/column', data)
 }

@@ -9,7 +9,7 @@ function DeleteColumn({columnId}) {
     const columns = useSelector((state) => state.columns.allColumns);
     const handleClick = async () => {
         try {
-            const response = await deleteColumn(columnId);
+            await deleteColumn(columnId);
             const newColumns = columns.filter((column) => column.id !== columnId);
             dispatch(createColumn(newColumns));
         }catch(error) {

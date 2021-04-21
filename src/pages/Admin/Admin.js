@@ -6,7 +6,9 @@ function Admin() {
   return (
     <>
       <Navigation />
+      <>
       <AdminTable />
+      </>
     </>
   )
 }

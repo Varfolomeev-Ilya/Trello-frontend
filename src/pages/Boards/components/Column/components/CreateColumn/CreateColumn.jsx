@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { postColumn } from '../../../../../../api/columnsRequests';
-import { setColumnsPosition } from '../../../../../../api/boardsRequests';
 import { createBoard } from '../../../../../../store/boards';
 import { createColumn } from '../../../../../../store/colums';
 import { useParams } from 'react-router-dom';
@@ -60,9 +59,7 @@ function CreateColumn() {
                     return item;
                 });
 
-                const columnsPosition = newColumns.map((item) => item.id);
                 dispatch(createBoard(newBoard));
-                await setColumnsPosition({ boardId, columnsPosition });
             } catch (error) {
                 alert(error)
             }

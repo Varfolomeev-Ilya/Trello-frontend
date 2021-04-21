@@ -81,7 +81,7 @@ function CreateTask({ columnId }) {
                 id={id}
                 open={open}
                 anchorEl={anchorEl}
-                onClose={handleClose}
+                onClose={handleEnter}
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'center',
@@ -101,6 +101,7 @@ function CreateTask({ columnId }) {
                         onChange={onChangeInputValue}
                         color='secondary'
                         onKeyPress={handleEnter}
+                        autoFocus
                     />
                 </Typography>
             </Popover>
