@@ -25,7 +25,7 @@ function CreateColumn() {
     const allBoards = useSelector((state) => state.boards.allBoards);
     const [inputValue, setInputValue] = React.useState('');
     const routParams = useParams();
-    const boardId = Number(routParams.id);
+    const id = Number(routParams.id);
 
     const onChangeInputValue = event => {
         setInputValue(event.target.value);
@@ -35,7 +35,7 @@ function CreateColumn() {
         if (inputValue) {
             const newColumn = {
                 name: inputValue,
-                boardId: boardId,
+                id: id,
             }
             try {
                 const response = await postColumn(newColumn);
@@ -47,13 +47,13 @@ function CreateColumn() {
                 dispatch(createColumn(newColumns));
 
                 const column = newColumns.map((item) => {
-                    if (item.boardId === boardId) {
+                    if (item.boardId === id) {
                         return item.id
                     }
                     return item
                 })
                 const newBoard = allBoards.map((item) => {
-                    if (item.id === boardId) {
+                    if (item.id === id) {
                         return { ...item, columnsPosition: column }
                     }
                     return item;

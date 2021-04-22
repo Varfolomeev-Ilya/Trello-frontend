@@ -22,8 +22,8 @@ function UploadAvatar() {
 
   const { handleSubmit } = useFormik({
     initialValues: {
-      firstname: "",
-      lastname: "",
+      firstname: '',
+      lastname: '',
       id: id
     },
     onSubmit: async () => {
@@ -31,7 +31,6 @@ function UploadAvatar() {
         const formData = new FormData();
         formData.append('filedata', avatarFile);
         formData.set('id', id);
-        formData.set('imgUrl', imgUrl);
         const response = await postImage(formData);
         dispatch(regUser(response.data));
       } catch (error) {
@@ -42,7 +41,7 @@ function UploadAvatar() {
 
   return (
     <StyledSection>
-      <ImageAvatars />
+      <ImageAvatars imgUrl={imgUrl}/>
       <StyledH1>Your Avatar</StyledH1>
       <StyledDiv>
         <StyledForm

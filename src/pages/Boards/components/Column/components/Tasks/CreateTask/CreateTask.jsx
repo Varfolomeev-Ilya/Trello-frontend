@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function CreateTask({ columnId }) {
+    const id = columnId;
     const classes = useStyles();
     const allColumns = useSelector((state) => state.columns.allColumns);
     const currentColumn = allColumns.find((column) => column.id === columnId);
@@ -47,11 +48,11 @@ function CreateTask({ columnId }) {
 
     const handleClose = async () => {
         setAnchorEl(null);
-        const text = inputValue;
-        const response = await postTask({ columnId, text });
+        const text = inputValue.trim();
+        const response = await postTask({ id, text });
         const newTasks = [...columnTasks, response.data];
         const newColumns = allColumns.map((item) => {
-            if (item.id === columnId) {
+            if (item.id === id) {
                 return { ...item, Tasks: newTasks }
             }
             return item;
@@ -61,7 +62,7 @@ function CreateTask({ columnId }) {
     };
 
     const open = Boolean(anchorEl);
-    const id = open ? 'simple-popover' : undefined;
+    const isOpen = open ? 'simple-popover' : undefined;
     const handleEnter = event => {
         if (event.key === 'Enter') {
             handleClose();
@@ -71,14 +72,14 @@ function CreateTask({ columnId }) {
     return (
         <div>
             <Button
-                aria-describedby={id}
+                aria-describedby={isOpen}
                 className={classes.textStyled}
                 onClick={handleClick}
             >
                 <p className={classes.pStyled}>+ Add Another card</p>
             </Button>
             <Popover
-                id={id}
+                id={isOpen}
                 open={open}
                 anchorEl={anchorEl}
                 onClose={handleEnter}
@@ -95,7 +96,7 @@ function CreateTask({ columnId }) {
                     className={classes.typography}
                 >
                     <TextField
-                        id={columnId}
+                        id={id}
                         placeholder="new task"
                         value={inputValue}
                         onChange={onChangeInputValue}

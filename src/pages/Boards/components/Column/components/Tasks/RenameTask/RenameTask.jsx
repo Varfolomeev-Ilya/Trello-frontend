@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 function RenameTask({taskText, columnId, taskId}) {
     const classes = useStyles();
+    const id = taskId;
     const allColumns = useSelector((state) => state.columns.allColumns);
     const currentColumn = allColumns.find((column) => column.id === columnId);
     const columnTask = currentColumn.Tasks;
@@ -47,10 +48,10 @@ function RenameTask({taskText, columnId, taskId}) {
       try {
         setAnchorEl(null);
         const text = inputValue.trim();
-        await updateTask({text, taskId});
+        await updateTask({text, id});
         if (onChangeInputValue) {
             const newTasks = columnTask.map((item) => {
-                if (item.id === taskId) {
+                if (item.id === id) {
                     return { ...item, text: text };
                 }
                 return item;
@@ -77,19 +78,19 @@ function RenameTask({taskText, columnId, taskId}) {
     };
 
     const open = Boolean(anchorEl);
-    const id = open ? 'simple-popover' : undefined;
+    const isOpen = open ? 'simple-popover' : undefined;
 
     return (
         <div>
             <Button
-                aria-describedby={id}
+                aria-describedby={isOpen}
                 className={classes.textStyled}
                 onClick={handleClick}
             >
                 <p className={classes.pStyled}>{taskText}</p>
             </Button>
             <Popover
-                id={id}
+                id={isOpen}
                 open={open}
                 anchorEl={anchorEl}
                 onClose={handleEnter}

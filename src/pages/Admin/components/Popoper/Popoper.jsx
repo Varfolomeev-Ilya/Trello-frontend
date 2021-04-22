@@ -63,8 +63,8 @@ function AdminPopper({ id }) {
         Yup
           .string()
           .trim()
-          .min(validation.FIRSTNAME_LENGTH, validation.FIRSTNAME_LENGTH_MESSAGE)
-          .matches(validation.FIRSTNAME_MATCHES, validation.FIRSTNAME_MATCHES_MESSAGE),
+          .min(validation.NAME_LENGTH, validation.NAME_LENGTH_MESSAGE)
+          .matches(validation.NAME_MATCHES, validation.NAME_MATCHES_MESSAGE),
       createdAt:
         Yup
           .string()
@@ -76,7 +76,8 @@ function AdminPopper({ id }) {
         Yup
           .string()
           .trim()
-          .matches(validation.NUMB_MATCHES, validation.NUMB_MATCHES_MESSAGE),
+          .max(5)
+          .matches(validation.NAME_MATCHES, validation.NAME_MATCHES_MESSAGE),
       email:
         Yup
           .string()
@@ -206,6 +207,7 @@ function AdminPopper({ id }) {
                     value={values.roleId}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    required pattern='user|admin'
                   />
                   {touched.roleId && errors.roleId ? (
                     <StyledMsg

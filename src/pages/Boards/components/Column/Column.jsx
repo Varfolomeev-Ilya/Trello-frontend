@@ -79,21 +79,22 @@ function Column() {
                 return { ...column, Tasks: sortedTasks };
             });
             // console.log(response.data)
-            if (currentColumnsPosition) {
-                const sortedColumnsBoard = [];
+            dispatch(createColumn(response.data));
+            // if (currentColumnsPosition) {
+            //     const sortedColumnsBoard = [];
 
-                for (let i = 0; i < currentColumnsPosition.length; i++) {
-                    sortedTasksColumn.forEach((column) => {
-                        if (column.id === currentColumnsPosition[i]) {
-                            sortedColumnsBoard.push(column);
-                        }
-                    });
-                }
-                dispatch(createColumn(sortedColumnsBoard));
-            } else {
-                dispatch(createColumn(sortedTasksColumn));
+            //     for (let i = 0; i < currentColumnsPosition.length; i++) {
+            //         sortedTasksColumn.forEach((column) => {
+            //             if (column.id === currentColumnsPosition[i]) {
+            //                 sortedColumnsBoard.push(column);
+            //             }
+            //         });
+            //     }
+            //     dispatch(createColumn(sortedColumnsBoard));
+            // } else {
+            //     dispatch(createColumn(sortedTasksColumn));
 
-            }
+            // }
 
         } catch (error) {
             console.log(error);

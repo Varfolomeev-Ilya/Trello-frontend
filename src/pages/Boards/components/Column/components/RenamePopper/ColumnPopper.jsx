@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 function ColumnPopper({ columnId, name }) {
     const classes = useStyles();
     const allColumns = useSelector((state) => state.columns.allColumns);
-
+    const id = columnId;
     const [inputValue, setInputValue] = React.useState('');
     const [anchorEl, setAnchorEl] = React.useState(null);
     const dispatch = useDispatch();
@@ -45,11 +45,11 @@ function ColumnPopper({ columnId, name }) {
         try {
             if (onChangeInputValue) {
                 setAnchorEl(null);
-                const columnName = inputValue.trim();
-                await updateNameColumn({ columnName, columnId });
+                const name = inputValue.trim();
+                await updateNameColumn({name, id });
                 const newColumns = allColumns.map((item) => {
-                    if (item.id === columnId) {
-                        return { ...item, name: columnName };
+                    if (item.id === id) {
+                        return { ...item, name };
                     }
                     return item;
                 });
@@ -69,19 +69,19 @@ function ColumnPopper({ columnId, name }) {
     };
 
     const open = Boolean(anchorEl);
-    const id = open ? 'simple-popover' : undefined;
+    const isOpen = open ? 'simple-popover' : undefined;
 
     return (
         <div>
             <Button
-                aria-describedby={id}
+                aria-describedby={isOpen}
                 className={classes.textStyled}
                 onClick={handleClick}
             >
                 <p className={classes.pStyled} key={name} >{name}</p>
             </Button>
             <Popover
-                id={id}
+                id={isOpen}
                 open={open}
                 anchorEl={anchorEl}
                 onClose={handleEnter}
@@ -98,7 +98,7 @@ function ColumnPopper({ columnId, name }) {
                     className={classes.typography}
                 >
                     <TextField
-                        id={columnId}
+                        id={id}
                         defaultValue={name}
                         onChange={onChangeInputValue}
                         color='secondary'

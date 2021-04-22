@@ -42,16 +42,16 @@ function SignUpForm() {
         Yup
           .string()
           .trim()
-          .min(validation.FIRSTNAME_LENGTH, validation.FIRSTNAME_LENGTH_MESSAGE)
-          .required(validation.FIRSTNAME_REQUIRED_MESSAGE)
-          .matches(validation.FIRSTNAME_MATCHES, validation.FIRSTNAME_MATCHES_MESSAGE),
+          .min(validation.NAME_LENGTH, validation.NAME_LENGTH_MESSAGE)
+          .required(validation.NAME_REQUIRED_MESSAGE)
+          .matches(validation.NAME_MATCHES, validation.NAME_MATCHES_MESSAGE),
       lastName:
         Yup
           .string()
           .trim()
-          .min(validation.LASTNAME_LENGTH, validation.LASTNAME_LENGTH_MESSAGE)
-          .required(validation.LASTNAME_REQUIRED_MESSAGE)
-          .matches(validation.LASTNAME_MATCHES, validation.LASTNAME_MATCHES_MESSAGE),
+          .min(validation.NAME_LENGTH, validation.NAME_LENGTH_MESSAGE)
+          .required(validation.NAME_REQUIRED_MESSAGE)
+          .matches(validation.NAME_MATCHES, validation.NAME_MATCHES_MESSAGE),
     }),
     onSubmit: async ({ email, password, firstName, lastName }) => {
       try {

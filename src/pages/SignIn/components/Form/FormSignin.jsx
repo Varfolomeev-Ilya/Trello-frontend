@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { StyledButton, StyledH3 } from '../../../../ui/components/Buttons/ButtonStyled';
-import { StyledLoginButton, StyledSpan } from '../../../../ui/components/Buttons/LoginBtnStyled';
 import { postLoginUser } from '../../../../api/authApi';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import FollowLink from '../../../../ui//components/Link/LinkUp';
 import { Link } from 'react-router-dom';
-import { StyledSection, StyledContainer, StyledInput, StyledDiv, StyledH2, StyledUl, StyledLi, StyledForm } from './FormSigninStyled';
+import { StyledSection, StyledContainer, StyledInput, StyledDiv, StyledH2, StyledForm } from './FormSigninStyled';
 import { StyledMsg } from '../../../../ui/components/Message/MessageStyled';
 import * as validation from '../../../../utils/validationConsts';
 import { regUser } from '../../../../store/users'
@@ -94,23 +93,6 @@ const SigninForm = () => {
             </StyledForm>
             <StyledH2>or</StyledH2>
             <FollowLink />
-            <StyledLoginButton>
-              <StyledSpan>Continue with Google</StyledSpan>
-            </StyledLoginButton>
-            <StyledLoginButton>
-              <StyledSpan>Continue with Microsoft</StyledSpan>
-            </StyledLoginButton>
-            <StyledLoginButton>
-              <StyledSpan>Continue with Apple</StyledSpan>
-            </StyledLoginButton>
-            <StyledUl>
-              <StyledLi>
-                <StyledH2>Privacy Policy</StyledH2>
-              </StyledLi>
-              <StyledLi>
-                <StyledH2>Terms of Service</StyledH2>
-              </StyledLi>
-            </StyledUl>
           </StyledDiv>
         </StyledContainer>
       </StyledSection>

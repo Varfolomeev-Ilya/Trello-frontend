@@ -26,9 +26,9 @@ const useStyles = makeStyles((theme) => ({
 
 function RenamePopover() {
     const routParams = useParams();
-    const boardId = Number(routParams.id);
+    const id = Number(routParams.id);
     const allBoards = useSelector((state) => state.boards.allBoards);
-    const currentBoard = allBoards.find((board) => board.id === boardId);
+    const currentBoard = allBoards.find((board) => board.id === id);
     const name = currentBoard.name;
 
     const [inputValue, setInputValue] = React.useState('');
@@ -48,11 +48,11 @@ function RenamePopover() {
         try {
             if (onChangeInputValue) {
                 setAnchorEl(null);
-                const boardName = inputValue;
-                await updateBoard({ boardName, boardId });
+                const name = inputValue;
+                await updateBoard({ name, id });
                 const newBoards = allBoards.map((item) => {
-                    if (item.id === boardId) {
-                        return { ...item, name: boardName };
+                    if (item.id === id) {
+                        return { ...item, name: name };
                     }
                     return item;
                 })
@@ -72,19 +72,19 @@ function RenamePopover() {
     };
     
     const open = Boolean(anchorEl);
-    const id = open ? 'simple-popover' : undefined;
+    const isOpen = open ? 'simple-popover' : undefined;
 
     return (
         <div>
             <Button
-                aria-describedby={id}
+                aria-describedby={isOpen}
                 className={classes.textStyled}
                 onClick={handleClick}
             >
                 <p className={classes.pStyled} key={name}>{name}</p>
             </Button>
             <Popover
-                id={id}
+                isOpen={isOpen}
                 open={open}
                 anchorEl={anchorEl}
                 onClose={handleEnter}
@@ -101,7 +101,7 @@ function RenamePopover() {
                     className={classes.typography}
                 >
                     <TextField
-                        id={boardId}
+                        id={id}
                         defaultValue={name}
                         onChange={onChangeInputValue}
                         color='secondary'

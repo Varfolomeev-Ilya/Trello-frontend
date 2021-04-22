@@ -34,7 +34,6 @@ const classes = useStyles();
   const userInfo = useSelector((state) => state.users.registeredUser);
   const [inputValue, setInputValue] = React.useState('');
   const id = userInfo.id;
-  const email = userInfo.email;
 
   const onChangeInputValue = event => {
     setInputValue(event.target.value);
@@ -43,9 +42,8 @@ const classes = useStyles();
   const addBoard = async () => {
     if (inputValue) {
       const newBoard = {
-        name: inputValue,
+        name: inputValue.trim(),
         id,
-        email,
       }
 
       try {
